@@ -1,0 +1,876 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <title>【目标检测】Underwater target detection based on improved YOLOv7 | YJT's Blog</title>
+  <meta name="keywords" content=" YOLO ">
+  <meta name="description" content="【目标检测】Underwater target detection based on improved YOLOv7 | YJT's Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="YJT's Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-23T12:49:09.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:49:31.199Z">
+<meta property="article:author" content="YJT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+<body><div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>YJT</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(45)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="python">
+            
+            python
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="sciencewriting">
+            
+            sciencewriting
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="刷题">
+            
+            刷题
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="动手学深度学习">
+            
+            动手学深度学习
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数学">
+            
+            数学
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文写作">
+            
+            论文写作
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文精读">
+            
+            论文精读
+            <small>(12)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文翻译">
+            
+            论文翻译
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="课程笔记">
+            
+            课程笔记
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="45">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off">
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search">
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>leetcode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>markdown</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>YOLO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声传感器网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声信道</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声通信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>深度学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>目标检测</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文写作</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文精读</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文翻译</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a id="top" class="全部文章 " href="/2023/11/11/xue-xi-lu-xian-tu-shen-du-xue-xi-cong-ru-men-dao-ru-tu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【学习路线图】深度学习从入门到入土">【学习路线图】深度学习从入门到入土</span>
+            <span class="post-date" title="2023-11-11 12:25:49">2023/11/11</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/27/mu-biao-jian-ce-you-only-look-once-unified-real-time-object-detection/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】You Only Look Once Unified Real Time Object Detection">【目标检测】You Only Look Once Unified Real Time Object Detection</span>
+            <span class="post-date" title="2024-02-27 19:51:22">2024/02/27</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-3-writing-about-results/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 3 Writing about Results">Unit 3 Writing about Results</span>
+            <span class="post-date" title="2024-02-25 23:50:30">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-2-writing-about-methodology/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 2 Writing about Methodology">Unit 2 Writing about Methodology</span>
+            <span class="post-date" title="2024-02-25 23:48:04">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-object-detection-in-20-years-a-survey/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Object Detection in 20 Years A Survey">【目标检测】Object Detection in 20 Years A Survey</span>
+            <span class="post-date" title="2024-02-25 20:00:13">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-underwater-target-detection-based-on-improved-yolov7/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on improved YOLOv7">【目标检测】Underwater target detection based on improved YOLOv7</span>
+            <span class="post-date" title="2024-02-25 19:18:01">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network-1/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network">【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network</span>
+            <span class="post-date" title="2024-02-06 15:05:16">2024/02/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy">【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy</span>
+            <span class="post-date" title="2024-02-03 14:38:42">2024/02/03</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/29/shui-sheng-xin-dao-channel-state-information-prediction-for-adaptive-underwater-acoustic-downlink-ofdma-system-deep-neural-networks-based-approach/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach">【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach</span>
+            <span class="post-date" title="2024-01-29 13:07:47">2024/01/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/28/xin-dao-gu-ji-sparse-channel-estimation-for-ofdm-based-underwater-acoustic-systems-in-rician-fading-with-a-new-omp-map-algorithm/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm">【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm</span>
+            <span class="post-date" title="2024-01-28 22:25:42">2024/01/28</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/unit-1-how-to-write-an-introduction/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 1 How to Write an Introduction">Unit 1 How to Write an Introduction</span>
+            <span class="post-date" title="2024-01-26 14:20:20">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/introduction-how-to-use-this-book/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Introduction: How to Use This Book">Introduction: How to Use This Book</span>
+            <span class="post-date" title="2024-01-26 10:44:16">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/04-shu-ju-cao-zuo-shu-ju-yu-chu-li/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="04数据操作+数据预处理">04数据操作+数据预处理</span>
+            <span class="post-date" title="2024-01-25 14:25:01">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/00-03/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="00-03">00-03</span>
+            <span class="post-date" title="2024-01-25 14:22:41">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/24/lun-wen-fan-yi-channel-state-information-based-ranging-for-underwater-acoustic-sensor-networks/" data-tag="水声传感器网络" data-author="">
+            <span class="post-title" title="【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks">【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks</span>
+            <span class="post-date" title="2024-01-24 09:13:38">2024/01/24</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-retentive-network-a-successor-to-transformer-for-large-language-models/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Retentive Network A Successor to Transformer for Large Language Models">【论文翻译】Retentive Network A Successor to Transformer for Large Language Models</span>
+            <span class="post-date" title="2023-12-12 10:58:30">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-a-novel-noise-aware-deep-learning-model-for-underwater-acoustic-denoising/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising">【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising</span>
+            <span class="post-date" title="2023-12-12 10:47:35">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/06/lun-wen-11-swin-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文11】Swin Transformer论文逐段精读">【论文11】Swin Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-06 08:30:35">2023/12/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-10-deepmind-yong-ji-qi-xue-xi-zhi-dao-shu-xue-zhi-jue-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文10】Deepmind用机器学习指导数学直觉论文逐段精读">【论文10】Deepmind用机器学习指导数学直觉论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:30">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-9-moco-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文9】MoCo论文逐段精读">【论文9】MoCo论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:15">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-8-mae-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文8】MAE论文逐段精读">【论文8】MAE论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-7-vit-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文7】ViT论文逐段精读">【论文7】ViT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:46:34">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-6-bert-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文6】BERT论文逐段精读">【论文6】BERT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:44:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-5-gan-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文5】GAN论文逐段精读">【论文5】GAN论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:43:45">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-4-ling-ji-chu-duo-tu-xiang-jie-tu-shen-jing-wang-luo-gnn-gcn/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文4】零基础多图详解图神经网络（GNN-GCN）">【论文4】零基础多图详解图神经网络（GNN-GCN）</span>
+            <span class="post-date" title="2023-12-04 14:43:23">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-3-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文3】Transformer论文逐段精读">【论文3】Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:39:57">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-2-cheng-qi-ji-suan-ji-shi-jue-ban-bian-tian-de-resnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文2】撑起计算机视觉半边天的ResNet">【论文2】撑起计算机视觉半边天的ResNet</span>
+            <span class="post-date" title="2023-12-04 14:38:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-1-shen-du-xue-xi-dian-ji-zuo-zhi-yi-alexnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文1】深度学习奠基作之一：AlexNet">【论文1】深度学习奠基作之一：AlexNet</span>
+            <span class="post-date" title="2023-12-04 14:36:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/02/lun-wen-fan-yi-swin-transformer-hierarchical-vit-using-shifted-windows/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows">【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows</span>
+            <span class="post-date" title="2023-12-02 10:07:14">2023/12/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/29/lun-wen-fan-yi-spectrum-sensing-for-underwater-cognitive-radio-with-limited-sensing-time/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time">【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time</span>
+            <span class="post-date" title="2023-11-29 10:05:04">2023/11/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/23/lun-wen-fan-yi-underwater-acoustic-communication-receiver-using-deep-belief-network/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network">【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network</span>
+            <span class="post-date" title="2023-11-23 19:39:00">2023/11/23</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/13/bi-ji-li-yong-python-jin-xing-shu-ju-fen-xi/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】利用Python进行数据分析">【笔记】利用Python进行数据分析</span>
+            <span class="post-date" title="2023-11-13 15:39:51">2023/11/13</span>
+        </a>
+        
+        
+        <a class="全部文章 论文写作 " href="/2023/11/09/bi-ji-the-craft-of-research/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="【笔记】The Craft of Research">【笔记】The Craft of Research</span>
+            <span class="post-date" title="2023-11-09 22:38:28">2023/11/09</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/04/lun-wen-fan-yi-a-transformer-based-deep-learning-network-for-underwater-acoustic-target-recognition/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition">【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition</span>
+            <span class="post-date" title="2023-11-04 08:55:31">2023/11/04</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/11/03/bi-ji-shui-sheng-tong-xin-zhou-sheng-li/" data-tag="水声通信" data-author="">
+            <span class="post-title" title="【笔记】水声通信（周胜利）">【笔记】水声通信（周胜利）</span>
+            <span class="post-date" title="2023-11-03 16:40:05">2023/11/03</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/02/bi-ji-ling-ji-chu-ru-men-xue-xi-python-xiao-jia-yu/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】零基础入门学习Python（小甲鱼）">【笔记】零基础入门学习Python（小甲鱼）</span>
+            <span class="post-date" title="2023-11-02 15:58:57">2023/11/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/01/lun-wen-fan-yi-attention-is-all-you-need/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Attention is all you need">【论文翻译】Attention is all you need</span>
+            <span class="post-date" title="2023-11-01 22:21:09">2023/11/01</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/10/31/bi-ji-ai-lun-wen-jing-du-li-mu/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【笔记】AI论文精读（李沐）">【笔记】AI论文精读（李沐）</span>
+            <span class="post-date" title="2023-10-31 13:32:42">2023/10/31</span>
+        </a>
+        
+        
+        <a class="全部文章 数学 " href="/2023/10/28/bi-ji-shi-fen-zhong-ji-qi-xue-xi-xi-lie-shi-pin-tong-ji-xue-xi-fang-fa-jian-bo-shi/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）">【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）</span>
+            <span class="post-date" title="2023-10-28 08:16:18">2023/10/28</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/10/11/bi-ji-pytorch-shen-du-xue-xi-kuai-su-ru-men-jiao-cheng-xiao-tu-dui/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】PyTorch深度学习快速入门教程（小土堆）">【笔记】PyTorch深度学习快速入门教程（小土堆）</span>
+            <span class="post-date" title="2023-10-11 08:34:42">2023/10/11</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/09/30/bi-ji-dong-shou-xue-shen-du-xue-xi-v2-quan-73-jiang-li-mu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】动手学深度学习v2（全73讲）李沐">【笔记】动手学深度学习v2（全73讲）李沐</span>
+            <span class="post-date" title="2023-09-30 13:11:50">2023/09/30</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-704-er-fen-cha-zhao/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】704、二分查找">【leetcode】704、二分查找</span>
+            <span class="post-date" title="2023-09-26 17:22:01">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-1-liang-shu-zhi-he/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】1、两数之和">【leetcode】1、两数之和</span>
+            <span class="post-date" title="2023-09-26 17:21:41">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/markdown-yu-fa/" data-tag="markdown" data-author="">
+            <span class="post-title" title="markdown语法">markdown语法</span>
+            <span class="post-date" title="2023-09-23 21:57:53">2023/09/23</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/da-jian-ge-ren-bo-ke/" data-tag="hexo" data-author="">
+            <span class="post-title" title="搭建个人博客">搭建个人博客</span>
+            <span class="post-date" title="2023-09-23 21:57:26">2023/09/23</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first">&lt;</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-【目标检测】Underwater-target-detection-based-on-improved-YOLOv7" class="article article-type-post" itemscope="" itemprop="blogPost">
+    
+        <h1 class="article-title">【目标检测】Underwater target detection based on improved YOLOv7</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a data-rel="论文翻译">论文翻译</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">YOLO</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title="最后更新: 2024-02-27 20:04:43">2024-02-25 19:18</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Related-Works"><span class="toc-text">2. Related Works</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-YOLOv7"><span class="toc-text">2.1. YOLOv7</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPT%E8%A7%A3%E8%AF%BB"><span class="toc-text">GPT解读</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em><strong>Underwater target detection based on improved YOLOv7</strong></em><br><em><strong>基于改进YOLOv7的水下目标检测</strong></em></p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Underwater target detection is a crucial aspect of ocean exploration. However, conventional underwater target detection methods face several challenges such as inaccurate feature extraction, slow detection speed and lack of robustness in complex underwater environments. To address these limitations, this study proposes an improved YOLOv7 network (YOLOv7-AC) for underwater target detection. The proposed network utilizes an ACmixBlock module to replace the 3x3 convolution block in the E-ELAN structure, and incorporates jump connections and 1x1 convolution architecture between ACmixBlock modules to improve feature extraction and network reasoning speed. Additionally, a ResNet-ACmix module is designed to avoid feature information loss and reduce computation, while a Global Attention Mechanism (GAM) is inserted in the backbone and head parts of the model to improve feature extraction. Furthermore, the K-means++ algorithm is used instead of K-means to obtain anchor boxes and enhance model accuracy. Experimental results show that the improved YOLOv7 network outperforms the original YOLOv7 model and other popular underwater target detection methods. The proposed network achieved a mean average precision (mAP) value of 89.6% and 97.4% on the URPC dataset and Brackish dataset, respectively, and demonstrated a higher frame per second (FPS) compared to the original YOLOv7 model.<br><code>水下目标检测是海洋探测的一个重要方面。然而，在复杂的水下环境下，传统的水下目标检测方法面临特征提取不准确、检测速度慢、鲁棒性不足等挑战。针对这些局限性，提出了一种改进的YOLOv7网络(YOLOv7- ac)用于水下目标检测。该网络利用ACmixBlock模块替代E-ELAN结构中的3x3卷积块，并在ACmixBlock模块之间融入跳跃连接和1x1卷积架构，以提高特征提取和网络推理速度。此外，设计了ResNet-ACmix模块以避免特征信息损失并减少计算量，同时在模型的主干和头部部分插入了全局注意力机制(GAM)以改进特征提取。使用k -means++算法代替K-means算法获取锚框，提高模型精度。实验结果表明，改进的YOLOv7网络优于原始的YOLOv7模型和其他流行的水下目标检测方法。所提网络在URPC数据集和Brackish数据集上分别取得了89.6%和97.4%的平均精度均值(mAP)值，并且相比原始YOLOv7模型表现出更高的每秒帧数(FPS)。</code><br>The source code for this study is publicly available at <a target="_blank" rel="noopener" href="https://github.com/NZWANG/YOLOV7-AC">https://github.com/NZWANG/YOLOV7-AC</a>.<br>In conclusion, the improved YOLOv7 network proposed in this study represents a promising solution for underwater target detection and holds great potential for practical applications in various underwater tasks.<br><code>综上所述，本文提出的改进YOLOv7网络为水下目标检测提供了一种很好的解决方案，在水下各种任务的实际应用中具有很大的潜力。</code><br><em><strong>Keywords</strong></em><br>Underwater target detection; Marine resources; Computer vision; Image analysis; YOLOv7-AC; GAM; K-means++<br><code>水下目标检测;海洋资源;计算机视觉;图像分析;YOLOv7-AC;GAM;k - means + +</code></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The oceans occupy a significant portion of the Earth’s surface and are a valuable source of oil, gas, minerals, chemicals, and other aquatic resources, attracting the attention of professionals, adventurers, and researchers, leading to an increase in marine exploration activities [1]. To support these exploration efforts, various underwater tasks such as target location, biometric identification, archaeology, object search, environmental monitoring, and equipment maintenance must be performed [2]. In this context, underwater target detection technology plays a crucial role. Underwater target detection can be categorized into acoustic system detection and optical system detection [3], and image analysis, including classification, identification, and detection, can be performed based on the obtained image information. Optical images, compared to acoustic images, offer higher resolution and a greater volume of information and are more cost-effective in terms of acquisition methods [4, 5]. As a result, underwater target detection based on optical systems is receiving increased attention.Target detection, being as a core branch of computer vision, encompasses fundamental tasks such as target classification and localization. The existing approaches to target detection can be broadly classified into two categories: traditional target detection methods and deep learning-based target detection methods [6].<br><code>海洋占据了地球表面的重要部分，是石油、天然气、矿物、化学品和其他水生资源的宝贵来源，吸引了专业人士、探险家和研究人员的注意，导致海洋勘探活动的增加。为了支持这些探索工作，必须执行各种水下任务，如目标定位、生物特征识别、考古、物体搜索、环境监测和设备维护。在此背景下，水下目标检测技术起着至关重要的作用。水下目标探测分为声学系统探测和光学系统探测[3]，可以根据获得的图像信息进行图像分析，包括分类、识别和探测。与声学图像相比，光学图像具有更高的分辨率和更大的信息量，在获取方法方面更具成本效益[4,5]。因此，基于光学系统的水下目标检测受到越来越多的关注。目标检测作为计算机视觉的核心分支，包含目标分类、定位等基本任务。现有的目标检测方法大致可以分为两类:传统的目标检测方法和基于深度学习的目标检测方法[6]。</code><br>Traditional algorithms for target detection are typically structured into three phases: region selection, feature extraction, and feature classification [7]. The goal of region selection is to localize the target, as the position and aspect ratio of the target may vary in the image. This phase is typically performed by traversing the entire image using a sliding window strategy [8], wherein different scales and aspect ratios are considered. Subsequently, feature extraction algorithms such as Histogram of Oriented Gradients (HOG) [9] and Scale Invariant Feature Transform (SIFT) [10] are employed to extract relevant features. Finally, the extracted features are classified using classifiers such as Support Vector Machines (SVM) [11] and Adaptive Boosting (Ada-Boost) [12]. However, the traditional target detection method has two major limitations: (1) the region selection using sliding windows lacks specificity and leads to high time complexity and redundant windows, and (2) the hand-designed features are not robust to variations in pose.<br><code>传统的目标检测算法通常分为3个阶段:区域选择、特征提取和特征分类。由于目标在图像中的位置和长宽比可能会发生变化，因此区域选择的目的是定位目标。这一阶段通常通过使用滑动窗口策略[8]遍历整个图像来执行，其中考虑了不同的尺度和长宽比。然后，采用方向梯度直方图(HOG)[9]和尺度不变特征变换(SIFT)[10]等特征提取算法提取相关特征;最后，利用支持向量机(SVM)[11]和自适应增强(Ada-Boost)[12]等分类器对提取的特征进行分类。然而，传统的目标检测方法存在两个主要的局限性:(1)使用滑动窗口的区域选择缺乏特异性，导致时间复杂度高和窗口冗余;(2)手工设计的特征对姿态变化的鲁棒性不强。</code><br>The advent of deep learning has revolutionized the field of target detection and has been extensively applied in computer vision. Convolutional neural networks (CNNs) have demonstrated their superior ability to extract and model features for target detection tasks, and numerous studies have demonstrated that deep learning-based methods outperform traditional methods relying on hand-designed features [13]. Currently, there are two main categories of deep learning-based target detection algorithms: region proposal-based algorithms and regression-based algorithms. The former category, also referred to as Two-Stage target detection methods, are based on the principle of coarse localization and fine classification, where candidate regions containing targets are first identified and then classified. Representative algorithms in this category include R-FCN (Region-based Fully Convolutional Networks) [15] and the R-CNN (Region-CNN) family of algorithms (R-CNN [16], Fast-RCNN [17], Faster-RCNN [18], Mask-RCNN [19], Cascade-RCNN [20], etc.). Although region-based algorithms have high accuracy, they tend to be slower and may not be suitable for real-time applications. In contrast, regression-based target detection algorithms, also known as One-Stage target detection algorithms, directly extract features through CNNs for the prediction of target classification and localization. Representative algorithms in this category include the SSD (Single Shot MultiBox Detector) [21] and the YOLO (You Only Look Once) family of algorithms (YOLO [23], YOLO9000 [24], YOLOv3 [25], YOLOv4 [26], YOLOv5 [27], YOLOv6 [28], YOLOv7 [29]). Due to the direct prediction of classification and localization, these algorithms offer a faster detection speed, making them a popular research area in the field of target detection, with ongoing efforts aimed at improving their accuracy and performance.<br><code>深度学习的出现彻底改变了目标检测领域，并被广泛应用于计算机视觉。卷积神经网络(cnn)已经证明了其在目标检测任务中提取和建模特征的卓越能力，大量研究表明，基于深度学习的方法优于依赖手工设计特征[13]的传统方法。目前，基于深度学习的目标检测算法主要有两大类:基于区域提议的算法和基于回归的算法。前一类也称为两阶段目标检测方法，基于粗定位和细分类的原则，首先识别出包含目标的候选区域，然后再进行分类。该类别中的代表性算法包括R-FCN(基于区域的全卷积网络)[15]和R-CNN(区域- cnn)系列算法(R-CNN[16]、Fast-RCNN[17]、Faster-RCNN[18]、Mask-RCNN[19]、Cascade-RCNN[20]等)。基于区域的算法虽然精度高，但速度较慢，不适合实时应用。相比之下，基于回归的目标检测算法，也称为单阶段目标检测算法，直接通过cnn提取特征用于目标分类和定位的预测。这一类中的代表性算法包括SSD (Single Shot MultiBox Detector)[21]和YOLO (You Only Look Once)系列算法(YOLO[23]、YOLO9000[24]、YOLOv3[25]、YOLOv4[26]、YOLOv5[27]、YOLOv6[28]、YOLOv7[29])。由于直接预测分类和定位，这些算法具有更快的检测速度，成为目标检测领域的研究热点，人们一直在努力提高它们的精度和性能。</code><br>The commercial viability of underwater robots equipped with highly efficient and accurate target detection algorithms is being actively pursued in the field of underwater environments [30]. In this regard, researchers have made significant contributions to the development of target detection algorithms. For instance, in 2017, Zhou et al. [31] integrated image enhancement techniques into an expanded VGG16 feature extraction network and employed a Faster R-CNN network with feature mapping for the detection and identification of underwater biological targets using the URPC dataset. In 2020, Chen et al. [32] introduced a new sample distribution-based weighted loss function called IMA (Invert Multi-Class AdaBoost) to mitigate the adverse effect of noise on detection performance. In 2021, Qiao et al. [33] proposed a real-time and accurate underwater target classifier, leveraging the combination of LWAP (Local Wavelet Acoustic Pattern) and MLP (Multilayer Perceptron) neural networks, to tackle the challenging problem of underwater target classification. Nevertheless, the joint requirement of localization and classification, in addition to classification, makes the target detection task especially challenging in underwater environments where images are often plagued by severe color distortion and low visibility caused by mobile acquisition.With the aim of enhancing the accuracy, achieving real-time performance, and promoting the portability of the underwater target detection capability, the most advanced YOLOv7 model of the YOLO series has been selected for improvement, resulting in the proposed YOLOv7-AC model, designed to address the difficulties encountered in this field. The effectiveness of the proposed model has been demonstrated through experiments conducted on underwater images.The innovations of this paper are as follows:<br><code>在水下环境[30]领域，配备高效、准确目标检测算法的水下机器人的商业可行性正在积极追求。为此，研究人员为目标检测算法的发展做出了重大贡献。例如，2017年，Zhou等[31]将图像增强技术集成到扩展的VGG16特征提取网络中，并利用具有特征映射的Faster R-CNN网络对URPC数据集进行水下生物目标的检测和识别。2020年，Chen等人在[32]中引入了一种新的基于样本分布的加权损失函数IMA (inverse Multi-Class AdaBoost)来缓解噪声对检测性能的不利影响。2021年，Qiao et al.[33]提出了一种实时准确的水下目标分类器，利用LWAP (Local Wavelet Acoustic Pattern)和MLP (Multilayer Perceptron)神经网络的结合来解决水下目标分类的挑战性问题。然而，除了分类之外，还需要定位和分类，这使得水下环境下的目标检测任务尤其具有挑战性。在水下环境中，由于移动采集，图像往往存在严重的颜色失真和低能见度。为了提高水下目标检测的准确性、实时性和便携性，选取YOLO系列中最先进的YOLOv7模型进行改进，提出了YOLOv7- ac模型，以解决该领域遇到的困难。通过在水下图像上的实验验证了所提模型的有效性。本文的创新点如下:</code><br>   (1) In order to extract more informative features, the integration of the Global Attention Mechanism (GAM) [39] is proposed. This mechanism effectively captures both the channel and spatial aspects of the features and increases the significance of cross-dimensional interactions.<br>   <code>(1)为了提取信息量更大的特征，提出了融合全局注意力机制(GAM)的[39]。这种机制有效地捕获了特征的通道和空间方面，并增加了跨维度交互的重要性。</code><br>(2) To further enhance the performance of the network, the ACmix (A mixed model incorporating the benefits of self-Attention and Convolution) [40] is introduced.<br>   <code>(2)为了进一步提升网络的性能，引入了ACmix (A mixed model combination of self-Attention and Convolution)[40]模型。</code><br>   (3) The design of the ResNet-ACmix module in YOLOv7-AC aims to enhance the feature extraction capability of the backbone network and to accelerate the convergence of the network by capturing more informative features.<br>   <code>(3) YOLOv7-AC中ResNet-ACmix模块的设计旨在增强骨干网的特征提取能力，并通过捕获更有信息量的特征来加速网络的收敛。</code><br>   (4) The E-ELAN module in the YOLOv7 network is optimized by incorporating Skip Connections and a 1x1 convolutional structure between modules and replacing the 3x3 Convolutional layer with the ACmixBlock. This results in an enhanced feature extraction ability and improved speed during inference.<br>   <code>(4)对YOLOv7网络中的E-ELAN模块进行优化，在模块之间加入跳跃连接和1x1卷积结构，并将3x3卷积层替换为ACmixBlock。这增强了特征提取能力，提高了推理速度。</code><br>The rest of this paper is organized as follows. Section 2 describes the architecture of YOLOv7 model and related methods. Section 3 presents the proposed YOLOv7-AC model and its theoretical foundations. The performance of the YOLOv7-AC model is evaluated and analyzed through experiments conducted on underwater image datasets in Section 4. The limitations and drawbacks of the proposed method are discussed in Section 5. Finally, we provide a conclusion of this work in Section 6.<br><code>本文的其余部分组织如下。第2节介绍YOLOv7模型的体系结构和相关方法。第3节介绍了YOLOv7-AC模型及其理论基础。第四节通过在水下图像数据集上进行实验，评估和分析了YOLOv7-AC模型的性能。第5节讨论了所提出方法的局限性和缺点。最后，在第6节对本文工作进行了总结。</code></p>
+<h1 id="2-Related-Works"><a href="#2-Related-Works" class="headerlink" title="2. Related Works"></a>2. Related Works</h1><h2 id="2-1-YOLOv7"><a href="#2-1-YOLOv7" class="headerlink" title="2.1. YOLOv7"></a>2.1. YOLOv7</h2><p>The YOLOv7 model, developed by Chien-Yao Wang and Alexey Bochkovskiy et al. in 2022, integrates strategies such as E-ELAN (Extended efficient layer aggregation networks) [34], model scaling for concatenation-based models [35], and model re-parameterization [36] to achieve a favorable balance between detection efficiency and precision. As shown in Figure 1, the YOLOv7 network consists of distinct four modules: the Input module, the Backbone network, the Head network and the Prediction network.<br><code>由Chien-Yao Wang和Alexey Bochkovskiy等人在2022年开发的YOLOv7模型集成了E-ELAN (Extended efficient layer aggregation networks)[34]、基于级联的模型扩展[35]和模型重新参数化[36]等策略，以实现检测效率和精度之间的良好平衡。如图1所示，YOLOv7网络由四个不同的模块组成:输入模块、主干网络、头部网络和预测网络。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/6-1.png"></p>
+<blockquote>
+<p>Figure 1. The network structure of YOLOv7 [29].<br><code>图1.YOLOv7的网络结构[29]。</code></p>
+</blockquote>
+<p>Input module: The pre-processing stage of the YOLOv7 model employs both mosaic and hybrid data enhancement techniques and leverages the adaptive anchor frame calculation method established by YOLOv5 to ensure that the input color images are uniformly scaled to a 640x640 size, thereby meeting the requirements for the input size of the backbone network.<br><code>输入模块：YOLOv7模型的预处理阶段采用了马赛克和混合数据增强技术，并利用YOLOv5建立的自适应锚帧计算方法，以确保输入的彩色图像均匀缩放到640 x640大小，从而满足骨干网络对输入大小的要求。</code><br>Backbone network: The YOLOv7 network comprises three main components: CBS, E-ELAN, and MP1. The CBS module is composed of convolution, batch normalization, and SiLU activation functions. The E-ELAN module maintains the original ELAN design architecture and enhances the network’s learning ability by guiding different feature group computational blocks to learn more diverse features, preserving the original gradient path. MP1 is composed of CBS and MaxPool and is divided into upper and lower branches. The upper branch uses MaxPool to halve the image’s length and width and CBS with 128 output channels to halve the image channels. The lower branch halves the image channels through a CBS with a 1x1 kernel and stride, halves the image length and width with a CBS of 3x3 kernel and 2x2 stride, and finally fuses the features extracted from both branches through the concatenation (Cat) operation. MaxPool extracts the maximum value information of small local areas while CBS extracts all value information of small local areas, thereby improving the network’s feature extraction ability.<br><code>骨干网络:YOLOv7网络由三个主要组件组成:CBS、E-ELAN和MP1。CBS模块由convolution、batch normalization和SiLU激活函数组成。E-ELAN模块保持了原有ELAN设计架构，通过引导不同特征组计算块学习更多样化的特征，增强了网络的学习能力，保留了原有的梯度路径。MP1由CBS和MaxPool组成，分为上分支和下分支。上面的分支使用MaxPool将图像的长度和宽度减半，使用具有128个输出通道的CBS将图像通道减半。下分支通过具有1x1核和步幅的CBS将图像通道减半，使用具有3x3核和2x2步幅的CBS将图像长宽减半，最后通过concatenation (Cat)操作将从两个分支提取的特征进行融合。MaxPool提取局部小区域的最大值信息，CBS提取局部小区域的所有值信息，从而提高网络的特征提取能力。</code><br>Head network: The Head network of YOLOv7 is structured using the Feature Pyramid Network (FPN) architecture, which employs the PANet design. This network comprises several Convolutional, Batch Normalization and SiLU activation (CBS) blocks, along with the introduction of a Spatial Pyramid Pooling and Convolutional Spatial Pyramid Pooling (Sppcspc) structure, the extended efficient layer aggregation network (E-ELAN), and MaxPool-2 (MP2). The Sppcspc structure improves the network’s perceptual field through the incorporation of a Convolutional Spatial Pyramid (CSP) structure within the Spatial Pyramid Pooling (SPP) structure, along with a large residual edge to aid optimization and feature extraction. The ELAN-H layer, which is a fusion of several feature layers based on E-ELAN, further enhances feature extraction. The MP2 block has a similar structure to the MP1 block, with a slight modification to the number of output channels.<br><code>头网络:YOLOv7的头网络采用特征金字塔网络(Feature Pyramid network, FPN)架构构建，采用PANet设计。该网络由多个卷积、批量归一化和SiLU激活(CBS)块组成，同时引入了空间金字塔池化和卷积空间金字塔池化(Sppcspc)结构、扩展的高效层聚合网络(E-ELAN)和MaxPool-2 (MP2)。Sppcspc结构通过在空间金字塔池化(SPP)结构中融入卷积空间金字塔(CSP)结构来改善网络的感知场，并使用较大的残差边缘来辅助优化和特征提取。在E-ELAN的基础上融合多个特征层，进一步增强特征提取能力。MP2块与MP1块具有相似的结构，对输出通道的数量略有修改。</code></p>
+<h1 id="GPT解读"><a href="#GPT解读" class="headerlink" title="GPT解读"></a>GPT解读</h1><p>这篇文章的核心内容是关于一种改进的YOLOv7网络（YOLOv7-AC）用于水下目标检测的研究。以下是文章的主要点：</p>
+<ol>
+<li><strong>研究背景</strong>：水下目标检测对于海洋探索至关重要，但传统的水下目标检测方法面临着特征提取不准确、检测速度慢和在复杂水下环境中缺乏鲁棒性等挑战。</li>
+<li><strong>改进的YOLOv7网络（YOLOv7-AC）</strong>：为了解决这些限制，研究提出了一种改进的YOLOv7网络。这个网络通过以下方式进行优化：<ul>
+<li>使用ACmixBlock模块替换E-ELAN结构中的3x3卷积块。</li>
+<li>在ACmixBlock模块之间加入跳跃连接和1x1卷积架构以提高特征提取和网络推理速度。</li>
+<li>设计ResNet-ACmix模块以避免特征信息丢失并减少计算量。</li>
+<li>在模型的骨干和头部部分插入全局注意力机制（GAM）以提高特征提取。</li>
+<li>使用K-means++算法代替K-means来获取锚框，以提高模型精度。</li>
+</ul>
+</li>
+<li><strong>实验结果</strong>：改进的YOLOv7网络在URPC数据集和Brackish数据集上分别实现了89.6%和97.4%的平均精度（mAP），并且与原始YOLOv7模型相比，帧率（FPS）更高。</li>
+<li><strong>研究贡献</strong>：文章提出了以下创新点：<ul>
+<li>引入全局注意力机制（GAM）以更有效地捕获特征。</li>
+<li>引入ACmix（结合自注意力和卷积的优点）。</li>
+<li>设计ResNet-ACmix模块以增强骨干网络的特征提取能力。</li>
+<li>优化YOLOv7网络的E-ELAN模块，通过引入跳跃连接和1x1卷积结构。</li>
+</ul>
+</li>
+<li><strong>实验设置</strong>：详细描述了实验环境、超参数设置、测试数据集以及锚框的优化方法。</li>
+<li><strong>性能比较</strong>：与YOLOv7、YOLOv6、YOLOv5s、SSD等流行的目标检测模型进行了性能比较，证明了YOLOv7-AC模型在水下目标检测中的优越性。</li>
+<li><strong>讨论与结论</strong>：尽管YOLOv7-AC模型在水下目标检测方面表现出色，但在高度复杂的水下环境中仍存在误检和漏检的情况。未来的研究将致力于收集更多样化的水下数据集，并采用图像增强技术来提高水下图像质量，这对于水下目标检测至关重要。</li>
+</ol>
+<p>文章还提供了源代码的公开链接：<a target="_blank" rel="noopener" href="https://github.com/NZWANG/YOLOV7-AC%EF%BC%8C%E4%BB%A5%E4%BE%BF%E5%85%B6%E4%BB%96%E7%A0%94%E7%A9%B6%E8%80%85%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%82">https://github.com/NZWANG/YOLOV7-AC，以便其他研究者可以访问和使用。</a></p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2017 YJT
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket"></a>
+
+    </div>
+</div>
+
+
+<script src="/js/jquery.pjax.js?v=1.1.0"></script>
+
+<script src="/js/script.js?v=1.1.0"></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 532px;
+        }
+        .nav.fullscreen {
+            margin-left: -532px;
+        }
+        .nav-left {
+            width: 140px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 532px;
+            margin-left: -532px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/lazyload-plugin/lazyload.intersectionObserver.min.js"></script></body></html>

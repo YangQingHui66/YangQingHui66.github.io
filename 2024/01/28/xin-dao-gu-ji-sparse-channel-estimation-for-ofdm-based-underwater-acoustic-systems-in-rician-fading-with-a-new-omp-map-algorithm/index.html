@@ -1,0 +1,847 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <title>【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm | YJT's Blog</title>
+  <meta name="keywords" content=" 水声信道 ">
+  <meta name="description" content="【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm | YJT's Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="YJT's Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-23T12:49:09.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:49:31.199Z">
+<meta property="article:author" content="YJT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+<body><div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>YJT</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(45)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="python">
+            
+            python
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="sciencewriting">
+            
+            sciencewriting
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="刷题">
+            
+            刷题
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="动手学深度学习">
+            
+            动手学深度学习
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数学">
+            
+            数学
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文写作">
+            
+            论文写作
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文精读">
+            
+            论文精读
+            <small>(12)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文翻译">
+            
+            论文翻译
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="课程笔记">
+            
+            课程笔记
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="45">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off">
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search">
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>leetcode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>markdown</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>YOLO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声传感器网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声信道</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声通信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>深度学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>目标检测</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文写作</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文精读</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文翻译</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a id="top" class="全部文章 " href="/2023/11/11/xue-xi-lu-xian-tu-shen-du-xue-xi-cong-ru-men-dao-ru-tu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【学习路线图】深度学习从入门到入土">【学习路线图】深度学习从入门到入土</span>
+            <span class="post-date" title="2023-11-11 12:25:49">2023/11/11</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/27/mu-biao-jian-ce-you-only-look-once-unified-real-time-object-detection/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】You Only Look Once Unified Real Time Object Detection">【目标检测】You Only Look Once Unified Real Time Object Detection</span>
+            <span class="post-date" title="2024-02-27 19:51:22">2024/02/27</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-3-writing-about-results/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 3 Writing about Results">Unit 3 Writing about Results</span>
+            <span class="post-date" title="2024-02-25 23:50:30">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-2-writing-about-methodology/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 2 Writing about Methodology">Unit 2 Writing about Methodology</span>
+            <span class="post-date" title="2024-02-25 23:48:04">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-object-detection-in-20-years-a-survey/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Object Detection in 20 Years A Survey">【目标检测】Object Detection in 20 Years A Survey</span>
+            <span class="post-date" title="2024-02-25 20:00:13">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-underwater-target-detection-based-on-improved-yolov7/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on improved YOLOv7">【目标检测】Underwater target detection based on improved YOLOv7</span>
+            <span class="post-date" title="2024-02-25 19:18:01">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network-1/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network">【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network</span>
+            <span class="post-date" title="2024-02-06 15:05:16">2024/02/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy">【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy</span>
+            <span class="post-date" title="2024-02-03 14:38:42">2024/02/03</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/29/shui-sheng-xin-dao-channel-state-information-prediction-for-adaptive-underwater-acoustic-downlink-ofdma-system-deep-neural-networks-based-approach/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach">【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach</span>
+            <span class="post-date" title="2024-01-29 13:07:47">2024/01/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/28/xin-dao-gu-ji-sparse-channel-estimation-for-ofdm-based-underwater-acoustic-systems-in-rician-fading-with-a-new-omp-map-algorithm/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm">【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm</span>
+            <span class="post-date" title="2024-01-28 22:25:42">2024/01/28</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/unit-1-how-to-write-an-introduction/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 1 How to Write an Introduction">Unit 1 How to Write an Introduction</span>
+            <span class="post-date" title="2024-01-26 14:20:20">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/introduction-how-to-use-this-book/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Introduction: How to Use This Book">Introduction: How to Use This Book</span>
+            <span class="post-date" title="2024-01-26 10:44:16">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/04-shu-ju-cao-zuo-shu-ju-yu-chu-li/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="04数据操作+数据预处理">04数据操作+数据预处理</span>
+            <span class="post-date" title="2024-01-25 14:25:01">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/00-03/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="00-03">00-03</span>
+            <span class="post-date" title="2024-01-25 14:22:41">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/24/lun-wen-fan-yi-channel-state-information-based-ranging-for-underwater-acoustic-sensor-networks/" data-tag="水声传感器网络" data-author="">
+            <span class="post-title" title="【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks">【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks</span>
+            <span class="post-date" title="2024-01-24 09:13:38">2024/01/24</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-retentive-network-a-successor-to-transformer-for-large-language-models/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Retentive Network A Successor to Transformer for Large Language Models">【论文翻译】Retentive Network A Successor to Transformer for Large Language Models</span>
+            <span class="post-date" title="2023-12-12 10:58:30">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-a-novel-noise-aware-deep-learning-model-for-underwater-acoustic-denoising/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising">【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising</span>
+            <span class="post-date" title="2023-12-12 10:47:35">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/06/lun-wen-11-swin-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文11】Swin Transformer论文逐段精读">【论文11】Swin Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-06 08:30:35">2023/12/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-10-deepmind-yong-ji-qi-xue-xi-zhi-dao-shu-xue-zhi-jue-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文10】Deepmind用机器学习指导数学直觉论文逐段精读">【论文10】Deepmind用机器学习指导数学直觉论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:30">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-9-moco-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文9】MoCo论文逐段精读">【论文9】MoCo论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:15">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-8-mae-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文8】MAE论文逐段精读">【论文8】MAE论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-7-vit-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文7】ViT论文逐段精读">【论文7】ViT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:46:34">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-6-bert-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文6】BERT论文逐段精读">【论文6】BERT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:44:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-5-gan-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文5】GAN论文逐段精读">【论文5】GAN论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:43:45">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-4-ling-ji-chu-duo-tu-xiang-jie-tu-shen-jing-wang-luo-gnn-gcn/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文4】零基础多图详解图神经网络（GNN-GCN）">【论文4】零基础多图详解图神经网络（GNN-GCN）</span>
+            <span class="post-date" title="2023-12-04 14:43:23">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-3-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文3】Transformer论文逐段精读">【论文3】Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:39:57">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-2-cheng-qi-ji-suan-ji-shi-jue-ban-bian-tian-de-resnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文2】撑起计算机视觉半边天的ResNet">【论文2】撑起计算机视觉半边天的ResNet</span>
+            <span class="post-date" title="2023-12-04 14:38:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-1-shen-du-xue-xi-dian-ji-zuo-zhi-yi-alexnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文1】深度学习奠基作之一：AlexNet">【论文1】深度学习奠基作之一：AlexNet</span>
+            <span class="post-date" title="2023-12-04 14:36:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/02/lun-wen-fan-yi-swin-transformer-hierarchical-vit-using-shifted-windows/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows">【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows</span>
+            <span class="post-date" title="2023-12-02 10:07:14">2023/12/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/29/lun-wen-fan-yi-spectrum-sensing-for-underwater-cognitive-radio-with-limited-sensing-time/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time">【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time</span>
+            <span class="post-date" title="2023-11-29 10:05:04">2023/11/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/23/lun-wen-fan-yi-underwater-acoustic-communication-receiver-using-deep-belief-network/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network">【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network</span>
+            <span class="post-date" title="2023-11-23 19:39:00">2023/11/23</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/13/bi-ji-li-yong-python-jin-xing-shu-ju-fen-xi/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】利用Python进行数据分析">【笔记】利用Python进行数据分析</span>
+            <span class="post-date" title="2023-11-13 15:39:51">2023/11/13</span>
+        </a>
+        
+        
+        <a class="全部文章 论文写作 " href="/2023/11/09/bi-ji-the-craft-of-research/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="【笔记】The Craft of Research">【笔记】The Craft of Research</span>
+            <span class="post-date" title="2023-11-09 22:38:28">2023/11/09</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/04/lun-wen-fan-yi-a-transformer-based-deep-learning-network-for-underwater-acoustic-target-recognition/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition">【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition</span>
+            <span class="post-date" title="2023-11-04 08:55:31">2023/11/04</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/11/03/bi-ji-shui-sheng-tong-xin-zhou-sheng-li/" data-tag="水声通信" data-author="">
+            <span class="post-title" title="【笔记】水声通信（周胜利）">【笔记】水声通信（周胜利）</span>
+            <span class="post-date" title="2023-11-03 16:40:05">2023/11/03</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/02/bi-ji-ling-ji-chu-ru-men-xue-xi-python-xiao-jia-yu/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】零基础入门学习Python（小甲鱼）">【笔记】零基础入门学习Python（小甲鱼）</span>
+            <span class="post-date" title="2023-11-02 15:58:57">2023/11/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/01/lun-wen-fan-yi-attention-is-all-you-need/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Attention is all you need">【论文翻译】Attention is all you need</span>
+            <span class="post-date" title="2023-11-01 22:21:09">2023/11/01</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/10/31/bi-ji-ai-lun-wen-jing-du-li-mu/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【笔记】AI论文精读（李沐）">【笔记】AI论文精读（李沐）</span>
+            <span class="post-date" title="2023-10-31 13:32:42">2023/10/31</span>
+        </a>
+        
+        
+        <a class="全部文章 数学 " href="/2023/10/28/bi-ji-shi-fen-zhong-ji-qi-xue-xi-xi-lie-shi-pin-tong-ji-xue-xi-fang-fa-jian-bo-shi/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）">【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）</span>
+            <span class="post-date" title="2023-10-28 08:16:18">2023/10/28</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/10/11/bi-ji-pytorch-shen-du-xue-xi-kuai-su-ru-men-jiao-cheng-xiao-tu-dui/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】PyTorch深度学习快速入门教程（小土堆）">【笔记】PyTorch深度学习快速入门教程（小土堆）</span>
+            <span class="post-date" title="2023-10-11 08:34:42">2023/10/11</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/09/30/bi-ji-dong-shou-xue-shen-du-xue-xi-v2-quan-73-jiang-li-mu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】动手学深度学习v2（全73讲）李沐">【笔记】动手学深度学习v2（全73讲）李沐</span>
+            <span class="post-date" title="2023-09-30 13:11:50">2023/09/30</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-704-er-fen-cha-zhao/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】704、二分查找">【leetcode】704、二分查找</span>
+            <span class="post-date" title="2023-09-26 17:22:01">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-1-liang-shu-zhi-he/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】1、两数之和">【leetcode】1、两数之和</span>
+            <span class="post-date" title="2023-09-26 17:21:41">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/markdown-yu-fa/" data-tag="markdown" data-author="">
+            <span class="post-title" title="markdown语法">markdown语法</span>
+            <span class="post-date" title="2023-09-23 21:57:53">2023/09/23</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/da-jian-ge-ren-bo-ke/" data-tag="hexo" data-author="">
+            <span class="post-title" title="搭建个人博客">搭建个人博客</span>
+            <span class="post-date" title="2023-09-23 21:57:26">2023/09/23</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first">&lt;</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-【信道估计】Sparse-Channel-Estimation-for-OFDM-Based-Underwater-Acoustic-Systems-in-Rician-Fading-With-a-New-OMP-MAP-Algorithm" class="article article-type-post" itemscope="" itemprop="blogPost">
+    
+        <h1 class="article-title">【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a data-rel="论文翻译">论文翻译</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">水声信道</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title="最后更新: 2024-01-28 22:38:31">2024-01-28 22:25</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-INTRODUCTION"><span class="toc-text">I. INTRODUCTION</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em><strong>基于OMP-MAP算法的莱斯衰落ofdm水声系统稀疏信道估计</strong></em></p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>In this paper, a new channel estimation algorithm is proposed that exploits channel sparsity in the time domain for an orthogonal frequency division multiplexing (OFDM)-based underwater acoustical communications systems in the presence of Rician fading. A path-based channel model is used, in which the channel is described by a limited number of paths, each characterized by a delay, Doppler scale, and attenuation factor. The resulting algorithm initially estimates the overall sparse channel tap delays and Doppler shifts using a compressed sensing approach, in the form of the orthogonal matching pursuit (OMP) algorithm. Then a computationally efficient and novel channel estimation algorithm is developed by combining the OMP and maximum a posteriori probability (MAP) techniques for estimating the sparse complex channel path gains whose prior densities have complex Gaussian distributions with unknown mean and variance vectors, where a computationally efficient maximum likelihood (ML) algorithm is proposed for their estimation. Monte Carlo simulation results show that the mean square error (MSE) and symbol error rate (SER) performances of the OMP-MAP algorithm uniformly outperforms the conventional OMP-based channel estimation algorithm, in case of uncoded OFDM-based underwater acoustic (UWA) communications systems.<br><code>在本文中，提出了一种新的信道估计算法，利用信道的稀疏性在时域中的正交频分复用（OFDM）为基础的水声通信系统中存在的莱斯衰落。使用基于路径的信道模型，其中信道由有限数量的路径描述，每个路径的特征在于延迟、多普勒尺度和衰减因子。所得到的算法最初估计的整体稀疏信道抽头延迟和多普勒频移使用压缩感知方法，在正交匹配追踪（OMP）算法的形式。然后，一个计算有效的和新的信道估计算法相结合的OMP和最大后验概率（MAP）技术估计稀疏的复杂的信道路径增益的先验密度具有复杂的高斯分布与未知的均值和方差向量，其中一个计算有效的最大似然（ML）算法提出了他们的估计。Monte Carlo仿真结果表明，在未编码的OFDM水声通信系统中，OMP-MAP算法的均方误差（MSE）和误符号率（SER）性能均优于传统的基于OMP的信道估计算法。</code><br>Index Terms—Underwater Acoustic Channel Estimation, Equalization, OFDM, Orthogonal Matching Pursuit, MAP estimation.<br><code>索引词——水声信道估计，均衡，正交频分复用，正交匹配追踪，MAP估计。</code></p>
+<h1 id="I-INTRODUCTION"><a href="#I-INTRODUCTION" class="headerlink" title="I. INTRODUCTION"></a>I. INTRODUCTION</h1><p>Underwater wireless communication has received increased attention over the past decade. In particular, there is growing interest in providing high-speed wireless links with high link reliability in various underwater applications such as offshore oil field exploration/monitoring, oceanographic data collection, maritime archaeology, seismic observations, environmental monitoring, port and border security among many others. While these tasks can be achieved through radio, optical, or sound (acoustic) waves, underwater acoustic (UWA) transmission is the most practical and commonly employed method due to the favorable propagation characteristics of sound waves in the underwater environment, and research efforts method due to the favorable propagation characteristics of sound waves in the underwater environment, and research efforts therefore have focused on this area. However, the UWA channel presents many challenges, such as long propagation delays, multipath and fading, limited bandwidth, and potentially high spatial and temporal variability. In addition, there is no typical underwater acoustic channel; different bodies of water exhibit quantifiably different properties. Consequently, current modems, implemented in hardware with a fixed, conservative set of transmission parameters, can face severe performance degradation in such varied UWA channels. The four distinguishing characteristics of UWA channels are frequency-dependent propagation loss, severe multipath with much longer delay spreads [1], Doppler spread, and low speed of sound propagation. None of these characteristics are nearly as pronounced in land-based radio channels, which makes underwater wireless communication comparatively quite difficult, and necessitates a dedicated system design.<br><code>水下无线通信在过去的十年中受到越来越多的关注。特别是，在各种水下应用中，例如近海油田勘探/监测、海洋学数据收集、海洋考古学、地震观测、环境监测、港口和边界安全等，对提供具有高链路可靠性的高速无线链路的兴趣日益增加。虽然这些任务可以通过无线电、光或声（声）波来实现，但由于声波在水下环境中的有利传播特性，水下声学（UWA）传输是最实用和最常用的方法，并且由于声波在水下环境中的有利传播特性，研究工作集中在该领域。然而，水下航行器信道提出了许多挑战，如长的传播延迟，多径和衰落，有限的带宽，以及潜在的高空间和时间的变化。此外，没有典型的水声信道;不同的水体表现出量化的不同属性。因此，当前的调制解调器，在硬件中实现一个固定的，保守的一组传输参数，可能会面临严重的性能下降，在这种变化的UWA信道。UWA信道的四个显著特征是频率相关的传播损耗、具有更长延迟扩展的严重多径[1]、多普勒扩展和声音传播的低速。这些特性在陆基无线电信道中几乎都不明显，这使得水下无线通信相对相当困难，并且需要专用的系统设计。</code><br>Space-time coding and multi-input multi-output (MIMO) configurations as well as orthogonal frequency division multiplexing (OFDM)-based communication systems, which were originally introduced in the context of terrestrial radiofrequency (RF) wireless communication, have been successfully applied to underwater communications in studies [2], [3], [4]. These techniques seem to be primary candidates for next generation UWA systems, due to their high information capacity and robustness to large multipath spreads [5] [6] and bring significant improvements in both throughput rate and error rate performance through channel estimation and equalization processes [7]. On the other hand, when the deployment of multi transmit/receive elements is not possible due to space or power limitations and path loss becomes a performance limiting factor, relay-assisted (cooperative) communication has also been applied to UWA systems to take advantage of diversity benefits. These works have been mostly focused on capacity and power allocation [8] for UWA relay channels with intersymbol interference (ISI), distributed channel coding and space time cooperative schemes for UWA channels [9] [10], adaptive relay-aided OFDM UWA communications using the amplify-and- forward (AF) protocol [11]. On the other hand, channel estimation and equalization for amplify-and-forward cooperative relay based OFDM systems in UWA channels was investigated in [12]. Notably, in [12], assuming Rayleigh fading channels between source, relay and destination, an efficient algorithm is developed based on the space-alternating generalized expectation-maximization (SAGE) technique. The fundamental performance bounds of such system generalized expectation-maximization (SAGE) technique.<br><code>空时编码和多输入多输出（MIMO）配置以及基于正交频分复用（OFDM）的通信系统，最初是在陆地射频（RF）无线通信的背景下引入的，已在研究[2]，[3]，[4]中成功应用于水下通信。这些技术似乎是下一代UWA系统的主要候选者，因为它们的高信息容量和对大的多径扩展的鲁棒性[5] [6]，并且通过信道估计和均衡过程[7]在吞吐率和错误率性能方面都带来了显着的改进。另一方面，当由于空间或功率限制而不可能部署多个发射/接收元件并且路径损耗成为性能限制因素时，中继辅助（协作）通信也已经应用于UWA系统以利用分集益处。这些工作主要集中在具有符号间干扰（ISI）的UWA中继信道的容量和功率分配[8]，UWA信道的分布式信道编码和空时协作方案[9] [10]，使用放大转发（AF）协议的自适应中继辅助OFDM UWA通信[11]。另一方面，在[12]中研究了UWA信道中基于放大转发协作中继的OFDM系统的信道估计和均衡。值得注意的是，在[12]中，假设源、中继和目的地之间存在瑞利衰落信道，基于空间交替广义期望最大化（SAGE）技术开发了一种有效的算法。这种系统的基本性能界广义期望最大化（SAGE）技术。</code></p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2017 YJT
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket"></a>
+
+    </div>
+</div>
+
+
+<script src="/js/jquery.pjax.js?v=1.1.0"></script>
+
+<script src="/js/script.js?v=1.1.0"></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 532px;
+        }
+        .nav.fullscreen {
+            margin-left: -532px;
+        }
+        .nav-left {
+            width: 140px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 532px;
+            margin-left: -532px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/lazyload-plugin/lazyload.intersectionObserver.min.js"></script></body></html>

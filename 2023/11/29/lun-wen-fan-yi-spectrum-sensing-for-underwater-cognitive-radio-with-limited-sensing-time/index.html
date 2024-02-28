@@ -1,0 +1,858 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <title>【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time | YJT's Blog</title>
+  <meta name="keywords" content=" 论文翻译 ">
+  <meta name="description" content="【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time | YJT's Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="YJT's Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-23T12:49:09.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:49:31.199Z">
+<meta property="article:author" content="YJT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+<body><div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>YJT</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(45)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="python">
+            
+            python
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="sciencewriting">
+            
+            sciencewriting
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="刷题">
+            
+            刷题
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="动手学深度学习">
+            
+            动手学深度学习
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数学">
+            
+            数学
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文写作">
+            
+            论文写作
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文精读">
+            
+            论文精读
+            <small>(12)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文翻译">
+            
+            论文翻译
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="课程笔记">
+            
+            课程笔记
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="45">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off">
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search">
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>leetcode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>markdown</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>YOLO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声传感器网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声信道</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声通信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>深度学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>目标检测</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文写作</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文精读</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文翻译</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a id="top" class="全部文章 " href="/2023/11/11/xue-xi-lu-xian-tu-shen-du-xue-xi-cong-ru-men-dao-ru-tu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【学习路线图】深度学习从入门到入土">【学习路线图】深度学习从入门到入土</span>
+            <span class="post-date" title="2023-11-11 12:25:49">2023/11/11</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/27/mu-biao-jian-ce-you-only-look-once-unified-real-time-object-detection/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】You Only Look Once Unified Real Time Object Detection">【目标检测】You Only Look Once Unified Real Time Object Detection</span>
+            <span class="post-date" title="2024-02-27 19:51:22">2024/02/27</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-3-writing-about-results/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 3 Writing about Results">Unit 3 Writing about Results</span>
+            <span class="post-date" title="2024-02-25 23:50:30">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-2-writing-about-methodology/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 2 Writing about Methodology">Unit 2 Writing about Methodology</span>
+            <span class="post-date" title="2024-02-25 23:48:04">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-object-detection-in-20-years-a-survey/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Object Detection in 20 Years A Survey">【目标检测】Object Detection in 20 Years A Survey</span>
+            <span class="post-date" title="2024-02-25 20:00:13">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-underwater-target-detection-based-on-improved-yolov7/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on improved YOLOv7">【目标检测】Underwater target detection based on improved YOLOv7</span>
+            <span class="post-date" title="2024-02-25 19:18:01">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network-1/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network">【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network</span>
+            <span class="post-date" title="2024-02-06 15:05:16">2024/02/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy">【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy</span>
+            <span class="post-date" title="2024-02-03 14:38:42">2024/02/03</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/29/shui-sheng-xin-dao-channel-state-information-prediction-for-adaptive-underwater-acoustic-downlink-ofdma-system-deep-neural-networks-based-approach/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach">【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach</span>
+            <span class="post-date" title="2024-01-29 13:07:47">2024/01/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/28/xin-dao-gu-ji-sparse-channel-estimation-for-ofdm-based-underwater-acoustic-systems-in-rician-fading-with-a-new-omp-map-algorithm/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm">【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm</span>
+            <span class="post-date" title="2024-01-28 22:25:42">2024/01/28</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/unit-1-how-to-write-an-introduction/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 1 How to Write an Introduction">Unit 1 How to Write an Introduction</span>
+            <span class="post-date" title="2024-01-26 14:20:20">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/introduction-how-to-use-this-book/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Introduction: How to Use This Book">Introduction: How to Use This Book</span>
+            <span class="post-date" title="2024-01-26 10:44:16">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/04-shu-ju-cao-zuo-shu-ju-yu-chu-li/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="04数据操作+数据预处理">04数据操作+数据预处理</span>
+            <span class="post-date" title="2024-01-25 14:25:01">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/00-03/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="00-03">00-03</span>
+            <span class="post-date" title="2024-01-25 14:22:41">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/24/lun-wen-fan-yi-channel-state-information-based-ranging-for-underwater-acoustic-sensor-networks/" data-tag="水声传感器网络" data-author="">
+            <span class="post-title" title="【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks">【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks</span>
+            <span class="post-date" title="2024-01-24 09:13:38">2024/01/24</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-retentive-network-a-successor-to-transformer-for-large-language-models/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Retentive Network A Successor to Transformer for Large Language Models">【论文翻译】Retentive Network A Successor to Transformer for Large Language Models</span>
+            <span class="post-date" title="2023-12-12 10:58:30">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-a-novel-noise-aware-deep-learning-model-for-underwater-acoustic-denoising/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising">【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising</span>
+            <span class="post-date" title="2023-12-12 10:47:35">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/06/lun-wen-11-swin-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文11】Swin Transformer论文逐段精读">【论文11】Swin Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-06 08:30:35">2023/12/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-10-deepmind-yong-ji-qi-xue-xi-zhi-dao-shu-xue-zhi-jue-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文10】Deepmind用机器学习指导数学直觉论文逐段精读">【论文10】Deepmind用机器学习指导数学直觉论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:30">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-9-moco-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文9】MoCo论文逐段精读">【论文9】MoCo论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:15">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-8-mae-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文8】MAE论文逐段精读">【论文8】MAE论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-7-vit-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文7】ViT论文逐段精读">【论文7】ViT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:46:34">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-6-bert-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文6】BERT论文逐段精读">【论文6】BERT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:44:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-5-gan-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文5】GAN论文逐段精读">【论文5】GAN论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:43:45">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-4-ling-ji-chu-duo-tu-xiang-jie-tu-shen-jing-wang-luo-gnn-gcn/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文4】零基础多图详解图神经网络（GNN-GCN）">【论文4】零基础多图详解图神经网络（GNN-GCN）</span>
+            <span class="post-date" title="2023-12-04 14:43:23">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-3-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文3】Transformer论文逐段精读">【论文3】Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:39:57">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-2-cheng-qi-ji-suan-ji-shi-jue-ban-bian-tian-de-resnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文2】撑起计算机视觉半边天的ResNet">【论文2】撑起计算机视觉半边天的ResNet</span>
+            <span class="post-date" title="2023-12-04 14:38:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-1-shen-du-xue-xi-dian-ji-zuo-zhi-yi-alexnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文1】深度学习奠基作之一：AlexNet">【论文1】深度学习奠基作之一：AlexNet</span>
+            <span class="post-date" title="2023-12-04 14:36:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/02/lun-wen-fan-yi-swin-transformer-hierarchical-vit-using-shifted-windows/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows">【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows</span>
+            <span class="post-date" title="2023-12-02 10:07:14">2023/12/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/29/lun-wen-fan-yi-spectrum-sensing-for-underwater-cognitive-radio-with-limited-sensing-time/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time">【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time</span>
+            <span class="post-date" title="2023-11-29 10:05:04">2023/11/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/23/lun-wen-fan-yi-underwater-acoustic-communication-receiver-using-deep-belief-network/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network">【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network</span>
+            <span class="post-date" title="2023-11-23 19:39:00">2023/11/23</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/13/bi-ji-li-yong-python-jin-xing-shu-ju-fen-xi/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】利用Python进行数据分析">【笔记】利用Python进行数据分析</span>
+            <span class="post-date" title="2023-11-13 15:39:51">2023/11/13</span>
+        </a>
+        
+        
+        <a class="全部文章 论文写作 " href="/2023/11/09/bi-ji-the-craft-of-research/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="【笔记】The Craft of Research">【笔记】The Craft of Research</span>
+            <span class="post-date" title="2023-11-09 22:38:28">2023/11/09</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/04/lun-wen-fan-yi-a-transformer-based-deep-learning-network-for-underwater-acoustic-target-recognition/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition">【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition</span>
+            <span class="post-date" title="2023-11-04 08:55:31">2023/11/04</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/11/03/bi-ji-shui-sheng-tong-xin-zhou-sheng-li/" data-tag="水声通信" data-author="">
+            <span class="post-title" title="【笔记】水声通信（周胜利）">【笔记】水声通信（周胜利）</span>
+            <span class="post-date" title="2023-11-03 16:40:05">2023/11/03</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/02/bi-ji-ling-ji-chu-ru-men-xue-xi-python-xiao-jia-yu/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】零基础入门学习Python（小甲鱼）">【笔记】零基础入门学习Python（小甲鱼）</span>
+            <span class="post-date" title="2023-11-02 15:58:57">2023/11/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/01/lun-wen-fan-yi-attention-is-all-you-need/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Attention is all you need">【论文翻译】Attention is all you need</span>
+            <span class="post-date" title="2023-11-01 22:21:09">2023/11/01</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/10/31/bi-ji-ai-lun-wen-jing-du-li-mu/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【笔记】AI论文精读（李沐）">【笔记】AI论文精读（李沐）</span>
+            <span class="post-date" title="2023-10-31 13:32:42">2023/10/31</span>
+        </a>
+        
+        
+        <a class="全部文章 数学 " href="/2023/10/28/bi-ji-shi-fen-zhong-ji-qi-xue-xi-xi-lie-shi-pin-tong-ji-xue-xi-fang-fa-jian-bo-shi/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）">【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）</span>
+            <span class="post-date" title="2023-10-28 08:16:18">2023/10/28</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/10/11/bi-ji-pytorch-shen-du-xue-xi-kuai-su-ru-men-jiao-cheng-xiao-tu-dui/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】PyTorch深度学习快速入门教程（小土堆）">【笔记】PyTorch深度学习快速入门教程（小土堆）</span>
+            <span class="post-date" title="2023-10-11 08:34:42">2023/10/11</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/09/30/bi-ji-dong-shou-xue-shen-du-xue-xi-v2-quan-73-jiang-li-mu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】动手学深度学习v2（全73讲）李沐">【笔记】动手学深度学习v2（全73讲）李沐</span>
+            <span class="post-date" title="2023-09-30 13:11:50">2023/09/30</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-704-er-fen-cha-zhao/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】704、二分查找">【leetcode】704、二分查找</span>
+            <span class="post-date" title="2023-09-26 17:22:01">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-1-liang-shu-zhi-he/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】1、两数之和">【leetcode】1、两数之和</span>
+            <span class="post-date" title="2023-09-26 17:21:41">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/markdown-yu-fa/" data-tag="markdown" data-author="">
+            <span class="post-title" title="markdown语法">markdown语法</span>
+            <span class="post-date" title="2023-09-23 21:57:53">2023/09/23</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/da-jian-ge-ren-bo-ke/" data-tag="hexo" data-author="">
+            <span class="post-title" title="搭建个人博客">搭建个人博客</span>
+            <span class="post-date" title="2023-09-23 21:57:26">2023/09/23</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first">&lt;</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-【论文翻译】Spectrum-Sensing-for-Underwater-Cognitive-Radio-With-Limited-Sensing-Time" class="article article-type-post" itemscope="" itemprop="blogPost">
+    
+        <h1 class="article-title">【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a data-rel="论文翻译">论文翻译</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">论文翻译</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title="最后更新: 2024-01-10 15:37:40">2023-11-29 10:05</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-INTRODUCTION"><span class="toc-text">I. INTRODUCTION</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II-SYSTEM-MODEL"><span class="toc-text">II. SYSTEM MODEL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III-LEARNING-BASED-SPECTRUM-SENSING"><span class="toc-text">III. LEARNING-BASED SPECTRUM SENSING</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IV-NUMERICAL-RESULTS"><span class="toc-text">IV. NUMERICAL RESULTS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#V-CONCLUSION"><span class="toc-text">V. CONCLUSION</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>有限感知时间的水下认知无线电频谱感知研究</code></p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Underwater acoustic (UWA) communications suffer from the following factors: many multi-paths, slow propagation speed, rapid time-varying channels, and various noise such as the sound of marine animals and artificial acoustic systems. Moreover, since there are no strict standards or specifications for UWA communications, UWA communications generally employ cognitive radio (CR)-based ad-hoc networks, and recently, orthogonal frequency division multiple access (OFDMA) has been adopted to improve CR-based communication performance by maximizing multiplexing gain. However, due to the CR protocol, the performance of the UWA communication is significantly affected by sensing techniques. Therefore, this letter proposes a deep-learning-based spectrum sensing scheme in an OFDMAbased UWA-CR network. Compared to the existing schemes, the proposed scheme has a limited sensing time even shorter than one symbol duration, which is effective in a UWA environment where a long symbol duration is essential. In addition, by learning animal noise and interference caused by the broken orthogonality of OFDMA, the proposed scheme increases the detection accuracy of idle channels and recognizes animal sounds to prevent damage to animal. The simulation results confirm the superiority of the proposed scheme.<br><code>水声通信（UWA）面临着多径、传播速度慢、信道时变快以及海洋动物和人工声系统等各种噪声的影响。此外，由于对于UWA通信没有严格的标准或规范，所以UWA通信通常采用基于认知无线电（CR）的自组织网络，并且最近，已经采用正交频分多址（OFDMA）来通过最大化复用增益来改善基于CR的通信性能。然而，由于CR协议，UWA通信的性能受到传感技术的显著影响。因此，这篇文章提出了一种基于OFDMA的UWA-CR网络中基于深度学习的频谱感知方案。与现有方案相比，所提出的方案具有有限的感测时间，甚至短于一个符号持续时间，这是有效的，在水声环境中，长符号持续时间是必不可少的。此外，该方案通过学习动物噪声和OFDMA正交性破坏引起的干扰，提高了空闲信道的检测精度，并识别动物声音，防止对动物造成伤害。仿真结果证实了该方案的优越性。</code><br>Index Terms<br><code>索引词</code><br>Spectrum sensing, underwater acoustic communication, cognitive radio, deep learning, limited sensing time.<br><code>频谱感知，水声通信，认知无线电，深度学习，有限感知时间。</code></p>
+<h1 id="I-INTRODUCTION"><a href="#I-INTRODUCTION" class="headerlink" title="I. INTRODUCTION"></a>I. INTRODUCTION</h1><p>For underwater communication, acoustic waveform has been used to exploit the moderate attenuation owing to low frequency unlike high-frequency electromagnetic waves [1]. However, the UWA communications have insufficient frequency resources due to extremely limited bandwidth caused by the low-frequency wave [2]. To solve this problem, there are many efforts applying the orthogonal frequency division multiplexing (OFDM) waveform, orthogonal frequency division multiple access (OFDMA), and cognitive radio (CR) to UWA communications [3], [4].<br><code>对于水下通信，声波波形已被用于利用与高频电磁波不同的低频的适度衰减[1]。然而，由于低频波造成的带宽极其有限，UWA通信的频率资源不足[2]。为了解决这个问题，存在将正交频分复用（OFDM）波形、正交频分多址（OFDMA）和认知无线电（CR）应用于UWA通信的许多努力[3]、[4]。</code><br>As a result, an OFDMA-based CR protocol employs cyclic prefix (CP) to compensate for multi-path and achieves high spectral efficiency compared to single-carrier-based approaches [4]. Moreover, the protocol enables a terminal to detect spectrum holes and transmit packets without requiring a grant, which effectively enhances resource efficiency by eliminating the process for exchanging control signals. However, the OFDMA-based CR protocol identifies and utilizes idle resources solely through spectrum sensing, and thus it inevitably makes the resource efficiency highly dependent on the sensing accuracy. Consequently, numerous previous studies have been conducted to enhance the accuracy of spectrum sensing [5].<br><code>因此，与基于单载波的方法相比，基于OFDMA的CR协议采用循环前缀（CP）来补偿多径并实现高频谱效率[4]。此外，该协议使得终端能够检测频谱空洞并发送分组而不需要授权，这通过消除用于交换控制信号的过程而有效地提高了资源效率。然而，基于OFDMA的CR协议仅通过频谱感知来识别和利用空闲资源，因此不可避免地使得资源效率高度依赖于感知精度。因此，已经进行了许多先前的研究以提高频谱感测的准确性[5]。</code><br>To improve sensing accuracy in terrestrial wireless communications, there are various sensing schemes based on a covariance matrix of the received signals. Specifically, most of them utilize a sample-covariance matrix (SCM), which is an empirical mean of the covariance matrix derived from multiple received OFDM symbols [6]. However, an OFDM waveform in UWA communication has long CP and long symbol duration due to the high delay spread of UWA multi-path channels. Hence, the SCM-based schemes undergo seriously long sensing delay, which wastes energy and causes a change in the communication environment during the sensing time.<br><code>为了提高地面无线通信中的感测精度，存在基于接收信号的协方差矩阵的各种感测方案。具体地，它们中的大多数利用样本协方差矩阵（SCM），其是从多个接收的OFDM符号导出的协方差矩阵的经验平均值[6]。然而，由于水声多径信道的高延迟扩展，水声通信中的OFDM波形具有长CP和长符号持续时间。因此，基于SCM的方案经历非常长的感测延迟，这浪费了能量并且在感测时间期间引起通信环境的变化。</code><br>As another scheme, there is an energy detection (ED)-based sensing scheme that should not require a long sensing time because multiple symbols are not needed [7]. Although the ED-based scheme can flexibly change the sensing time, the sensing accuracy is low due to its too simple abstraction of information. In particular, it shows extremely low performance in an environment if synchronization between terminals is not guaranteed or where the sensing time is shorter even than a single OFDM symbol. In addition, the performance of ED-based sensing is significantly degraded even in the presence of interfering sources such as dolphins affecting UWA channels.<br><code>作为另一种方案，存在基于能量检测（艾德）的感测方案，其不应要求长的感测时间，因为不需要多个符号[7]。虽然基于ED的方案可以灵活地改变感测时间，但由于其过于简单的信息抽象，感测精度较低。特别地，在如果终端之间的同步没有得到保证或者感测时间甚至比单个OFDM符号更短的环境中，其显示出极低的性能。此外，基于ED的传感的性能显着下降，即使在干扰源，如海豚影响UWA信道的存在。</code><br>This letter addresses a sensing scheme that can achieve high sensing accuracy with a short sensing time in an OFDMA-based CR protocol. Specifically, the proposed scheme improves signal detection accuracy by about 10 % compared to the ED-based scheme in scenarios where the sensing time is shorter than a single OFDM symbol duration. In addition, the proposed scheme can protect dolphins by learning dolphin sounds in the neural network (NN) training process.<br><code>这封信介绍了一种在基于OFDMA的CR协议中能够以较短的感测时间实现高感测精度的感测方案。具体地说，在感知时间小于单个ofdm符号持续时间的情况下，所提出的方案比基于ED的方案提高了约10%的信号检测精度。此外，该方案通过在神经网络(NN)训练过程中学习海豚的声音来保护海豚。</code><br>Numerical results show that the proposed scheme outperforms the existing ED-based sensing scheme for various signal-to-noise ratio (SNR) regimes and sensing times through receiver operating characteristic (ROC) curves. Furthermore, we have compared the proposed NN structure to a simple NN structure which has the same computational complexity as the proposed NN. The results demonstrate that the proposed scheme has a well-suited structure for UWA spectrum sensing.<br><code>数值结果表明，该方案优于现有的ED为基础的传感方案的各种信号噪声比（SNR）制度和传感时间通过接收机工作特性（ROC）曲线。此外，我们已经比较了建议的NN结构，一个简单的NN结构，具有相同的计算复杂度建议的NN。结果表明，该方案具有良好的适应结构的水声频谱感知。</code></p>
+<h1 id="II-SYSTEM-MODEL"><a href="#II-SYSTEM-MODEL" class="headerlink" title="II. SYSTEM MODEL"></a>II. SYSTEM MODEL</h1><p><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/1.png" alt="图一"><br><code>采用基于OFDMA的CR协议的水声网络系统模型。</code><br>Fig. 1 depicts a UWA network with an OFDMA-based CR protocol. The UWA network consists of a sink node, sensor nodes, and noise sources, where each sensor node communicates with the sink node as in [8]. The sets of sensor node indices and noise source indices are denoted as J = {1, 2, . . . , J} and M = {1, 2, . . . ,M}, respectively. We assume that OFDMA is employed in the communication between a sensor node and the sink node. The minimum set of subcarriers allocated to a node is called resource block (RB), and the time consumed for the spectrum sensing is denoted as Tsens.<br><code>图1描绘了具有基于OFDMA的CR协议的UWA网络。UWA网络由汇聚节点、传感器节点和噪声源组成，其中每个传感器节点与汇聚节点通信，如[8]中所述。传感器节点索引和噪声源索引的集合被表示为J = {1，2，...，J}且M = {1，2，...，M}。我们假设OFDMA被用于传感器节点和汇聚节点之间的通信。分配给节点的子载波的最小集合被称为资源块（RB），并且频谱感测所消耗的时间被表示为Tsens。</code><br>In the OFDMA-based CR protocol, node j detects idle resources through spectrum sensing when a packet to transmit occurs, and then the node transmits the packet to the idle resource. Therefore, if node j performs spectrum sensing, signals transmitted by other nodes are received by node j through the sensing link. The sensing link is physically identical to the acoustic communication channel, but it is used only for sensing purposes without decoding in the system under consideration.<br><code>在基于OFDMA的CR协议中，节点j在出现要发送的分组时通过频谱感知来检测空闲资源，然后节点将分组发送到空闲资源。因此，如果节点j进行频谱感知，则其他节点发送的信号通过感知链路被节点j接收。感测链路在物理上与声学通信信道相同，但它仅用于感测目的，而不在所考虑的系统中进行解码。</code><br>A. UWA Channel Generation<br><code>A.UWA信道生成</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/2.png" alt="图二"><br><code>采用BELLHOP模拟器的拟议频谱感测方案的框图。</code><br>Fig. 2 depicts the block diagram of the proposed spectrum sensing scheme. In the figure, a UWA channel between sensor node i and sensor node J is denoted by hi,J, and the UWA channel is obtained by a UWA channel generating simulator called BELLHOP [9], [10]. The BELLHOP simulator can generate channels by deriving intensity field and performing ray tracing based on underwater information such as a sound speed profile (SSP) and geographical features, where the details of the channel model were discussed in [9]. Therefore, these channels are more realistic than the channels generated by a simple transmission loss model [11].<br><code>图2描绘了所提出的频谱感测方案的框图。在图中，传感器节点i和传感器节点J之间的UWA信道由hi，J表示，并且UWA信道由称为BELLHOP的UWA信道生成模拟器获得[9]，[10]。BELLHOP模拟器可以通过导出强度场并基于水下信息（例如声速剖面（SSP）和地理特征）执行射线跟踪来生成通道，其中通道模型的详细信息在[9]中进行了讨论。因此，这些信道比由简单传输损耗模型生成的信道更真实[11]。</code></p>
+<h1 id="III-LEARNING-BASED-SPECTRUM-SENSING"><a href="#III-LEARNING-BASED-SPECTRUM-SENSING" class="headerlink" title="III. LEARNING-BASED SPECTRUM SENSING"></a>III. LEARNING-BASED SPECTRUM SENSING</h1><p><code>三.基于学习的频谱感知</code><br>A. Transmitted Signal<br><code>A.发射信号</code><br>As shown in Fig. 2, the continuous time signal detected by sensor node i is denoted as yi(t). To express yi(t), we first define the signal transmitted by the other sensor node j as follows.<br><code>如图2所示，传感器节点i检测到的连续时间信号表示为yi（t）。为了表示yi（t），我们首先如下定义由另一传感器节点j发送的信号。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/3.png"><br>where U is the number of OFDM symbols in a packet, fc is the center frequency, Ttot is the duration of total OFDM symbol including CP, and ˆx^(u)_j is defined as<br><code>其中，U是分组中的OFDM符号的数量，fc是中心频率，Ttot是包括CP的总OFDM符号的持续时间，并且ˆx^(u)_j被定义为：</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/4.png"></p>
+<p>In (2), ˆx^(u)_j = 0 for t ≤ −TCP and t ≥ Tsym, Kj is the set of subcarrier indices allocated to node j, Tsym is the duration of a single OFDM symbol, TCP is the duration of CP, and d(u) j,k is the transmitted data of node j carried on the k-th subcarrier in the u-th OFDM symbol.<br><code>在（2）中，ˆx^(u)_j对于t ≤-TCP和t ≥ Tsym，Kj = 0，Kj是分配给节点j的子载波索引的集合，Tsym是单个OFDM符号的持续时间，TCP是CP的持续时间，d（u）j，k是在第u个OFDM符号中的第k个子载波上承载的节点j的发送数据。</code></p>
+<p>B. Animal and Artificial Noise<br><code>B.动物和人工噪声</code><br>In addition to the transmitted signal, we generate animal and artificial noise based on the sound source files to implement realistic UWA communication environments, where the public data in [12] and [13] is used as the source files. Specifically, the dolphin sounds with grade 3 called high-quality whistles in [13] are extracted and used as the animal noise.<br><code>除了传输的信号之外，我们还根据声源文件生成动物和人工噪声，以实现逼真的UWA通信环境，其中[12]和[13]中的公共数据用作源文件。具体地，提取[13]中称为高质量哨声的3级海豚声音并用作动物噪声。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/7.png" alt="Fig. 3. Analysis of time/frequency signals from underwater sources of interference such as bottlenose dolphins, snapping shrimps, and vessels."><br><code>分析来自水下干扰源的时间/频率信号，如海豚、虾类和船只。</code><br>Fig. 3 shows the results of analyzing time/frequency signals of bottlenose dolphins, snapping shrimps, and vessels, which are representative sources of underwater interference. Since a UWA communication typically uses the center frequency of around 10 kHz, it is hardly affected by vessel sounds. Snapping shrimp can affect the UWA communication, but the effect is not critical. On the other hand, bottlenose dolphins have effective signals up to 20 kHz, making it a significant obstacle to finding idle resources.<br><code>图3显示了对海豚、虾蛄和船只的时间/频率信号进行分析的结果，这些信号是水下干扰的代表性来源。由于UWA通信通常使用10 kHz左右的中心频率，因此几乎不受船只声音的影响。捕虾对水声通信有一定的影响，但影响并不严重。另一方面，海豚的有效信号高达20 kHz，这是寻找闲置资源的一个重大障碍。</code></p>
+<p>C. Detected Signal<br><code>C.检测信号</code><br>Let us denote a sound of the noise source m as sm(t), and then a detected signal in the sensor node i is represented as<br><code>让我们将噪声源m的声音表示为sm（t），然后将传感器节点i中的检测信号表示为</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/5.png"><br>In (3), the operator ∗ represents a convolution product, z(t) is additive white gaussian noise, and the operating gap gj,i is defined as gj,i = ri − lj,i. As shown in Fig. 4, lj,i is the time when the signal of node j arrives at node i, and ri is the time at which node i starts sensing.<br><code>在（3）中，运算符n表示卷积积，z（t）是加性白色高斯噪声，并且操作间隙gj，i被定义为gj，i = ri-lj，i。如图4所示，lj，i是节点j的信号到达节点i的时间，ri是节点i开始感测的时间。</code><br>Finally, the detected signal yi(t) is discretized by sampling, and it is expressed as<br><code>最后，通过采样对检测信号yi（t）进行离散化，并将其表示为</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/6.png"><br>where Tsamp is a sampling period.<br><code>其中Tsamp是采样周期。</code></p>
+<p>D. Neural Network Input Data<br><code>D.神经网络输入数据</code><br>In UWA short-time sensing scenarios, inter-carrier interference (ICI) is mainly caused by frequency-adjacent RBs, called out-of-band emission (OOBE). Therefore, the convolution process in convolutional neural network (CNN) can effectively mitigate ICI by capturing features of the signals in adjacent RBs. Furthermore, the convolution process effectively extracts correlation features among adjacent time samples, where animal noise and sinusoidal-based signals have strong correlations among contiguous time samples. As a result, the proposed spectrum sensing scheme employs CNN to mitigate the effects of animal noise and ICI.<br><code>在水声短时间感知场景中，载波间干扰（ICI）主要由频率相邻的RB引起，称为带外发射（OOBE）。因此，卷积神经网络（CNN）中的卷积过程可以通过捕获相邻RB中信号的特征来有效地减轻ICI。此外，卷积过程有效地提取相邻时间样本之间的相关性特征，其中动物噪声和基于正弦的信号在连续时间样本之间具有强相关性。因此，所提出的频谱感测方案采用CNN来减轻动物噪声和ICI的影响。</code><br>The received time-domain and frequency-domain signals utilized in the CNN model are represented as follows:<br><code>CNN模型中使用的接收到的时域和频域信号表示如下：</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/8.png"><br>In (5), Ncol and Nrow mean column size and row size of 2D input, respectively. In addition, Re{y} is a function that outputs the real part of y, Im{y} is a function that outputs the imaginary part of y, ˆ Yi[n] is a frequency-domain discrete signal in which ˆyi[n] is transformed by fast Fourier transform (FFT), ∀p ∈ [1, · · · , Ncol], and ∀q ∈ [1, · · · , Nrow]. Finally, all 2D inputs are combined into a single 3D network input with the size of 4 ×Ncol ×Nrow.<br><code>在（5）中，Ncol和Nrow分别表示2D输入的列大小和行大小。另外，Re{y}是输出y的真实的部分的函数，Im{y}是输出y的虚部的函数，ˆ Yi[n] 是通过快速傅立叶变换（FFT）对ˆyi[n]进行变换的频域离散信号，Yp ∈ [1，· · ·，Ncol]，并且Yq ∈ [1，· · ·，Nrow]。最后，将所有2D输入合并为一个大小为4 ×Ncol ×Nrow的3D网络输入。</code><br>E. CNN Output and Loss Model<br><code>E.CNN输出和损失模型</code><br>The goal of the spectrum sensing in the CR protocol is to detect idle RBs, and thus the output of the CNN should indicate the state of RBs. In addition, the proposed scheme detects dolphin sounds, and thus the presence or absence of dolphin sounds should be included in the output. Therefore, we design the label of the output as<br><code>CR协议中的频谱感测的目标是检测空闲RB，因此CNN的输出应该指示RB的状态。此外，所提出的方案检测海豚的声音，因此海豚的声音的存在或不存在应该包括在输出中。因此，我们将输出的标签设计为</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/9.png"><br>where NRB is the number of RBs, S^(us)_q + D^(id)_q = 1 for all q, S^(us)_1 = 1 if RB1 is used, and D^(id)_1 = 1 if RB1 is idle.<br><code>其中NRB是RB的数量，对于所有q，S^(us)_q + D^(id)_q = 1，如果使用RB1，则S^(us)_1 = 1，并且如果RB1空闲，则D^(id)_1 = 1。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/10.png"><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/11.png"><br><code>类似地，s（pr）dol + d（ab）dol = 1，如果海豚音存在，s（pr）dol = 1，如果海豚音不存在，d（ab）dol = 1。让我们将网络的输出定义为：对于所有q，都有S（us）q，对于所有q，都有D（id）q，都有S（pr）dol和D（ab）dol。利用交叉熵，成本函数设计如下。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/12.png"></p>
+<p>F. Training Process<br><code>F.训练过程</code><br>Algorithm 1 depicts the training architecture of the proposed scheme. As shown in the algorithm, training is divided into a MATLAB-based module for generating sensing signals and a Python-based CNN learning module for updating network weights. In the MATLAB-based module, Nongoing and Nact are first determined, where Nongoing and Nact mean the number of sensor nodes transmitting a packet and the number of noise nodes generating noise, respectively. To prevent the biased dataset, the values of Nongoing and Nact should be uniformly distributed within the generated data.<br><code>算法1描述了所提出的方案的训练架构。如算法所示，训练分为基于MATLAB的模块，用于生成传感信号，以及基于Python的CNN学习模块，用于更新网络权重。在基于MATLAB的模块中，首先确定Nongoing和Nact，其中Nongoing和Nact分别表示发送数据包的传感器节点的数量和产生噪声的噪声节点的数量。为了防止有偏的数据集，Nongoing和Nact的值应该均匀分布在生成的数据中。</code><br>The MATLAB-based module randomly deploys nodes in the specified underwater space and creates channels between them using the BELLHOP simulator. Then, to generate a sensing signal, Nongoing and Nact number of nodes are activated to transmit a packet or to generate noise.<br><code>基于MATLAB的模块在指定的水下空间随机部署节点，并使用BELLHOP模拟器在它们之间创建通道。然后，为了生成感测信号，Nongoing和Nact数量的节点被激活以发送分组或生成噪声。</code></p>
+<h1 id="IV-NUMERICAL-RESULTS"><a href="#IV-NUMERICAL-RESULTS" class="headerlink" title="IV. NUMERICAL RESULTS"></a>IV. NUMERICAL RESULTS</h1><p><code>四.数值结果</code><br>A. Simulation Setup<br><code>A.仿真设置</code><br>The UWA network and OFDM waveform parameters are listed in Table I, where the OFDM parameters are based on the actual measurements in [15] and [16]. According to [15] and [16], OFDM symbol duration higher than 100 ms and CP duration higher than 20 ms should be used due to the high delay spread of UWA channels. With limited computing power on a real time basis, the proposed scheme uses a customized shallow CNN structure composed of 5 layers, where the depth of the CNN has been intentionally set to the minimum depth that yields converged sensing performance for all considered scenarios. Each layer of the network consists of a convolutional layer and a Rectified Linear Unit (ReLU) activation function, without any pooling layers. The used functions and hyperparameters for the CNN are summarized as follows: Adam optimizer, CosineAnnealingLR scheduler, initial learning rate of 1×10−4, and two kernels with sizes of 5×5 and 3×3. In addition, the CNN input sizes for sensing times of 45 ms and 22.5 ms are defined as 4 × 50 × 20 and 4 × 50 × 10, respectively. In addition, a cross-validation technique is employed to prevent overfitting.<br><code>UWA网络和OFDM波形参数列于表I中，其中OFDM参数基于[15]和[16]中的实际测量。根据[15]和[16]，由于UWA信道的高延迟扩展，应使用高于100 ms的OFDM符号持续时间和高于20 ms的CP持续时间。在真实的时间基础上具有有限的计算能力的情况下，所提出的方案使用由5层组成的定制的浅CNN结构，其中CNN的深度被有意地设置为针对所有考虑的场景产生收敛的感测性能的最小深度。网络的每一层都由卷积层和整流线性单元（ReLU）激活函数组成，没有任何池化层。CNN使用的函数和超参数总结如下：Adam优化器，CosineAnnealingLR调度器，初始学习率为1×10−4，两个大小为5×5和3×3的内核。此外，感知时间为45 ms和22.5 ms的CNN输入大小分别定义为4 × 50 × 20和4 × 50 × 10。此外，交叉验证技术，以防止过度拟合。</code></p>
+<p>B. Discussion of CNN Complexity<br><code>B.CNN复杂度的讨论</code><br>Let us define the dimensions of the input and output of CNN are Cin and Cout, respectively. Then, the number of flops of CNN can be obtained by<br><code>让我们将CNN的输入和输出的维度分别定义为Cin和Cout。然后，CNN的触发次数可以通过以下方式获得：</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/13.png"><br>where a × b is a convolutional kernel size, and α × β is an input shape of CNN. Therefore, the computational complexity of CNN is O(FCNN) flops. On the other hand, the dominant computational complexity of the ED-based sensing arises from the FFT operation due to the OFDMA protocol. Hence, the computational complexity of the ED-based sensing is O(Nsam log2(Nsam)), where Nsam is the number of sensing samples.<br><code>其中a × B是卷积核大小，α × β是CNN的输入形状。因此，CNN的计算复杂度是O（FCNN）flops。另一方面，基于ED的感测的主要计算复杂度由归因于OFDMA协议的FFT操作引起。因此，基于ED的感测的计算复杂度是O（Nsam log2（Nsam）），其中Nsam是感测样本的数量。</code><br>In general, the worst case of α × β is similar to Nsam and the remaining terms in FCNN, excluding the term α × β, are larger than log2(Nsam). Thus, the computational complexity of CNN is typically larger than that of the ED-based sensing. Nevertheless, the proposed scheme exhibits significantly lower complexity in comparison to networks such as ResNet-152. Therefore, the proposed scheme is still suitable for use in UWA equipment, such as autonomous underwater vehicles (AUVs).<br><code>一般来说，α × β的最差情况与Nsam相似，FCNN中的其余项（不包括α × β项）大于log 2（Nsam）。因此，CNN的计算复杂度通常大于基于ED的感测的计算复杂度。尽管如此，与ResNet-152等网络相比，该方案的复杂度明显降低。因此，所提出的方案仍然适用于UWA设备，如自主水下航行器（AUV）。</code></p>
+<p>C. Performance Evaluation<br><code>C.绩效评价</code><br>For performance comparison, we have implemented an ED-based sensing scheme that can operate in a short sensing time. In addition, to demonstrate the suitability of the proposed NN structure, a fully connected network (FCN) has been implemented in two versions: 1) a model with similar computational complexity to the CNN scheme, and 2) a model which achieves the converged sensing performance with significantly higher computational complexity than the CNN-based scheme.<br><code>对于性能比较，我们已经实现了一个基于ED的传感方案，可以在很短的传感时间内工作。此外，为了证明所提出的NN结构的适用性，全连接网络（FCN）已经以两个版本实现：1）具有与CNN方案相似的计算复杂度的模型，以及2）实现收敛感测性能的模型，其计算复杂度显著高于基于CNN的方案。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/14.png" alt="Fig. 5. ROC curves of CNN-based, FCN-based, and ED-based schemes for different sensing times with the SNR of 6 dB."><br><code>图五.SNR为6 dB时，基于CNN、基于FCN和基于ED的方案在不同感知时间的ROC曲线。</code><br>Figs. 5 present ROC curves of the spectrum sensing schemes. The ROC curve is a graph that measures classification performance through true positive rate (TPR) and false positive rate (FPR). TPR represents the proportion of actual positive cases that are correctly identified as positive, while FPR represents the proportion of actual negative cases that are incorrectly identified as positive. Here, the positive represents a detection of a spectrum hole.<br><code>图5给出了频谱感知方案的ROC曲线。ROC曲线是通过真阳性率（TPR）和假阳性率（FPR）来测量分类性能的图。TPR代表被正确识别为阳性的实际阳性病例的比例，而FPR代表被错误识别为阳性的实际阴性病例的比例。这里，正表示检测到频谱空洞。</code><br>In Fig. 5a, area under the curve (AUC) of the proposed scheme is 5 % larger than that of the ED-based scheme, and thus the proposed CNN-based scheme is a better sensor than the ED-based scheme. However, as discussed in Section IVB, the CNN-based scheme requires a higher computational complexity than the ED-based scheme, which indicates that there exists a trade-off between a computational complexity and sensing performance. Although the trade-off exists, the FCN-based scheme requiring a high computational complexity exhibits inferior sensing performance compared to the CNN-based scheme with a relatively low computational complexity, as depicted in Fig. 5a. This indicates that the proposed CNN-based scheme is a well-suited model for the UWA-CR spectrum sensing because it effectively captures both animal noise and ICI caused by the short sensing time, leading to superior sensing performance compared to the FCN-based scheme.<br><code>在图5a中，所提出的方案的曲线下面积（AUC）比基于ED的方案的曲线下面积大5%，因此所提出的基于CNN的方案是比基于ED的方案更好的传感器。然而，如第IVB节中所讨论的，基于CNN的方案需要比基于ED的方案更高的计算复杂度，这指示在计算复杂度和感测性能之间存在折衷。尽管存在折衷，但是与具有相对低的计算复杂度的基于CNN的方案相比，需要高计算复杂度的基于FCN的方案表现出较差的感测性能，如图5a所示。这表明所提出的基于CNN的方案是非常适合UWA-CR频谱感测的模型，因为它有效地捕获动物噪声和由短感测时间引起的ICI，从而导致与基于FCN的方案相比具有上级感测性能。</code><br>In Fig. 5b, if the sensing time reduces to 22.5 ms, the interval between frequency samples becomes wider. As a result, the ED-based sensing scheme detects the presence or absence of a signal by using only one frequency sample, and thus it has a very poor ROC curve. In the case of the proposed scheme, the sensing performance degrades if the sensing time is reduced to 22.5 ms. However, since the CNN extracts meaningful information from other frequency samples, the performance degradation is not severe compared to the ED-based sensing scheme.<br><code>在图5b中，如果感测时间减少到22.5ms，则频率样本之间的间隔变得更宽。结果，基于ED的感测方案通过仅使用一个频率样本来检测信号的存在或不存在，并且因此其具有非常差的ROC曲线。在所提出的方案的情况下，如果感测时间减少到22.5 ms，则感测性能降低。然而，由于CNN从其他频率样本中提取有意义的信息，因此与基于ED的感测方案相比，性能降低并不严重。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/15.png"><br><code>表II在固定SNR为10 dB的环境中，建议方案的海豚声检测精度（%）</code><br>Table II shows the accuracy of detecting the dolphin sounds of the proposed scheme, where the accuracy means the ratio of accurately matching the presence or absence of dolphins. In an environment where the SNR is fixed at 10 dB, as the signal-to-interference ratio (SIR) increases, the dolphin’s loudness decreases. Therefore, as the value of SIR increases, the detection accuracy decreases from 97.2 % to 88.4 % with a sensing time of 45 ms. However, the low dolphin’s loudness means that the dolphin is far away, and thus it is more important to have 97 % accuracy at an SIR of 0 dB where the dolphin may be close. In the table, the sensing accuracy varies by approximately 1 % depending on the sensing time. Although the sensing accuracy improves as the sensing time increases, it only converges to about 98 % at the sensing time of 90 ms and SIR of 0 dB due to the error rate in data generation. Therefore, achieving 100 % sensing accuracy is still challenging.<br><code>表II显示了拟议方案检测海豚声音的准确性，其中准确性是指准确匹配海豚存在或不存在的比率。在SNR固定为10 dB的环境中，随着信号干扰比（SIR）的增加，海豚的响度降低。因此，随着SIR值的增加，检测准确度从97.2%降低到88.4%，感知时间为45 ms。然而，海豚的低响度意味着海豚很远，因此在SIR为0 dB时，海豚可能很近，因此更重要的是具有97%的准确度。在该表中，感测精度根据感测时间而变化大约1%。尽管感测精度随着感测时间的增加而提高，但是由于数据生成中的错误率，其仅在90 ms的感测时间和0 dB的SIR处收敛到约98%。因此，实现100%的感测精度仍然具有挑战性。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/sp/16.png"><br>Fig. 6 shows the true negative rate (TNR) values at which the sensing scheme achieves TPR of 0.8, where TNR represents the proportion of actual negative cases that are correctly identified as negative. With the same sensing time, the proposed scheme achieves TPR values of 0.8 at 10 % higher TNR values compared to the ED-based sensing scheme. In addition, the proposed scheme with a sensing time of 45 ms achieves a TPR value of 0.8 at an SNR of 12 dB with a TNR value of 1. That is, 80 % of the signals can be detected without error.<br><code>图6示出了感测方案实现TPR为0.8时的真阴性率（TNR）值，其中TNR表示被正确识别为阴性的实际阴性情况的比例。在相同的感测时间下，与基于ED的感测方案相比，所提出的方案在高10%的TNR值下实现了0.8的TPR值。此外，所提出的方案具有45 ms的感测时间，在SNR为12 dB，TNR值为1时，TPR值为0.8。也就是说，80%的信号可以被无误差地检测。</code></p>
+<h1 id="V-CONCLUSION"><a href="#V-CONCLUSION" class="headerlink" title="V. CONCLUSION"></a>V. CONCLUSION</h1><p>This letter proposed a CNN-based spectrum sensing scheme to reduce the sensing time and to improve sensing accuracy in the OFDMA-based UWA-CR network. To generate a realistic sensing signal for training the CNN, UWA channels were generated using a ray-tracing-based BELLHOP simulator. Then, various noises were added to the received signal. The proposed scheme showed more than 10 % improvement in the TNR performance in all SNR regimes compared to the existing ED-based sensing. In future work, we will apply cooperative sensing to the proposed scheme to improve sensing accuracy. Moreover, we will optimize energy efficiency by conducting a comprehensive system performance analysis to assess power consumption arising from sensing time and computational complexity.<br><code>本文提出了一种基于CNN的频谱感知方案，以减少基于OFDMA的UWA-CR网络中的感知时间，提高感知精度。为了生成用于训练CNN的真实感测信号，使用基于光线跟踪的BELLHOP模拟器生成UWA通道。然后，各种噪声被添加到所接收的信号。与现有的基于ED的感测相比，所提出的方案在所有SNR机制中的TNR性能表现出超过10%的改善。在未来的工作中，我们将应用合作感知的建议方案，以提高传感精度。此外，我们将进行全面的系统性能分析，以评估因感知时间和计算复杂性而产生的功耗，从而优化能源效率。</code></p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2017 YJT
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket"></a>
+
+    </div>
+</div>
+
+
+<script src="/js/jquery.pjax.js?v=1.1.0"></script>
+
+<script src="/js/script.js?v=1.1.0"></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 532px;
+        }
+        .nav.fullscreen {
+            margin-left: -532px;
+        }
+        .nav-left {
+            width: 140px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 532px;
+            margin-left: -532px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/lazyload-plugin/lazyload.intersectionObserver.min.js"></script></body></html>

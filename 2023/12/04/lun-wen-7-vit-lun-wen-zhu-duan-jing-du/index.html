@@ -1,0 +1,914 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <title>【论文7】ViT论文逐段精读 | YJT's Blog</title>
+  <meta name="keywords" content=" 论文精读 ">
+  <meta name="description" content="【论文7】ViT论文逐段精读 | YJT's Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="YJT's Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-23T12:49:09.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:49:31.199Z">
+<meta property="article:author" content="YJT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+<body><div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>YJT</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(45)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="python">
+            
+            python
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="sciencewriting">
+            
+            sciencewriting
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="刷题">
+            
+            刷题
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="动手学深度学习">
+            
+            动手学深度学习
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数学">
+            
+            数学
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文写作">
+            
+            论文写作
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文精读">
+            
+            论文精读
+            <small>(12)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文翻译">
+            
+            论文翻译
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="课程笔记">
+            
+            课程笔记
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="45">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off">
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search">
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>leetcode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>markdown</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>YOLO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声传感器网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声信道</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声通信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>深度学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>目标检测</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文写作</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文精读</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文翻译</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a id="top" class="全部文章 " href="/2023/11/11/xue-xi-lu-xian-tu-shen-du-xue-xi-cong-ru-men-dao-ru-tu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【学习路线图】深度学习从入门到入土">【学习路线图】深度学习从入门到入土</span>
+            <span class="post-date" title="2023-11-11 12:25:49">2023/11/11</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/27/mu-biao-jian-ce-you-only-look-once-unified-real-time-object-detection/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】You Only Look Once Unified Real Time Object Detection">【目标检测】You Only Look Once Unified Real Time Object Detection</span>
+            <span class="post-date" title="2024-02-27 19:51:22">2024/02/27</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-3-writing-about-results/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 3 Writing about Results">Unit 3 Writing about Results</span>
+            <span class="post-date" title="2024-02-25 23:50:30">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-2-writing-about-methodology/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 2 Writing about Methodology">Unit 2 Writing about Methodology</span>
+            <span class="post-date" title="2024-02-25 23:48:04">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-object-detection-in-20-years-a-survey/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Object Detection in 20 Years A Survey">【目标检测】Object Detection in 20 Years A Survey</span>
+            <span class="post-date" title="2024-02-25 20:00:13">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-underwater-target-detection-based-on-improved-yolov7/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on improved YOLOv7">【目标检测】Underwater target detection based on improved YOLOv7</span>
+            <span class="post-date" title="2024-02-25 19:18:01">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network-1/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network">【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network</span>
+            <span class="post-date" title="2024-02-06 15:05:16">2024/02/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy">【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy</span>
+            <span class="post-date" title="2024-02-03 14:38:42">2024/02/03</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/29/shui-sheng-xin-dao-channel-state-information-prediction-for-adaptive-underwater-acoustic-downlink-ofdma-system-deep-neural-networks-based-approach/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach">【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach</span>
+            <span class="post-date" title="2024-01-29 13:07:47">2024/01/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/28/xin-dao-gu-ji-sparse-channel-estimation-for-ofdm-based-underwater-acoustic-systems-in-rician-fading-with-a-new-omp-map-algorithm/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm">【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm</span>
+            <span class="post-date" title="2024-01-28 22:25:42">2024/01/28</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/unit-1-how-to-write-an-introduction/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 1 How to Write an Introduction">Unit 1 How to Write an Introduction</span>
+            <span class="post-date" title="2024-01-26 14:20:20">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/introduction-how-to-use-this-book/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Introduction: How to Use This Book">Introduction: How to Use This Book</span>
+            <span class="post-date" title="2024-01-26 10:44:16">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/04-shu-ju-cao-zuo-shu-ju-yu-chu-li/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="04数据操作+数据预处理">04数据操作+数据预处理</span>
+            <span class="post-date" title="2024-01-25 14:25:01">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/00-03/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="00-03">00-03</span>
+            <span class="post-date" title="2024-01-25 14:22:41">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/24/lun-wen-fan-yi-channel-state-information-based-ranging-for-underwater-acoustic-sensor-networks/" data-tag="水声传感器网络" data-author="">
+            <span class="post-title" title="【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks">【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks</span>
+            <span class="post-date" title="2024-01-24 09:13:38">2024/01/24</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-retentive-network-a-successor-to-transformer-for-large-language-models/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Retentive Network A Successor to Transformer for Large Language Models">【论文翻译】Retentive Network A Successor to Transformer for Large Language Models</span>
+            <span class="post-date" title="2023-12-12 10:58:30">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-a-novel-noise-aware-deep-learning-model-for-underwater-acoustic-denoising/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising">【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising</span>
+            <span class="post-date" title="2023-12-12 10:47:35">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/06/lun-wen-11-swin-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文11】Swin Transformer论文逐段精读">【论文11】Swin Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-06 08:30:35">2023/12/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-10-deepmind-yong-ji-qi-xue-xi-zhi-dao-shu-xue-zhi-jue-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文10】Deepmind用机器学习指导数学直觉论文逐段精读">【论文10】Deepmind用机器学习指导数学直觉论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:30">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-9-moco-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文9】MoCo论文逐段精读">【论文9】MoCo论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:15">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-8-mae-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文8】MAE论文逐段精读">【论文8】MAE论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-7-vit-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文7】ViT论文逐段精读">【论文7】ViT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:46:34">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-6-bert-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文6】BERT论文逐段精读">【论文6】BERT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:44:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-5-gan-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文5】GAN论文逐段精读">【论文5】GAN论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:43:45">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-4-ling-ji-chu-duo-tu-xiang-jie-tu-shen-jing-wang-luo-gnn-gcn/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文4】零基础多图详解图神经网络（GNN-GCN）">【论文4】零基础多图详解图神经网络（GNN-GCN）</span>
+            <span class="post-date" title="2023-12-04 14:43:23">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-3-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文3】Transformer论文逐段精读">【论文3】Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:39:57">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-2-cheng-qi-ji-suan-ji-shi-jue-ban-bian-tian-de-resnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文2】撑起计算机视觉半边天的ResNet">【论文2】撑起计算机视觉半边天的ResNet</span>
+            <span class="post-date" title="2023-12-04 14:38:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-1-shen-du-xue-xi-dian-ji-zuo-zhi-yi-alexnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文1】深度学习奠基作之一：AlexNet">【论文1】深度学习奠基作之一：AlexNet</span>
+            <span class="post-date" title="2023-12-04 14:36:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/02/lun-wen-fan-yi-swin-transformer-hierarchical-vit-using-shifted-windows/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows">【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows</span>
+            <span class="post-date" title="2023-12-02 10:07:14">2023/12/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/29/lun-wen-fan-yi-spectrum-sensing-for-underwater-cognitive-radio-with-limited-sensing-time/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time">【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time</span>
+            <span class="post-date" title="2023-11-29 10:05:04">2023/11/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/23/lun-wen-fan-yi-underwater-acoustic-communication-receiver-using-deep-belief-network/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network">【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network</span>
+            <span class="post-date" title="2023-11-23 19:39:00">2023/11/23</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/13/bi-ji-li-yong-python-jin-xing-shu-ju-fen-xi/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】利用Python进行数据分析">【笔记】利用Python进行数据分析</span>
+            <span class="post-date" title="2023-11-13 15:39:51">2023/11/13</span>
+        </a>
+        
+        
+        <a class="全部文章 论文写作 " href="/2023/11/09/bi-ji-the-craft-of-research/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="【笔记】The Craft of Research">【笔记】The Craft of Research</span>
+            <span class="post-date" title="2023-11-09 22:38:28">2023/11/09</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/04/lun-wen-fan-yi-a-transformer-based-deep-learning-network-for-underwater-acoustic-target-recognition/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition">【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition</span>
+            <span class="post-date" title="2023-11-04 08:55:31">2023/11/04</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/11/03/bi-ji-shui-sheng-tong-xin-zhou-sheng-li/" data-tag="水声通信" data-author="">
+            <span class="post-title" title="【笔记】水声通信（周胜利）">【笔记】水声通信（周胜利）</span>
+            <span class="post-date" title="2023-11-03 16:40:05">2023/11/03</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/02/bi-ji-ling-ji-chu-ru-men-xue-xi-python-xiao-jia-yu/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】零基础入门学习Python（小甲鱼）">【笔记】零基础入门学习Python（小甲鱼）</span>
+            <span class="post-date" title="2023-11-02 15:58:57">2023/11/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/01/lun-wen-fan-yi-attention-is-all-you-need/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Attention is all you need">【论文翻译】Attention is all you need</span>
+            <span class="post-date" title="2023-11-01 22:21:09">2023/11/01</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/10/31/bi-ji-ai-lun-wen-jing-du-li-mu/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【笔记】AI论文精读（李沐）">【笔记】AI论文精读（李沐）</span>
+            <span class="post-date" title="2023-10-31 13:32:42">2023/10/31</span>
+        </a>
+        
+        
+        <a class="全部文章 数学 " href="/2023/10/28/bi-ji-shi-fen-zhong-ji-qi-xue-xi-xi-lie-shi-pin-tong-ji-xue-xi-fang-fa-jian-bo-shi/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）">【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）</span>
+            <span class="post-date" title="2023-10-28 08:16:18">2023/10/28</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/10/11/bi-ji-pytorch-shen-du-xue-xi-kuai-su-ru-men-jiao-cheng-xiao-tu-dui/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】PyTorch深度学习快速入门教程（小土堆）">【笔记】PyTorch深度学习快速入门教程（小土堆）</span>
+            <span class="post-date" title="2023-10-11 08:34:42">2023/10/11</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/09/30/bi-ji-dong-shou-xue-shen-du-xue-xi-v2-quan-73-jiang-li-mu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】动手学深度学习v2（全73讲）李沐">【笔记】动手学深度学习v2（全73讲）李沐</span>
+            <span class="post-date" title="2023-09-30 13:11:50">2023/09/30</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-704-er-fen-cha-zhao/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】704、二分查找">【leetcode】704、二分查找</span>
+            <span class="post-date" title="2023-09-26 17:22:01">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-1-liang-shu-zhi-he/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】1、两数之和">【leetcode】1、两数之和</span>
+            <span class="post-date" title="2023-09-26 17:21:41">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/markdown-yu-fa/" data-tag="markdown" data-author="">
+            <span class="post-title" title="markdown语法">markdown语法</span>
+            <span class="post-date" title="2023-09-23 21:57:53">2023/09/23</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/da-jian-ge-ren-bo-ke/" data-tag="hexo" data-author="">
+            <span class="post-title" title="搭建个人博客">搭建个人博客</span>
+            <span class="post-date" title="2023-09-23 21:57:26">2023/09/23</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first">&lt;</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-【论文7】ViT论文逐段精读" class="article article-type-post" itemscope="" itemprop="blogPost">
+    
+        <h1 class="article-title">【论文7】ViT论文逐段精读</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a data-rel="论文精读">论文精读</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">论文精读</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title="最后更新: 2024-01-02 17:16:48">2023-12-04 14:46</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%87%E9%A2%98"><span class="toc-text">1.标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%91%98%E8%A6%81"><span class="toc-text">2.摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BC%95%E8%A8%80"><span class="toc-text">3.引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%93%E8%AE%BA"><span class="toc-text">4.结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="toc-text">5.相关工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-ViT%E6%A8%A1%E5%9E%8B"><span class="toc-text">6.ViT模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%AE%9E%E9%AA%8C"><span class="toc-text">7.实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E8%AF%84%E8%AE%BA"><span class="toc-text">8.评论</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em><strong>AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE</strong></em></p>
+<blockquote>
+<p>如果说在过去的一年中在计算机视觉领域，哪个工作的影响力最大，那应该非<code>Vision Transformer</code>莫属了，因为他挑战了自从2012年 Alexnet 提出以来卷积神经网络，在计算机视觉领域里绝对统治的地位，他的结论就是说呢，如果在足够多的数据上去做预训练，那我们也可以不需要卷积神经网络，直接用一个从自然语言处理那边搬过来的标准的Transformer。也能把视觉问题解决得很好，而且Vision Transformer不光是在视觉领域挖了一个大坑，因为他打破了 cv 和 nlp在模型上的这个壁垒，所以在多模态领域也挖了一个大坑，于是在短短的一年之内，各种基于Vision Transformer的工作层出不穷，公开的论文应该已经有上百篇了，有把它扩展到别的任务的，有对模型本身进行改进的，有对它进行分析的，还有对目标函数或者训练方式进行改进的，基本上是可以说，开启了 cv 的一个新时代。</p>
+</blockquote>
+<p>图1里举了一些例子，在卷积神经网络cnn 上工作的不太好，但是用Vision Transformer都能处理很好的例子，比如说第一个就是遮挡，那在这么严重的遮挡情况下呢，卷积神经网络，很难看得出其中有一只鸟。第二个例子，就是数据分布上有所偏移，在这里就是对图片做了一次纹理去除的操作，所以说导致图片看起来非常魔幻，很难看出来其中到底是什么物体。第三个就是在鸟头的位置加了一个对抗性的 patch。第四个就是把图片打散了以后做排列组合，卷积神经网络也是很难去判断这到底是一个什么物体的。但所有这些例子呢，Vision Transformer都能处理得很好</p>
+<h3 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h3><p>***AN IMAGE IS WORTH 16X16 WORDS: ***<br><em><strong>TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE</strong></em></p>
+<p>先来看一下题目，题目是说一张图片等价于很多16x16大小的单词，那为什么是16x16，而且为什么是单词呢，其实他是说把这个图片看作是很多很多patch，就假如说我们把这个图片打成这种方格的形式每一个方格的大小都是16x16，那这个图片其实就相当于是很多16x16大小的这个patch组成的一个整体，接下来第二句是 transformer去做大规模的图像识别</p>
+<h3 id="2-摘要"><a href="#2-摘要" class="headerlink" title="2.摘要"></a>2.摘要</h3><p>虽然说现在Vision Transformer已经是 nlp 领域（自然语言处理领域）里的一个标准，我们也知道有 BERT model、GPT 3然后或者是T5模型，但是用transformer来做cv还是很有限的。在视觉里呢这个自注意力要么是跟卷积神经网络一起用，要么就是说去把某一些卷积神经网络里的卷积替换成自注意力，但是呢还是保持整体的这个结构不变。而这篇文章就证明了这种对于卷积神经网络的依赖呢是完全不必要的一个纯的<code>Vision Transformer</code>直接作用于一系列图像块的时候,他也是可以在图像分类这个任务上表现得非常好的,尤其是当在你在大规模的数据及去做预训练，然后又迁移到中小型数据及使用，这个Vision Transformer能获得跟最好的卷积神经网络相媲美的结果。</p>
+<h3 id="3-引言"><a href="#3-引言" class="headerlink" title="3.引言"></a>3.引言</h3><p><em><strong>第一段</strong></em><br>自注意力机制的这个网络尤其是Transformer已经是自然语言处理里的必选模型了，现在比较主流的方式，就是先去一个大规模的数据集上去做预训练，然后再在一些特定领域的小数据集上去做微调，那其实这个就是要BERT这篇paper里提出来的。多亏了Transformer的计算高效性和这个可扩展性现在已经可以训练超过1,000亿参数的模型了，比如说GPT3。随着你的这个模型和数据级的增长，我们还没有看到任何性能饱和的现象。</p>
+<blockquote>
+<p><code>把 transformer 用到视觉问题上的一些难处</code><br>先来回顾一下 transformer ，假如说我们有一个 transformer 的encoder，我们输入一些元素，在这里假如说是在自然语言处理，这些就是一个句子里的一个一个的单词，输出了也是一些元素，Transformer里最主要的操作就是自注意力操作，自注意力操作就是每个元素都要跟每个元素去做互动，是两两互相的，然后算得一个Attention就是算得一个自注意力的图，然后用这个自注意力的图去做加权平均，最后得到这个输出。因为在做自注意力的时候，我们是两两相互的，就是说这个计算复杂度是跟这个序列的长度乘三倍的。目前一般在自然语言处理，现在硬件能支持的这个序列长度一般也就是几百或者上千，比如说在BERT里也就是512的这个序列长度，那我们现在换到视觉领域，我们就是想用Transformer的话，首先第一个要解决的问题就是<br><code>如何把一个2d的图片变成一个1d的序列或者说变成一个集合，那最直观的方式就是说我们把每个像素点当成这边的这种元素，然后直接把2d的图片拉直，然后把这扔到Transformer里，然后自己跟自己学去就好了。</code><br>但是想法很美好，实现起来复杂度太高，一般来说，在视觉里面，我们训练分类任务的时候这个图片的输入大小大概是224x224这么大，那如果把图片里的每一个像素点都直接当成这里的元素来看待呢，那其实他的序列长度就不是512了，那他的序列长度就是224x224=50176,因为我们一共就有这么多像素点，一共有50,000个像素点，那这个序列长度50,000，其实也就意味着相当是 BRET序列长度512x100倍，所以这个复杂度是相当可怕的，然后呢这还只是分类任务，他的图片大小就24x24这么大，那对于检测或者分割这些任务，现在很多模型的输入呢都已经是变成600x600或者800x800或者更大了，那这个计算复杂度就更是高不可攀了。</p>
+</blockquote>
+<p><em><strong>第二段</strong></em><br>在视觉邻域卷积神经网络还是占主导地位的，像Alexnet 或者 ResNet，但是transformer 在 nlp 领域又这么火，自注意力又这么香，那计算机视觉那就是想用一下自注意力怎么办？所以说很多工作就是想怎么能把自注意力用到视觉里来，一些工作把卷积神经网络和自注意力混到一起用，另外一些工作把整个卷积神经都换掉了，然后就全用自注意力。这些方法呢其实都在干一个事，不是说序列长度太长所以导致没办法把transformer 用到视觉里来吗，那我就想办法就降低这个序列长度。那比如说像这篇论文就是 CVPR 18 Local Network，他就说既然用这个像素点当输入导致序列长度太长的话，我们就不用图片当这transformer的直接输入，我们把网络中间的这个特征图当做transformer的输入。假如说我们有残差网络res50，那其实在他最后一个 stage到res4的时候，他的feature map size 其实就只有14x14那么大，你把他拉平，其实也就只有196个元素，这个序列长度就只有196，就是可以接受的范围之内了。所以他就用特征图当做 transformer 输入的方式，去降低这个序列长度。那像他说的第二个方向，他其实举了两个例子，一个叫做 Stand-Alone Attention（孤立自注意力），另外一个是 Axial Attention（轴注意力）。那对于这个孤立自注意力，他做的什么事呢，他意思是说，你这个复杂度高是来源于你用整张图，那如果我现在不用整张图了，我就用一个 local 的一个 window，我就用一个局部的小窗口，那这个复杂度就是你可以控制，你可以通过控制这个窗口的大小来让这个计算复杂度在你可接受的范围之内，那这个就有点相当于回到卷积那一套操作，因为卷积也是在一个局部的窗口里做的。对于这个轴自注意力工作，他的意思是说图片的复杂度高是因为他的序列长度是 N = H x W，他是由2d的矩阵，那我们能不能把图片这个2d矩阵拆分成两个1d的向量呢，所以他们就是先在高度这个dimension身上去做一次 self-attention，就做一个自注意力，然后他们再去在这个宽度这个dimension上再去做一次自注意力，相当于他把一个在2d矩阵上进行的自注意力操作变成了两个1d的顺序的操作，这样这个计算复杂度就大幅降低了。然后Vision Transformer的作者又说这些后一种方式完全用自注意力把卷积操作的这一类工作，他们虽然理论上是非常高效的，但事实上，因为他们的这个自注意力操作都是一些比较特殊的自注意力操作，所以没有在现在的这个硬件上去加速，所以就会导致你很难去把它训练一个大模型，所以截止到目前为止像这种Stand-Alone Attenion或者这个Axial Attention他的模型都还没有太大，就是跟这种百亿千亿级别的大Transformer模型比还是差的很远。因此啊最后一句话就说，在大规模的图像识别上，这个传统的残差网络还是效果最好的。</p>
+<p><em><strong>第三段</strong></em></p>
+<blockquote>
+<p>那介绍完之前的工作，接下来就该讲Vision Transformer这篇paper到底做了什么事了，所以我们可以看到自注意力早已经在计算机视觉里有所应用，而且甚至已经有完全用自制力去取代卷积操作的工作了，所以这篇论文他就换了个角度去讲故事</p>
+</blockquote>
+<p>他说他们是被Transformer在NLP领域里这个可扩展性所启发，他们想做的就是直接应用于一个标准的Transformer直接作用于图片，尽量做少的修改，就是不做任何针对视觉任务的特定的改变，看看这样的Transformer能不能在视觉领域里扩展得很大很好。如果直接用Transformer，那老问题又回来了，这个这么长的序列长度该怎么办。所以Vision Transformer是怎么处理的呢，Vision Transformer是像我们刚才讲的一样，他把一个图片呢打成了很多 patch，每一个patch就是16x16，假如说这个图片的大小是224x224，sequence length是224x224等于50176。那现在如果我们换成 patch，就是这一个 patch相当于是一个元素，那有效的长宽又会是多少呢，那比如说现在这个宽度变成了24除以16，其实就相当是14了，同样的高度呢也就是14，所以说这样的话，最后的这个序列长度，就变成了14x14等于196，意思就是说现在这张图片就只有196个元素，那196对于Transformer来说，还是可以接受的这个序列程度。然后我们把这里的每一个patch当做一个元素，然后通过一个这个fc layer会得到一个linear embedding，然后这些呢就会当做输入传给Transformer，这个时候，你其实可以很容易的看出来，一个图片就已经变成一个一个的这样的图片块了，然后你可以把这些的图片块当成是像NLP里的那些单词，这一个句子有多少词那就相当是一个图片现在有多少个patch。这就是他题目的意义，一个图片等价于很多16乘16的单词。<br>然后最后一句话，他说他说我们训练这个Vision Transformer是用的有监督的训练，为什么要突出啊有监督呢，因为对于nlp那边来说的话Transformer基本上都是用无监督的方式去训练的，要么是language modeling，要么是用mask language modeling，总之都是无监督的训练方式，但是对于视觉来说，大部分的基线(baseline)网络还都是用这个有监督的训练方式去训练。</p>
+<blockquote>
+<p>Vision Transformer这篇paper是把视觉当成自然语言处理的任务去做，尤其是中间的这个模型，他就是用了一个Transformer encoder跟BERT是完全一样，那如果你已经听过沐神讲解BERT这篇论文，那其实Vision Transformer这篇论文对你而言没有任何技术难点，这篇论文其实就是想告诉你，用这么简洁的一套框架，Transformer也能在视觉里起到很好的效果</p>
+</blockquote>
+<p><em><strong>第四段</strong></em><br>当在中型大小的数据集上，比如说ImageNet去训练的时候，如果不加比较强的约束，ViT的模型其实跟同等大小的残差网络相比，其实是要弱的，那作者就得解释那他为什么弱，所以论文紧接着说，这个看起来不太好的结果，其实是可以预期的，为什么呢？因为 transformer跟卷积神经网络相比，他缺少一些卷积神经网络有的归纳偏置，这个归纳偏置的概念很有意思，他其实说的就是指一种先验知识或者一种我们提前做好的假设。比如说对于卷积神经网络来说，我们常说的就有两个inductive bias两个归纳偏置，一个叫做locality，因为卷积神经网络是以滑动窗口这种形式，是一点一点在图片上进行卷积的，所以他假设图片上相邻的区域会有相邻的特征，那这个假设当然是非常合理的，比如说桌子和椅子，就大概率他经常就会在一起，靠的越近的东西，他的相关性就会越强。另外一个归纳偏置呢叫做平移等变性，也就是我们常说的translation equivariance(平移同变性)，他的意思就是如果你把它写成公式的话，其实是这样的f(g(x)) = g(f(x))，就是不论你先做 g 这个函数还是先做 f这个函数，最后的结果是不变的。这里你可以把 f 理解成是卷积，然后 g 可以理解成是平移这个操作，那意思就是说，无论你先做平移还是先做卷积，最后的结果是一样的，因为卷积神经网络里，这个卷积核就相当于是一个模板一样，像一个 template 一样，不论你这个图片同样的物体移到哪里，那只要是同样的输入进来，然后遇到了同样的卷积核，那他的输出永远是一样的，一旦卷积神经网络有了这两个归纳偏置以后，他其实就有了很多先验信息，所以他就需要相对少的数据去学一个比较好的模型。但是对于Transformer来说，他没有这些先验信息，所以说他所有的这些能力对视觉世界的感知全都需要从这些数据里自己学。</p>
+<p><em><strong>第五段</strong></em><br>为了验证，这个假设作者就在更大的数据集上去做了预训练这里的这个14M 1,400万的图片，就是ImageNet 22k数据集，这里的300M数据集就是google他们自己的JFT 300M数据，上了大数据以后果然这效果拔群，他们立马就发现这个大规模的预训练就比这个归纳偏置要好，Vision Transformer只要在有这个足够的数据去预训练的情况下就能在下游任务上获得很好的迁移学习效果，具体来说就是当在ImageNet 21 k上去训练或者说在这 JFT 300M上去训练的时候vit 就能获得跟现在最好的残差网络相近或者说更好的结果。最后他还罗列了一些结果，比如说ImageNet 88.5 确实相当高，ImageNet-ReaL CIFAR-100 还有VTAB这些数据集。VTAB其实也是这个作者团队他们提出来的一个数据集是融合了19个数据集，主要是用来检测一个模型稳健性好不好的，所以从侧面也可以反映出Vision Transformer的稳健性也是相当不错的。</p>
+<blockquote>
+<p>那引言还是写的非常简洁明了的</p>
+<p>第一段先上来说因为Transformer在NLP那边扩展的很好，越大的数据或者越大的模型，最后的performance就会一直上升，没有饱和的现象，那自然而然就会有一个问题，那如果把Transformer用到视觉里来，是不是视觉的问题也能获得大幅度的提升呢？</p>
+<p>第二段就开始讲前人的工作，因为这么好的方向不可能没人做过，所以一定要讲清楚自己的工作和前人的工作的区别在哪里。他说之前的工作，要么就是把卷积神经网络和自注意力合起来，要么就是用自注意力去取代卷积神经网络，但是呢从来都没有工作直接把Transformer用到视觉领域里来，而且也都没有获得很好的扩展效果。</p>
+<p>所以第三段他就讲Vision Transformer就是用了一个标准的Transformer模型，只需要对图片做一下预处理，就是把图片打成块，然后送到Transforner里就可以了，别的什么改动都不需要，这样彻底可以把一个视觉问题理解成是一个NLP问题，这样就CV和 NLP这两个领域就大一统了。</p>
+<p>最后两段当然是卖一下结果了，只要在有足够多数据区域训练的情况下，Vision Transformer在很多数据集上取得很好的效果。</p>
+</blockquote>
+<h3 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h3><p><em><strong>第一段</strong></em><br>结论里他上来没有任何花里胡哨，直接一句话就点明了这篇 paper 在到底在干什么，直接拿NLP领域里标准Transformer来做计算机视觉问题，然后他说跟之前的那些工作就是用自注意力的那些工作不一样的，除了在刚开始的抽图像块的时候，还有这个位置编码用了一些图像特有的这个归纳偏置，如此之外，就再也没有引入任何图像特有的归纳偏置了，这样的好处呢就是我们不需要对Vision领域有什么了解，或者有什么domain knowledge(领域知识)，我们可以直接把这个图片理解成为是一个序列的图像块，就跟一个句子里有很多单词一样，然后就可以直接用NLP里面一个标准的Transformer来做图像分类，这个简单，然后呢扩展性很好的这个策略，当你跟大规模预训练结合起来的时候，工作得出奇的好，怎么个好法，就是说Vision Transformer在很多这个图像分类的这个benchmark上超过了之前最好的方法，而且还相对便宜，就训练起来还相对便宜。</p>
+<p><em><strong>第二段</strong></em></p>
+<blockquote>
+<p>然后接下来第二段呢，他又写了一些目前还没有解决的问题，或者是对未来的一个展望，为什么要写这一段呢，其实是因为Vision Transformer这篇论文属于是一个挖坑的论文，这挖坑呢你可以是挖一个新问题的坑或者是挖一个新数据集的坑，那这篇论文其实是挖了一个新模型的坑——如何能Transformer来做 cv</p>
+</blockquote>
+<p>那Vision Transformer不能只做分类，肯定还能去做这个分割和检测另外两个最主流的视觉任务，就是之前另外一篇很popular的工作就是这个DETR，DETR是去年目标检测的一个力作，他现在是改变了整个目标检测之前的框架，就是出框的这种方式，鉴于ViT和DETR而良好的表现，所以说拿Vision Transformer做视觉的其他问题呢应该是没有问题的。</p>
+<blockquote>
+<p>而事实上正是如此，就在 ViT 出来短短的一个半月之后，在2020年12月检测这块就出来了一个工作叫做ViT-FRCNN，就已经把ViT用到detection上了。seqmentation 也一样，同年12月只有一篇SETR，SETR的论文把Vision Transformer用到分割里了，而且紧接着三个月之后Swin Transformer横空出世，他把多尺度的这个设计融合到了Transformer里面，所以说更加适合做视觉的问题了，真正证明了Transformer是能够当成一个视觉领域一个通用的骨干网络的。</p>
+</blockquote>
+<p>另外一个未来工作方向，他就是说要去探索一下这个自监督的预训练方案，那是因为在NLP领域所有的这些大的Transformer全都是用自监督的方式训练。所以说呢Vision Transformer这篇论文，他也做了一些初始实验，他们证明了用这种自监督的训练方式也是 ok 的，但是呢跟这个有监督的训练比起来还是有不小的差距的。最后呢作者还说，继续把这个Vision Transformer变得更大，有可能会带来更好的结果。</p>
+<blockquote>
+<p>这个坑呢作者团队没有等别人去填，他想着反正别人可能也没有这种计算资源，那我就来把这个坑填一填吧，所以说过了半年，同样的作者团队又出了一篇论文叫Scaling Vision Transformer，就是把Transformer变得很大，提出了一个ViT-G，然后就把ImageNet分类的准确率刷到90以上了，所以说这篇论文真的是一个很好的挖坑之作，他不光是给视觉挖了一个坑，就是从此以后，你可以用传送门来做所有视觉的任务了，他同时还挖了一个更大的坑，就是在CV和NLP能够大一统之后，那是不是多模态的任务就可以用一个Transformer去解决了呢，而事实上多模态那边的工作，最近一年也是井喷式的增长，由此可以看来，Vision Transformer这篇论文的影响力还是非常巨大的。</p>
+</blockquote>
+<h3 id="5-相关工作"><a href="#5-相关工作" class="headerlink" title="5.相关工作"></a>5.相关工作</h3><p><em><strong>第一段</strong></em><br>Transformer在NLP领域的应用，自从2017年这个Transformer提出来去做这个机器翻译以后，基本上Transformer就是很多NLP任务里表现最好的方法，现在大规模的这个Transformer模型一般都是先在一个大规模语料库上去做预训练，然后再在这个目标任务上去做一些细小的微调，这里面有两系列比较出名的工作，一个就是BERT，一个就是GPT。BERT是用了一个 denoising自监督的方式其实就是完形填空，就是你有一个句子，然后你把其中某些词划掉，然后你先要把这些词再predict出来。GPT用的是language modeling去做自监督，language modeling 是你已经有一个句子然后我要去预测下一个词是什么，也就是next word prediction预测下一个词。因为这两个任务其实都是我们人为定的，就说语料都在哪，句子就在哪是完整的，我们只是人为的去划掉其中某些部分或者把最后的词拿掉，然后去做这种完形填空或者预测下一个词，所以这叫自监督的训练方式。</p>
+<p><em><strong>第二段</strong></em><br>接下来开始讲自注意力在视觉里的应用，视觉里就是说如果你想简单的使用一个自注意力还用到这个图片上，最简单的方式就是你把每一个像素点当成是一个元素，你就去让他们两两去做自注意力就好了，但是呢我们在引言里也说过这个是平方复杂度，所以说是很难应用到真实的这个图片输入尺寸上的，那像现在分类任务的224x224，一个Transformer都很难处理，那更别提就我们人眼看的比较清晰的图，一般都是1 k或者4 k这种画质了，那序列长度都是上百万，直接在像素层面使用Transformer肯定是不现实的，所以说如果你想用Transformer，那就一定得做一些这个近似，这里他就罗列一些例子，比如说这些工作，他们是说你的复杂度高是因为你用了整张图，所以你的序列长度长，那我现在不用整张图，我就用这个local neighborhood，我就用一个小窗口制作这个自注意力，那序列长度不就大大降低了吗，那最后的这个计算复杂度不也就降低了吗，那另外一条路就是用Sparse Transformer，这个顾名思义，就是说我去只对一些稀疏的点去做自注意力，所以只是全局注意力的一个近似，还有一系列方法，就是说把这个自注意力用到不同大小的这种block上，或者说在极端的情况下，就是直接走轴了，也就是我们刚才讲的轴注意力，就先在横轴上去做自注意力，然后再在纵轴上做自注意力，那这个序列长度也是大大减小的，然后他说这些特制的自注意力结构其实在计算机视觉上的结果都不错，就是表现是没问题，但是他需要很复杂的工程去加速这个算子，从而在cpu或者gpu上跑的很快，或者说让训练一个大模型成为可能。</p>
+<p><em><strong>第三段</strong></em><br>跟他们工作最相似的是一篇ICLR2020论文Vision Transformer，就是在用了更大的patch和更多的数据集去训练一个更好的transformer。</p>
+<p><em><strong>第四段</strong></em><br>在计算机视觉领域还有很多工作是把这个卷积神经网络和这个自注意力结合起来的，而这类工作是相当多的，而且基本涵盖了视觉里的很多任务，比如说这个检测、分类、视频，还有多模态。</p>
+<p><em><strong>第五段</strong></em><br>还有一个工作跟他们的工作很相近，叫image GPT，GPT是用在NLP里，是一个生成性的模型，那image GPT同样也是一个生成性模型，也是用无监督的方式去训练的，他跟Vision Transformer有什么相近的地方呢，是因为他也用了Transformer，最后这个 iGPT 能达到一个什么效果，如果我们拿训练好的模型去做一个微调，或者说就把他当成一个特征提取器，我们会发现他ImageNet的上最高这个分类准确率<br>也只能到72。</p>
+<blockquote>
+<p>那像这篇 Vision Transformer最后的结果已经有88.5了，所以说是远高于这个72的结果，但这个结果也是最近一篇论文 MAE(何凯明)<br>（Masked Autoencoders Are Scalable Vision Learners）爆火的原因，因为在BEiT（BERT Pre-Training of Image Transformer）或者MAE这类工作之前，生成是网络在视觉领域很多任务上是没法跟判别式网络比的，判别式网络往往要比生成式网络的结果要高很多，但是 MAE 就做到了，就在ImageNet-1k这个数据集上去做训练，就用一个生成式的模型，比之前判别式模型的效果要好，而且不光是在分类任务上，最近他们还研究了一下迁移学习的效果，就是在目标检测上效果也非常好。</p>
+</blockquote>
+<p><em><strong>第六段</strong></em><br>Vision Transformer其实还跟另外一系列工作是有关系的，就是用比ImagNet还大的数据集去做这个预训练，这种使用额外数据的方式，一般能够帮助你达到特别好的效果，比如说之前2017的这篇论文其实也就是介绍 JFT300M的这个数据集的论文，研究了卷积神经网络的效果是怎么随着数据集的增大而提高的。还有一些论文是研究了当你在更大的数据集上，比如说ImageNet-21k和 JFT300M去做预训练的时候，这个迁移学习的效果会怎么样，就是当你迁移到ImageNet或者CIFAR-100上的效果会如何。<br>在这篇论文里Vision Transformer上也是聚焦于最后两个数据集<br>ImageNet-21k和 JFT300M，但是我们并不是训一个残差网络，我们是去训Transformer。</p>
+<blockquote>
+<p>那其实这个相关工作写的非常彻底的，而且他列举了很多跟他们工作最相近的，比如说这篇ICLR2020的论文，还有这个iGPT，还有之前研究大数据集的，比如说BIT。其实写相关工作这个章节，就是要让读者知道在你的工作之前，别人做了哪些工作，你跟他们的区别在哪里，这个只要写清楚了，其实是对你非常有利的，并不会因此降低论文的这个创新性，反而会让整个文章变得更加简单易懂。</p>
+</blockquote>
+<h3 id="6-ViT模型"><a href="#6-ViT模型" class="headerlink" title="6.ViT模型"></a>6.ViT模型</h3><p>在模型的设计上最原始的Transformer来做的，这样一个好处就是我们可以直接把 NLP那边已经成功的 Transformer的架构直接拿过来用，就不用自己再去魔改模型了，而且因为Transformer已经在NLP领域火了这么多年了，他有一些写得非常高效的一些实现同样Vision Transformer可以直接把他拿过来用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/ai/7-2.png" alt="图1"></p>
+<blockquote>
+<p>模型的总览图其实对很多论文来说是非常重要的，画得好的模型总览图能够让读者在不读论文的情况下，光看这张图就能大概知道你整篇论文在讲什么内容。Vision Transformer这张图其实画得就很好，因为我们也可以看到，当别人在讲解Vision Transformer这篇论文或者跟他对比的时候就是直接把这个图1直接就复制粘贴过去了，而不是说自己为了讲解的需要，还要再费尽心思再从头再画一个图。</p>
+</blockquote>
+<p>我们先大概过一下这个整体的流程，然后我们再具体的过一遍，整个网络的这个前向操作，这样对Vision Transformer的理解就更深刻了。</p>
+<p>首先给定一张图，他是先把这张图呢打成了这种patch，比如说这里是把这个图打成了九宫格，然后他把这些patch变成了一个序列，每个patch会通过一个叫线性的投射层的操作得到一个特征，也就是这篇论文里说的patch embedding。但我们大家都知道啊这个自注意力是所有的元素之间两两去做这个交互，所以说他本身并不存在一个顺序问题，但是对于图片来说呢他是一个整体，这个九宫格是有自己的顺序的，比如说这图片就是1、2、3，一直到第九张图片还是有顺序的，如果这个顺序颠倒了，其实就不是原来这张图片了，那同样类似NLP那边，我们给这个patch embedding加上了一个position embedding就加上一个位置编码，一旦加上这个位置编码信息以后，这个整体的token就既包含了这个图片块原本有的图像信息，又包含了这个图像块的所在位置信息，那一旦我们得到这些一个一个的 token，那其实接下来就可能NLP那边是完全一样了，我们直接把它给这么一个Transformer encoder，然后Transformer encoder，就会同样的反馈给我们很多输出。那这里问题又来了，那这么多输出，我们该拿哪个输出去做最后的分类呢，所以说再次借鉴BERT，BERT有这个叫extra learnable embedding，也就是一个特殊字符叫cls，叫分类字符，同样的我们在这里，也加了这么一个特殊的字符，这里用新号代替，而且他也是 position embedding，他有位置信息的他永远是0，因为所有的token都在跟所有的token做交互信息，所以他们相信这个class embedding能够从别的这些embedding里头去学到有用的信息，从而我们只需要根据他的输出做一个最后的判断就可以，那最后这个MLP Head其实就是一个通用的分类头了，最后用交叉熵函数去进行模型的训练。</p>
+<p>至于这个Transformer encoder也是一个标准transformer，这篇论文也把具体的结构列在右边了，比如说当你有这些patch的时候呢，你先进来做一次layer norm，然后再做multi-head、self-attention，然后再layer norm，然后再做一个MLP，这就是一Transformer block。然后你可以把它叠加 L 次，就得到了你的Transformer Encoder。所以说整体上来看Vision Transformer的架构还是相当简洁，它的特殊之处就在于如何把一个图片变成这里的一系列的token。</p>
+<p>我们接下来，可以具体按照论文中的文字，再把整个模型的前向过程走一遍，假如说啊我们有个图片X，然后他的dimension是224x224x3，如果我们这里使用16x16的这个patch size 大小，那我们就会得到多少 token 呢，等于224平方除以16的平方，也就是196 就是14的平方，就我们一共会得到196个图像块，那每一个图像块的维度如何呢，其实就是16x16x3，也就是768，3就是RGB channel，所以呢我们就把原来这个图片224x224x3，变成了一个有196个patch，每个patch的维度是768，那接下来这个线性投射层是什么呢，其实这个线性投射层就是一个全连接层，文章后面呢是用大E这个符号就代表这个全连接层的，这个全连接层的维度是多少呢，其实这个全连接层的维度是768x768，这个768也就是文章中一直说的那个D，当然这个D是可以变的，就如果你的Transformer变得更大了，那这个D也可以变得相应的更大，但是前面这个768是从图像patch算来的，是16x16x3算来的，所以这个是不变的。那经过了这个线性投射，我们就得到我们的这个patching embedding，那具体来说呢就是如果XE =1，那在维度上其实就可以理解成是196x768，然后又乘了个768x768的矩阵，然后这两个维度抵消掉，所以最后你得到的还是196x768，意思就是我现在有196个token，每个 token 向量的维度是768，那到现在其实已经成功的把一个 Vision 的问题变成了一个NLP 的问题，我的输入就是一系列1d 的 token而不再是一张2d的图了。那除了图像本身带来的这些token以外，我们之前也说过，这里面要加一个额外的cls token，就是一个特殊的字符，那这个特殊字符他只有一个token，他的维度也是768，这样方便，你可以和后面图像的信息拼接起来，所以最后序列的长度就是整体进入Transformer中的这个序列，长度呢其实是196 +1，就是197乘以768了，这197就是有196个图片对应的 token和一个那个特殊字符cls token。最后呢我们还要加上这些位置编码信息，那位置编码刚才我们说1、2、3一直到9，其实这只是一个序号，而并不是我们真正使用的位置编码因为我们不可能，把这个1、2、3、4、5、6这些数字然后传给一个Transformer去学，具体的做法呢是我们有一个表，这个表的每一行其实就代表了这里面的1、2、3、4这个序号、然后每一行就是一个向量，这个向量的维度是多少呢，跟这边的D是一样的，是768 这个向量也是可以学的。然后我们把这个位置信息加到这所有的这些的token里面，而注意这里面是加而不是拼接，就不是concatenation，是直接sum了，所以加完位置编码信息以后，这个序列还是197x768。那到此，我们就做完了整个对图片的这个预处理，包括加上特殊的字符cls和加上这个位置编码信息。</p>
+<p>也就是说我们对于Transformer输入这块的embedded patches就是197x768的一个tensor，这个tensor先过一个layer norm出来还是197x768，然后我们就要做这个多头注意力了，那多头注意力这里就变成了三份k、q、v，每一个都是197x768，那这里呢因为我们做的是多头自注意力，所以其实最后的这个维度并不是768。假设说我们现在用的是Vision Transformer的base版本，也就是说他用多头是用了12个头，那这个维度呢就变成了768除以12也就等于64的维度，也就是说这里的k、q、 v变成了197x64，但是有12个头，12个对应的k、q、v去做这个自注意力操作，最后再把这些12个头的输出直接拼接起来，这样64拼接出来以后又变成了768，所以多头注意力出来的结果经过拼接，到这块还是197x768，然后再过一层layer norm，还是197x768，然后再过一层MLP，MLP这里呢会把维度相对应的放大，一般是放大四倍，所以说就是197乘以3072，然后再把它缩小投射回去，然后再变成197乘768，就输出了这个呢，就是一个Transformer block的前向传播的过程。所以说进去呢是197x768，出来呢还是197x768，这个序列的长度和每个token对应的维度大小都是一样的。所以说你就可以在一个Transformer block上不停的往上Transformer block，想加多少加多少，那最后有L层这个Transformer block的模型就是这个Transformer Encoder，也就是这里面这个Transformer Encoder的。</p>
+<p>标准的Transformer是需要一系列这个1D的token当做输入，那但是对于2 d 的图片怎么办，那我们就把这个图片打成这么多的小 patch，具体有多少个 patch 呢，就是 N 等于这个 HW/P^2，那其实也就是我们之前算过的24的平方除以16的平方也就是196，当然这个是对于patch size =16 而言了，如果你patch size变了就变成8或者变成14，那对应在这里的这个序列长度也会相应改变。这个Transformer从头到尾都是用了这个 D 当做向量的长度的，也就是我们刚才说的那个768，所以就是从头到尾他的向量长度都是768 这个维度是不变的，那为了和Transformer这个维度匹配上，所以说我们的这个图像的patch 的维度也得是这个 D，dimension也就是768。那具体怎么做呢，就是用一个可以训练的 linear projection，也就是一个全连接层，从全连接层出来的这个东西叫做 patch embedding，为了最后的分类我们借鉴了BERT 里的这个class token，一个特殊的cls token，这个token是一个可以学习的特征，跟图像的特征有同样的维度，都是768，但他只有一个token，就是经过很多层的这个Transformer block以后，我们把他这个输出当成是整个Transformer的模型的输出，也就是当做整个图片的这个特征，那一旦有了这个图像特征了，后面就好做了，因为你卷积神经网络到这块也是有一个图像的整体的特征，我们就在后面加一个这个MLP的这个分类图就可以了。然后对于位置编码信息，这篇文章就用的是标准的这个可以学习的1D position embedding，也就是BERT里用的位置编码，那当然作者也尝试了别的编码形式了，就比如说因为你是做图片，所以你对空间上的位置可能更敏感，你可能需要一个2D aware，就是能处理2D信息的一个位置编码，那最后发现了这个结果其实都差不多，没什么区别。其实针对这个特殊的class token，还有这个位置编码，作者还做了详细的消融实验，因为对于Vision Transformer来说，怎么对图片进行预处理，还有怎么对图片最后的输出进行后处理是很关键的，因为毕竟中间的这个模型就是一个标准的transformer，没什么好讲的，所以我们现在就来看一下这些消融实验。<br>首先我们说一下这个class token，他说因为在这篇论文中我们想跟原始的这个transformer保持尽可能的一致，所以说呢我们也用了这个class token，因为这个class token在NLP那边的分类任务里也是用的，在那边呢也是当做一个全局的对句子理解的一个特征那在这里呢<br>我们就是把它当做一个图像的整体特征<br>那拿到这个token的输出以后呢<br>我们就在后面接一个这个 mlp<br>mlp 里面呢<br>是用 tanh 当做一个非线性的激活函数<br>去做这个分类的预测<br>但是这个 class token 的设计呢<br>是完全从 nlp 里边借鉴过来的<br>之前在视觉领域呢<br>我们其实不是这么做的<br>那比如说我们现在有一个残差网络<br>一个 Res50<br>我们现在有这个前面的几个 block<br>res 2 res 3 res 4 res 5对吧<br>假如说是2345<br>那在最后这个 stage 出来的呢<br>是一个 feature map<br>这个 feature map 呢<br>是14乘14这么大<br>然后在这个 feature map 之上呢<br>我们其实是做了一步这个 gap 的操作<br>也就他这里说的 global average pulling<br>就是一个全局的平均池化<br>池化以后的特征呢<br>其实就已经拉直了 就是一个向量了<br>那这个时候<br>我们就可以把这个向量<br>理解成是一个全局的<br>对于这个图片的一个特征<br>然后我们就拿这个特征去做分类<br>那现在对于transformer来说<br>如果你有一个transformer的model<br>然后你进去呢有这么多 n 个元素<br>而你出来呢也是有这么多 n 个元素<br>我们为什么不能<br>直接在这 n 个输出上<br>去做一个这个 globel average pulling<br>然后得到一个最后的特征呢<br>我们为什么非得在这个前面呢<br>加一个 class token<br>然后最后用 class token 去做输出<br>然后去做分类呢<br>那其实通过实验呢<br>作者最后的结论是说<br>其实这两种方式都可以<br>就<br>你也可以去做这个 global average pulling<br>那得到一个全局的特征然后去做分类<br>或者你用什么一个 class token<br>去做vision transformer这篇论文<br>所有的实验<br>都是用 class token 去做的<br>他主要的目的呢<br>就是跟<br>原始的这个transformer而保持尽可能的一致<br>就像他这里说的<br>stay as close as possible<br>我不想让你觉得他这个效果好<br>有可能是因为某些 trick 带来的<br>或者是某些针对 cv 的改动而带来的<br>那就是想告诉你一个标准的transformer<br>照样能做视觉<br>那我们往下拉看这张图<br>这张图里呢<br>其实这个绿线呢<br>就代表这个全局平均池化<br>就是原来vision 领域里怎么做的<br>然后这个 class token 呢<br>就代表是 nlp 那边怎么做<br>就这条蓝线<br>那我们可以看到呢<br>其实最后呢<br>这个绿线和蓝线的效果是一样的<br>但是作者指出呢<br>这个绿线和蓝线用的这个学习率是不一样的<br>就是你得好好调参<br>如果你不好好调餐呢<br>比如说直接<br>把这个 class token<br>用的这个 learning rate<br>直接<br>拿过来去做这个全局平均池化呢<br>那他效果是非常差的<br>只有这么多可能大概低了<br>五六个点吧<br>所以说呢有的时候也不是你的 idea<br>不work<br>可能主要还是参没调好<br>炼丹技术还是要过硬 </p>
+<h3 id="7-实验"><a href="#7-实验" class="headerlink" title="7.实验"></a>7.实验</h3><p>在这个章节主要是对比的残差网络，vit 他们这个混合模型的，这个表征学习能力，为了了解到底训练好每个模型，需要多少数据呢, 他们在不同大小的数据集上，去做预训练，然后在很多的数据集上去做测试，当考虑到预训练的这个计算代价的时候，就是预训练的时间长短的时候呢，vision transformer表现的非常好，能在大多数数据之上取得最好的结果，同时需要更少的时间去训练，最后作者呢还做了一个小小的实验，就做了一个自监督的实验，自监督说的实验的结果呢，还可以虽然没有最好，但他说这个呢还是比较有潜力的。</p>
+<blockquote>
+<p>而事实上确实如此 时隔一年之后，最近大火的 mae，就证明了自监督的方式去训练vit，确实效果很好。</p>
+</blockquote>
+<h3 id="8-评论"><a href="#8-评论" class="headerlink" title="8.评论"></a>8.评论</h3>
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2017 YJT
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket"></a>
+
+    </div>
+</div>
+
+
+<script src="/js/jquery.pjax.js?v=1.1.0"></script>
+
+<script src="/js/script.js?v=1.1.0"></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 532px;
+        }
+        .nav.fullscreen {
+            margin-left: -532px;
+        }
+        .nav-left {
+            width: 140px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 532px;
+            margin-left: -532px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/lazyload-plugin/lazyload.intersectionObserver.min.js"></script></body></html>
