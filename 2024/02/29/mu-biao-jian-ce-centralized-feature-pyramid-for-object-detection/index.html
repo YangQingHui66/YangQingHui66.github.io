@@ -1,0 +1,879 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <title>【目标检测】Centralized Feature Pyramid for Object Detection | YJT's Blog</title>
+  <meta name="keywords" content=" 目标检测 ">
+  <meta name="description" content="【目标检测】Centralized Feature Pyramid for Object Detection | YJT's Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Oops～，我崩溃了！找不到你想要的页面 :(">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404">
+<meta property="og:url" content="http://example.com/404/index.html">
+<meta property="og:site_name" content="YJT's Blog">
+<meta property="og:description" content="Oops～，我崩溃了！找不到你想要的页面 :(">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-23T12:50:43.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:51:04.478Z">
+<meta property="article:author" content="YJT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+<body><div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>YJT</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(46)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="python">
+            
+            python
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="sciencewriting">
+            
+            sciencewriting
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="刷题">
+            
+            刷题
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="动手学深度学习">
+            
+            动手学深度学习
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数学">
+            
+            数学
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文写作">
+            
+            论文写作
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文精读">
+            
+            论文精读
+            <small>(12)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="论文翻译">
+            
+            论文翻译
+            <small>(16)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="课程笔记">
+            
+            课程笔记
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="46">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off">
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search">
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>leetcode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>markdown</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>YOLO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声传感器网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声信道</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>水声通信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>深度学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>目标检测</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文写作</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文精读</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文翻译</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a id="top" class="全部文章 " href="/2023/11/11/xue-xi-lu-xian-tu-shen-du-xue-xi-cong-ru-men-dao-ru-tu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【学习路线图】深度学习从入门到入土">【学习路线图】深度学习从入门到入土</span>
+            <span class="post-date" title="2023-11-11 12:25:49">2023/11/11</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/29/mu-biao-jian-ce-centralized-feature-pyramid-for-object-detection/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Centralized Feature Pyramid for Object Detection">【目标检测】Centralized Feature Pyramid for Object Detection</span>
+            <span class="post-date" title="2024-02-29 18:37:17">2024/02/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/27/mu-biao-jian-ce-you-only-look-once-unified-real-time-object-detection/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】You Only Look Once Unified Real Time Object Detection">【目标检测】You Only Look Once Unified Real Time Object Detection</span>
+            <span class="post-date" title="2024-02-27 19:51:22">2024/02/27</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-3-writing-about-results/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 3 Writing about Results">Unit 3 Writing about Results</span>
+            <span class="post-date" title="2024-02-25 23:50:30">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/02/25/unit-2-writing-about-methodology/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 2 Writing about Methodology">Unit 2 Writing about Methodology</span>
+            <span class="post-date" title="2024-02-25 23:48:04">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-object-detection-in-20-years-a-survey/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Object Detection in 20 Years A Survey">【目标检测】Object Detection in 20 Years A Survey</span>
+            <span class="post-date" title="2024-02-25 20:00:13">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/25/mu-biao-jian-ce-underwater-target-detection-based-on-improved-yolov7/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on improved YOLOv7">【目标检测】Underwater target detection based on improved YOLOv7</span>
+            <span class="post-date" title="2024-02-25 19:18:01">2024/02/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network">【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network</span>
+            <span class="post-date" title="2024-02-06 15:05:16">2024/02/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy">【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy</span>
+            <span class="post-date" title="2024-02-03 14:38:42">2024/02/03</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/29/shui-sheng-xin-dao-channel-state-information-prediction-for-adaptive-underwater-acoustic-downlink-ofdma-system-deep-neural-networks-based-approach/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach">【水声信道】Channel State Information Prediction for Adaptive Underwater Acoustic Downlink OFDMA System: Deep Neural Networks Based Approach</span>
+            <span class="post-date" title="2024-01-29 13:07:47">2024/01/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/28/xin-dao-gu-ji-sparse-channel-estimation-for-ofdm-based-underwater-acoustic-systems-in-rician-fading-with-a-new-omp-map-algorithm/" data-tag="水声信道" data-author="">
+            <span class="post-title" title="【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm">【信道估计】Sparse Channel Estimation for OFDM-Based Underwater Acoustic Systems in Rician Fading With a New OMP-MAP Algorithm</span>
+            <span class="post-date" title="2024-01-28 22:25:42">2024/01/28</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/unit-1-how-to-write-an-introduction/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Unit 1 How to Write an Introduction">Unit 1 How to Write an Introduction</span>
+            <span class="post-date" title="2024-01-26 14:20:20">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 sciencewriting " href="/2024/01/26/introduction-how-to-use-this-book/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="Introduction: How to Use This Book">Introduction: How to Use This Book</span>
+            <span class="post-date" title="2024-01-26 10:44:16">2024/01/26</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/04-shu-ju-cao-zuo-shu-ju-yu-chu-li/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="04数据操作+数据预处理">04数据操作+数据预处理</span>
+            <span class="post-date" title="2024-01-25 14:25:01">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 动手学深度学习 " href="/2024/01/25/00-03/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="00-03">00-03</span>
+            <span class="post-date" title="2024-01-25 14:22:41">2024/01/25</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/01/24/lun-wen-fan-yi-channel-state-information-based-ranging-for-underwater-acoustic-sensor-networks/" data-tag="水声传感器网络" data-author="">
+            <span class="post-title" title="【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks">【论文翻译】Channel State Information-Based Ranging for Underwater Acoustic Sensor Networks</span>
+            <span class="post-date" title="2024-01-24 09:13:38">2024/01/24</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-retentive-network-a-successor-to-transformer-for-large-language-models/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Retentive Network A Successor to Transformer for Large Language Models">【论文翻译】Retentive Network A Successor to Transformer for Large Language Models</span>
+            <span class="post-date" title="2023-12-12 10:58:30">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/12/lun-wen-fan-yi-a-novel-noise-aware-deep-learning-model-for-underwater-acoustic-denoising/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising">【论文翻译】A Novel Noise-Aware Deep Learning Model for Underwater Acoustic Denoising</span>
+            <span class="post-date" title="2023-12-12 10:47:35">2023/12/12</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/06/lun-wen-11-swin-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文11】Swin Transformer论文逐段精读">【论文11】Swin Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-06 08:30:35">2023/12/06</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-10-deepmind-yong-ji-qi-xue-xi-zhi-dao-shu-xue-zhi-jue-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文10】Deepmind用机器学习指导数学直觉论文逐段精读">【论文10】Deepmind用机器学习指导数学直觉论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:30">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-9-moco-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文9】MoCo论文逐段精读">【论文9】MoCo论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:15">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-8-mae-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文8】MAE论文逐段精读">【论文8】MAE论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:49:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-7-vit-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文7】ViT论文逐段精读">【论文7】ViT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:46:34">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-6-bert-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文6】BERT论文逐段精读">【论文6】BERT论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:44:02">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-5-gan-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文5】GAN论文逐段精读">【论文5】GAN论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:43:45">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-4-ling-ji-chu-duo-tu-xiang-jie-tu-shen-jing-wang-luo-gnn-gcn/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文4】零基础多图详解图神经网络（GNN-GCN）">【论文4】零基础多图详解图神经网络（GNN-GCN）</span>
+            <span class="post-date" title="2023-12-04 14:43:23">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-3-transformer-lun-wen-zhu-duan-jing-du/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文3】Transformer论文逐段精读">【论文3】Transformer论文逐段精读</span>
+            <span class="post-date" title="2023-12-04 14:39:57">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-2-cheng-qi-ji-suan-ji-shi-jue-ban-bian-tian-de-resnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文2】撑起计算机视觉半边天的ResNet">【论文2】撑起计算机视觉半边天的ResNet</span>
+            <span class="post-date" title="2023-12-04 14:38:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/12/04/lun-wen-1-shen-du-xue-xi-dian-ji-zuo-zhi-yi-alexnet/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【论文1】深度学习奠基作之一：AlexNet">【论文1】深度学习奠基作之一：AlexNet</span>
+            <span class="post-date" title="2023-12-04 14:36:53">2023/12/04</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/12/02/lun-wen-fan-yi-swin-transformer-hierarchical-vit-using-shifted-windows/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows">【论文翻译】Swin Transformer: Hierarchical ViT using Shifted Windows</span>
+            <span class="post-date" title="2023-12-02 10:07:14">2023/12/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/29/lun-wen-fan-yi-spectrum-sensing-for-underwater-cognitive-radio-with-limited-sensing-time/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time">【论文翻译】Spectrum Sensing for Underwater Cognitive Radio With Limited Sensing Time</span>
+            <span class="post-date" title="2023-11-29 10:05:04">2023/11/29</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/23/lun-wen-fan-yi-underwater-acoustic-communication-receiver-using-deep-belief-network/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network">【论文翻译】Underwater Acoustic Communication Receiver Using Deep Belief Network</span>
+            <span class="post-date" title="2023-11-23 19:39:00">2023/11/23</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/13/bi-ji-li-yong-python-jin-xing-shu-ju-fen-xi/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】利用Python进行数据分析">【笔记】利用Python进行数据分析</span>
+            <span class="post-date" title="2023-11-13 15:39:51">2023/11/13</span>
+        </a>
+        
+        
+        <a class="全部文章 论文写作 " href="/2023/11/09/bi-ji-the-craft-of-research/" data-tag="论文写作" data-author="">
+            <span class="post-title" title="【笔记】The Craft of Research">【笔记】The Craft of Research</span>
+            <span class="post-date" title="2023-11-09 22:38:28">2023/11/09</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/04/lun-wen-fan-yi-a-transformer-based-deep-learning-network-for-underwater-acoustic-target-recognition/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition">【论文翻译】A Transformer-Based Deep Learning Network for Underwater Acoustic Target Recognition</span>
+            <span class="post-date" title="2023-11-04 08:55:31">2023/11/04</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/11/03/bi-ji-shui-sheng-tong-xin-zhou-sheng-li/" data-tag="水声通信" data-author="">
+            <span class="post-title" title="【笔记】水声通信（周胜利）">【笔记】水声通信（周胜利）</span>
+            <span class="post-date" title="2023-11-03 16:40:05">2023/11/03</span>
+        </a>
+        
+        
+        <a class="全部文章 python " href="/2023/11/02/bi-ji-ling-ji-chu-ru-men-xue-xi-python-xiao-jia-yu/" data-tag="python" data-author="">
+            <span class="post-title" title="【笔记】零基础入门学习Python（小甲鱼）">【笔记】零基础入门学习Python（小甲鱼）</span>
+            <span class="post-date" title="2023-11-02 15:58:57">2023/11/02</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2023/11/01/lun-wen-fan-yi-attention-is-all-you-need/" data-tag="论文翻译" data-author="">
+            <span class="post-title" title="【论文翻译】Attention is all you need">【论文翻译】Attention is all you need</span>
+            <span class="post-date" title="2023-11-01 22:21:09">2023/11/01</span>
+        </a>
+        
+        
+        <a class="全部文章 论文精读 " href="/2023/10/31/bi-ji-ai-lun-wen-jing-du-li-mu/" data-tag="论文精读" data-author="">
+            <span class="post-title" title="【笔记】AI论文精读（李沐）">【笔记】AI论文精读（李沐）</span>
+            <span class="post-date" title="2023-10-31 13:32:42">2023/10/31</span>
+        </a>
+        
+        
+        <a class="全部文章 数学 " href="/2023/10/28/bi-ji-shi-fen-zhong-ji-qi-xue-xi-xi-lie-shi-pin-tong-ji-xue-xi-fang-fa-jian-bo-shi/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）">【笔记】十分钟 机器学习 系列视频 《统计学习方法》（简博士）</span>
+            <span class="post-date" title="2023-10-28 08:16:18">2023/10/28</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/10/11/bi-ji-pytorch-shen-du-xue-xi-kuai-su-ru-men-jiao-cheng-xiao-tu-dui/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】PyTorch深度学习快速入门教程（小土堆）">【笔记】PyTorch深度学习快速入门教程（小土堆）</span>
+            <span class="post-date" title="2023-10-11 08:34:42">2023/10/11</span>
+        </a>
+        
+        
+        <a class="全部文章 课程笔记 " href="/2023/09/30/bi-ji-dong-shou-xue-shen-du-xue-xi-v2-quan-73-jiang-li-mu/" data-tag="深度学习" data-author="">
+            <span class="post-title" title="【笔记】动手学深度学习v2（全73讲）李沐">【笔记】动手学深度学习v2（全73讲）李沐</span>
+            <span class="post-date" title="2023-09-30 13:11:50">2023/09/30</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-704-er-fen-cha-zhao/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】704、二分查找">【leetcode】704、二分查找</span>
+            <span class="post-date" title="2023-09-26 17:22:01">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 刷题 " href="/2023/09/26/leetcode-1-liang-shu-zhi-he/" data-tag="leetcode" data-author="">
+            <span class="post-title" title="【leetcode】1、两数之和">【leetcode】1、两数之和</span>
+            <span class="post-date" title="2023-09-26 17:21:41">2023/09/26</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/markdown-yu-fa/" data-tag="markdown" data-author="">
+            <span class="post-title" title="markdown语法">markdown语法</span>
+            <span class="post-date" title="2023-09-23 21:57:53">2023/09/23</span>
+        </a>
+        
+        
+        <a class="全部文章 " href="/2023/09/23/da-jian-ge-ren-bo-ke/" data-tag="hexo" data-author="">
+            <span class="post-title" title="搭建个人博客">搭建个人博客</span>
+            <span class="post-date" title="2023-09-23 21:57:26">2023/09/23</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first">&lt;</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-【目标检测】Centralized-Feature-Pyramid-for-Object-Detection" class="article article-type-post" itemscope="" itemprop="blogPost">
+    
+        <h1 class="article-title">【目标检测】Centralized Feature Pyramid for Object Detection</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a data-rel="论文翻译">论文翻译</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">目标检测</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title="最后更新: 2024-03-01 11:00:21">2024-02-29 18:37</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-INTRODUCTION"><span class="toc-text">I. INTRODUCTION</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II-RELATED-WORK"><span class="toc-text">II. RELATED WORK</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Feature-Pyramid-in-Computer-Vision"><span class="toc-text">A. Feature Pyramid in Computer Vision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Visual-Attention-Learning"><span class="toc-text">B. Visual Attention Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-MLP-in-Computer-Vision"><span class="toc-text">C. MLP in Computer Vision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-Object-Detection"><span class="toc-text">D. Object Detection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III-OUR-APPROACH"><span class="toc-text">III. OUR APPROACH</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Centralized-Feature-Pyramid-CFP"><span class="toc-text">A. Centralized Feature Pyramid (CFP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Explicit-Visual-Center-EVC"><span class="toc-text">B. Explicit Visual Center (EVC)</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em><strong>Centralized Feature Pyramid for Object Detection</strong></em><br><em><strong>用于目标检测的集中式特征金字塔</strong></em></p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Visual feature pyramid has shown its superiority in both effectiveness and efficiency in a wide range of applications. However, the existing methods exorbitantly concentrate on the inter-layer feature interactions but ignore the intra-layer feature regulations, which are empirically proved beneficial. Although some methods try to learn a compact intra-layer feature representation with the help of the attention mechanism or the vision transformer, they ignore the neglected corner regions that are important for dense prediction tasks. To address this problem, in this paper, we propose a Centralized Feature Pyramid (CFP) for object detection, which is based on a globally explicit centralized feature regulation. Specifically, we first propose a spatial explicit visual center scheme, where a lightweight MLP is used to capture the globally long-range dependencies and a parallel learnable visual center mechanism is used to capture the local corner regions of the input images. Based on this, we then propose a globally centralized regulation for the commonly-used feature pyramid in a top-down fashion, where the explicit visual center information obtained from the deepest intra-layer feature is used to regulate frontal shallow features. Compared to the existing feature pyramids, CFP not only has the ability to capture the global long-range dependencies, but also efficiently obtain an allround yet discriminative feature representation. Experimental results on the challenging MS-COCO validate that our proposed CFP can achieve the consistent performance gains on the stateof-the-art YOLOv5 and YOLOX object detection baselines. The code has been released at: <a target="_blank" rel="noopener" href="https://github.com/QY1994-0919/CFPNet">CFPNet</a>.<br><code>视觉特征金字塔在广泛的应用中显示了其在有效性和效率上的优越性。然而，现有的方法过分集中在层间的功能相互作用，而忽略了层内的功能规则，这是经验证明是有益的。虽然一些方法试图在注意力机制或视觉Transformer的帮助下学习紧凑的层内特征表示，但它们忽略了对密集预测任务很重要的被忽略的角区域。为了解决这个问题，在本文中，我们提出了一个集中式特征金字塔（CFP）的对象检测，这是基于一个全球显式的集中式特征调节。具体来说，我们首先提出了一个空间显式视觉中心计划，其中一个轻量级的MLP是用来捕捉全局的长程依赖和一个并行学习的视觉中心机制是用来捕捉输入图像的局部角区域。在此基础上，我们提出了一种全局集中的调节常用的特征金字塔在一个自上而下的方式，其中从最深的层内特征获得的显式视觉中心信息用于调节正面浅功能。与现有的特征金字塔相比，CFP不仅具有捕获全局长距离依赖的能力，而且能够有效地获得全面而有区别的特征表示。在具有挑战性的MS-COCO上的实验结果验证了我们提出的CFP可以在最先进的YOLOv 5和YOLOX对象检测基线上实现一致的性能增益。该代码已发布在：CFPNet。</code></p>
+<h1 id="I-INTRODUCTION"><a href="#I-INTRODUCTION" class="headerlink" title="I. INTRODUCTION"></a>I. INTRODUCTION</h1><p>Object detection is one of the most fundamental yet challenging research tasks in the community of computer vision, which aims to predict a unique bounding box for each object of the input image that contains not only the location but also the category information [1]. In the past few years, this task has been extensively developed and applied to a wide range of potential applications, e.g., autonomous driving [2] and computer-aided diagnosis [3].<br><code>目标检测是计算机视觉领域最基本但最具挑战性的研究任务之一，其目的是为输入图像中的每个目标预测一个唯一的边界框，该边界框不仅包含位置信息，还包含类别信息[1]。在过去的几年中，这项任务得到了广泛的发展，并应用于广泛的潜在应用，例如，自动驾驶[2]和计算机辅助诊断[3]。</code><br>The successful object detection methods are mainly based on the Convolutional Neural Network (CNN) as the backbone followed with a two-stage (e.g., Fast/Faster R-CNN [4], [5]) or single-stage (e.g., SSD [6] and YOLO [7]) framework. However, due to the uncertainty object sizes, a single feature scale cannot meet requirements of the high-accuracy recognition performance. To this end, methods (e.g., SSD [6] and FFP [8]) based on the in-network feature pyramid are proposed and achieve satisfactory results effectively and efficiently. The unified principle behind these methods is to assign region of interest for each object of different size with the appropriate contextual information and enable these objects to be recognized in different feature layers.<br><code>成功的对象检测方法主要基于卷积神经网络（CNN）作为骨干，随后是两阶段（例如，快速/更快的R-CNN [4]，[5]）或单级（例如，SSD [6]和YOLO [7]）框架。然而，由于目标尺寸的不确定性，单一的特征尺度不能满足高精度识别性能的要求。为此，方法（例如，SSD [6]和FFP [8]）提出了基于网络内特征金字塔的方法，并取得了令人满意的效果。这些方法背后的统一原则是为不同大小的每个对象分配具有适当上下文信息的感兴趣区域，并使这些对象能够在不同的特征层中被识别。</code><br>Feature interactions among pixels or objects are important [9]. We consider that effective feature interaction can make image features see wider and obtain richer representations, so that the object detection model can learn an implicit relation (i.e., the favorable co-occurrence features [10], [11]) between pixels/objects, which has been empirically proved to be beneficial to the visual recognition tasks [12], [13], [14], [15], [16], [17], [18]. For example, FPN [17] proposes a topdown inter-layer feature interaction mechanism, which enables shallow features to obtain the global contextual information and semantic representations of deep features. NAS-FPN [13] tries to learn the network structure of the feature pyramid part via a network architecture search strategy, and obtains a scalable feature representation. Besides the inter-layer interactions, inspired by the non-local/self-attention mechanism [19], [20], the finer intra-layer interaction methods for spatial feature regulation are also applied to object detection task, e.g., nonlocal features [21] and GCNet [22]. Based on the above two interaction mechanisms, FPT [15] further proposes an interlayer cross-layer and intra-layer cross-space feature regulation method, and has achieved remarkable performances.<br><code>像素或对象之间的特征交互很重要[9]。我们认为有效的特征交互可以使图像特征看得更宽，获得更丰富的表示，从而使目标检测模型可以学习到一种隐式关系（即，[10]，[11]），这已被经验证明是有益的视觉识别任务[12]，[13]，[14]，[15]，[16]，[17]，[18]。例如，FPN [17]提出了一种自顶向下的层间特征交互机制，该机制使浅层特征能够获得全局上下文信息和深层特征的语义表示。NAS-FPN [13]试图通过网络架构搜索策略学习特征金字塔部分的网络结构，并获得可扩展的特征表示。除了层间交互之外，受非局部/自注意机制的启发[19]，[20]，用于空间特征调节的更精细的层内交互方法也适用于对象检测任务，例如，非局部特征[21]和GCNet [22]。基于上述两种交互机制，FPT [15]进一步提出了层间跨层和层内跨空间的特征调控方法，并取得了显著的效果。</code><br>Despite the initiatory success in object detection, the above methods are based on the CNN backbone, which suffer from the inherent limit receptive fields. As shown in Figure 1 (a), the standard CNN backbone features can only locate those most discriminative object regions (e.g., the “body of an airplane” and the “motorcycle pedals”). To solve this problem, vision transformer-based object detection methods [24], [23], [25], [26] have been recently proposed and flourished. These methods first divide the input image into different image patches, and then use the multi-head attention-based feature interaction among patches to complete the purpose of obtaining the global long-range dependencies. As expected, the feature pyramid is also employed in a vision transformer, e.g., PVT [26] and Swin Transformer [25]. Although these methods can address the limited receptive fields and the local contextual information in CNN, an obvious drawback is their large computational complexity. For example, a Swin-B [25] has almost 3× model FLOPs (i.e., 47.0 G vs 16.0 G) than a performance-comparable CNN model RegNetY [27] with the input size of 224 × 224. Besides, as shown in Figure 1 (b), since vision transformer-based methods are implemented in an omnidirectional and unbiased learning pattern, which is easy to ignore some corner regions (e.g., the “airplane engine”, the “motorcycle wheel” and the “bat”) that are important for dense prediction tasks. These drawbacks are more obvious on the large-scale input images. To this end, we rise a question: is it necessary to use transformer encodes on all layers? To answer such a question, we start from an analysis of shallow features. Researches of the advanced methods [28], [29], [30] show that the shallow features mainly contain some general object feature patterns, e.g., texture, colour and orientation, which are often not global. In contrast, the deep features reflect the object-specific information, which usually requires global information [31], [32]. Therefore, we argue that the transformer encoder is unnecessary in all layers.<br><code>尽管在目标检测方面取得了初步的成功，但上述方法都是基于CNN主干的，其存在固有的有限感受野。如图1（a）所示，标准CNN骨干特征只能定位那些最具区分力的对象区域（例如，“飞机的机身”和“摩托车踏板”）。为了解决这个问题，最近提出了基于视觉变换的目标检测方法[24]，[23]，[25]，[26]并蓬勃发展。这些方法首先将输入图像划分为不同的图像块，然后利用块间基于多头注意力的特征交互来完成获取全局长距离依赖关系的目的。如所预期的，特征金字塔也用于视觉Transformer中，例如，PVT [26]和Swin Transformer [25]。虽然这些方法可以解决CNN中有限的感受野和局部上下文信息，但一个明显的缺点是它们的计算复杂度很大。例如，Swin-B [25]具有几乎3×模型FLOP（即，47.0 G与16.0 G）比输入大小为224 × 224的性能相当的CNN模型RegNetY [27]。此外，如图1（b）所示，由于基于视觉变换的方法是以全向和无偏的学习模式实现的，这很容易忽略一些角落区域（例如，“飞机发动机”、“摩托车车轮”和“蝙蝠”），它们对于密集预测任务很重要。这些缺点在大规模输入图像上更加明显。为此，我们提出了一个问题：是否有必要在所有层上使用Transformer编码？为了回答这个问题，我们从分析浅层特征开始。先进方法[28]、[29]、[30]的研究表明，浅层特征主要包含一些通用的对象特征模式，例如，纹理、颜色和方向，这些往往不是全局性的。相比之下，深层特征反映了对象特定的信息，这通常需要全局信息[31]，[32]。因此，我们认为Transformer编码器在所有层中是不必要的。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/8-1.png"></p>
+<blockquote>
+<p>Fig. 1. Visualizations of image feature evolution for vision recognition tasks. For the input images in (a), a CNN model in (b) only locates those most discriminative regions; although the progressive model in (c) can see wider under the help of the attention mechanism [20] or transformer [23], it usually ignores the corner cues that are important for dense prediction tasks; our model in (d) can not only see wider but also more well-rounded by attaching the centralized constraints on features with the advanced long-range dependencies, which is more suitable for dense prediction tasks. Best viewed in color.<br><code>Fig. 1.视觉识别任务中图像特征演化的可视化。对于（a）中的输入图像，（B）中的CNN模型仅定位那些最具辨别力的区域;尽管（c）中的渐进模型可以在注意力机制[20]或Transformer [23]的帮助下看到更宽的区域，但它通常忽略了对密集预测任务很重要的角落线索;我们在（d）中的模型不仅可以看到更宽，而且通过将集中式约束附加到具有高级长距离依赖性的特征上来更全面，这更适合于密集预测任务。最好用彩色观看。</code></p>
+</blockquote>
+<p>In this work, we propose a Centralized Feature Pyramid (CFP) network for object detection, which is based on a globally explicit centralized regulation scheme. Specifically, based on an visual feature pyramid extracted from the CNN backbone, we first propose an explicit visual center scheme, where a lightweight MLP architecture is used to capture the long-range dependencies and a parallel learnable visual center mechanism is used to aggregate the local key regions of the input images. Considering the fact that the deepest features usually contain the most abstract feature representations scarce in the shallow features [33], based on the proposed regulation scheme, we then propose a globally centralized regulation for the extracted feature pyramid in a top-down manner, where the spatial explicit visual center obtained from the deepest features is used to regulate all the frontal shallow features simultaneously. Compared to the existing feature pyramids, as shown in Figure 1 (c), CFP not only has the ability to capture the global long-range dependencies, but also efficiently obtain an all-round yet discriminative feature representation. To demonstrate the superiority, extensive experiments are carried out on the challenging MS-COCO dataset [34]. Results validate that our proposed CFP can achieve the consistent performance gains on the state-of-the-art YOLOv5 [35] and YOLOX [36] object detection baselines.<br><code>在这项工作中，我们提出了一个集中式特征金字塔（CFP）网络的对象检测，这是基于一个全球明确的集中式监管计划。具体来说，基于从CNN主干中提取的视觉特征金字塔，我们首先提出了一个显式的视觉中心方案，其中使用轻量级MLP架构来捕获长程依赖关系，并使用并行可学习的视觉中心机制来聚合输入图像的局部关键区域。考虑到最深特征通常包含浅层特征中缺乏的最抽象的特征表示[33]，基于所提出的调节方案，我们然后以自顶向下的方式对提取的特征金字塔提出全局集中式调节，其中从最深特征获得的空间显式视觉中心用于同时调节所有前部浅层特征。与现有的特征金字塔相比，如图1（c）所示，CFP不仅能够捕获全局长程依赖关系，而且还有效地获得全面而有区别的特征表示。为了证明其优越性，在具有挑战性的MS-COCO数据集上进行了大量实验[34]。结果验证了我们提出的CFP可以在最先进的YOLOv 5 [35]和YOLOX [36]对象检测基线上实现一致的性能增益。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/8-1.png"></p>
+<blockquote>
+<p>Fig. 1. Visualizations of image feature evolution for vision recognition tasks. For the input images in (a), a CNN model in (b) only locates those most discriminative regions; although the progressive model in (c) can see wider under the help of the attention mechanism [20] or transformer [23], it usually ignores the corner cues that are important for dense prediction tasks; our model in (d) can not only see wider but also more well-rounded by attaching the centralized constraints on features with the advanced long-range dependencies, which is more suitable for dense prediction tasks. Best viewed in color.<br><code>Fig. 1.视觉识别任务中图像特征演化的可视化。对于（a）中的输入图像，（B）中的CNN模型仅定位那些最具辨别力的区域;尽管（c）中的渐进模型可以在注意力机制[20]或Transformer [23]的帮助下看到更宽的区域，但它通常忽略了对密集预测任务很重要的角落线索;我们在（d）中的模型不仅可以看到更宽，而且通过将集中式约束附加到具有高级长距离依赖性的特征上来更全面，这更适合于密集预测任务。最好用彩色观看。</code></p>
+</blockquote>
+<p>Our contributions are summarized as the following: 1) We proposed a spatial explicit visual center scheme, which consists of a lightweight MLP for capturing the global long-range dependencies and a learnable visual center for aggregating the local key regions. 2) We proposed a globally centralized regulation for the commonly-used feature pyramid in a topdown manner. 3) CFP achieved the consistent performance gains on the strong object detection baselines.<br><code>1）提出了一种空间显式视觉中心方案，该方案由一个用于捕获全局长程依赖的轻量级MLP和一个用于聚集局部关键区域的可学习视觉中心组成。2)我们提出了一个全球性的集中监管的常用功能金字塔自上而下的方式。3)CFP在强对象检测基线上实现了一致的性能增益。</code></p>
+<h1 id="II-RELATED-WORK"><a href="#II-RELATED-WORK" class="headerlink" title="II. RELATED WORK"></a>II. RELATED WORK</h1><h2 id="A-Feature-Pyramid-in-Computer-Vision"><a href="#A-Feature-Pyramid-in-Computer-Vision" class="headerlink" title="A. Feature Pyramid in Computer Vision"></a>A. Feature Pyramid in Computer Vision</h2><p><code>A.计算机视觉中的特征金字塔</code><br>Feature pyramid is a fundamental neck network in modern recognition systems that can be effectively and efficiently used to detect objects with different scales. SSD [6] is one of the first approaches that uses a pyramidal feature hierarchy representation, which captures multi-scale feature information through network of different spatial sizes, thus the model recognition accuracy is improved. FPN [17] hierarchically mainly relies on the bottom-up in-network feature pyramid, which builds a top-down path with lateral connections from multi-scale high-level semantic feature maps. Based on which, PANet [16] further proposed an additional bottom-up pathway based on FPN to share feature information between the interlayer features, such that the high-level features can also obtain sufficient details in low-level features. Under the help of the neural architecture search, NAS-FPN [13] uses spatial search strategy to connect across layers via a feature pyramid and obtains the extensible feature information. M2Det [37] extracted multi-stage and multi-scale features by constructing multi-stage feature pyramid to achieve cross-level and cross-layer feature fusion. In general, 1) the feature pyramid can deal with the problem of multi-scale change in object recognition without increasing the computational overhead; 2) the extracted features can generate multi-scale feature representations including some high resolution features. In this work, we propose an intra-layer feature regulation from the perspective of inter-layer feature interactions and intra-layer feature regulations of feature pyramids, which makes up for the shortcomings of current methods in this regard.<br><code>特征金字塔是现代识别系统中的一种基本颈部网络，可以有效地用于检测不同尺度的目标。SSD [6]是最早使用金字塔特征层次表示的方法之一，它通过不同空间大小的网络捕获多尺度特征信息，从而提高模型识别精度。FPN [17]在层次上主要依赖于自下而上的网络内特征金字塔，该金字塔从多尺度高级语义特征映射中构建具有横向连接的自上而下的路径。在此基础上，PANet [16]进一步提出了一种基于FPN的额外的自底向上路径，以在层间特征之间共享特征信息，使得高层特征也可以在低层特征中获得足够的细节。在神经架构搜索的帮助下，NAS-FPN [13]使用空间搜索策略通过特征金字塔连接各层，并获得可扩展的特征信息。M2 Det [37]通过构建多级特征金字塔来提取多级、多尺度特征，实现跨层次、跨层特征融合。一般来说，1）特征金字塔可以在不增加计算开销的情况下处理对象识别中的多尺度变化问题; 2）提取的特征可以生成包括一些高分辨率特征的多尺度特征表示。在这项工作中，我们提出了一个层内的特征调节的角度，层间的特征相互作用和层内的特征规则的特征金字塔，这弥补了目前的方法在这方面的不足。</code></p>
+<h2 id="B-Visual-Attention-Learning"><a href="#B-Visual-Attention-Learning" class="headerlink" title="B. Visual Attention Learning"></a>B. Visual Attention Learning</h2><p><code>B。视觉注意学习</code><br>CNN [38] focuses more on the representative learning of local regions. However, this local representation does not satisfy the requirement for global context and long-term dependencies of the modern recognition systems. To this end, the attention learning mechanism [20] is proposed that focuses on deciding where to project more attention in an image. For example, non-local operation [19] uses the non-local neural network to directly capture long-range dependencies, demonstrating the significance of non-local modeling for tasks of video classification, object detection and segmentation. However, the local representation of the internal nature of CNNs is not resolved, i.e., CNN features can only capture limited contextual information. To address this problem, Transformer [20] which mainly benefits from the multi-head attention mechanism has caused a great sensation recently and achieved great success in the field of computer vision, such as image recognition [24], [39], [23], [40], [25]. For example, the representative VIT divides the image into a sequence with position encoding, and then uses the cascaded transformer block to extract the parameterized vector as visual representations. On this basis, many excellent models [39], [41], [42] have been proposed through further improvement, and have achieved good performance in various tasks of computer vision. Nevertheless, the transformer-based image recognition models still have disadvantages of being computationally intensive and complex.<br><code>CNN [38]更关注局部区域的代表性学习。然而，这种局部表示不能满足现代识别系统对全局上下文和长期依赖性的要求。为此，提出了注意力学习机制[20]，其重点是决定在图像中何处投射更多注意力。例如，非局部操作[19]使用非局部神经网络直接捕获长程依赖关系，证明了非局部建模对于视频分类，对象检测和分割任务的重要性。然而，CNN内部性质的局部表示没有解决，即，CNN功能只能捕获有限的上下文信息。为了解决这个问题，主要受益于多头注意机制的Transformer [20]最近引起了极大的轰动，并在计算机视觉领域取得了巨大的成功，如图像识别[24]，[39]，[23]，[40]，[25]。例如，代表性VIT将图像划分为具有位置编码的序列，然后使用级联的Transformer块来提取参数化向量作为视觉表示。在此基础上，通过进一步改进，提出了许多优秀的模型[39]、[41]、[42]，并在计算机视觉的各种任务中取得了良好的性能。然而，基于变换器的图像识别模型仍然具有计算密集和复杂的缺点。</code></p>
+<h2 id="C-MLP-in-Computer-Vision"><a href="#C-MLP-in-Computer-Vision" class="headerlink" title="C. MLP in Computer Vision"></a>C. MLP in Computer Vision</h2><p><code>C.计算机视觉中的MLP</code><br>In order to alleviate shortcomings of complex transformer models [43], [44], [23], [45], recent works [46], [47], [48], [49] show that replacing attention-based modules in a transformer model with MLP still performs well. The reason for this phenomenon is that both MLP (e.g., two fully-connected layer network) and attention mechanism are global information processing modules. On the one hand, the introduction of the MLP-Mixer [46] into the vision alleviates changes to the data layout. On the other hand, MLP-Mixer can better establish the long dependence/global relationship and spatial relationship of features through the interaction between spatial feature information and channel feature information. Although MLPstyle models perform well in computer vision tasks, they are still lacking in capturing fine-grained feature representations and obtaining higher recognition accuracy in object detection. Nevertheless, MLP is playing an increasingly important role in the field of computer vision, and has the advantage of a simpler network structure than transformer. In our work, we also use MLP to capture the global contextual information and longterm dependencies of the input images. Our contribution lies in the centrality of the grasped information using the proposed spatial explicit visual center scheme.<br><code>为了减轻复杂Transformer模型的缺点[43]，[44]，[23]，[45]，最近的工作[46]，[47]，[48]，[49]表明，用MLP替换Transformer模型中基于注意力的模块仍然表现良好。这种现象的原因是MLP（例如，两个全连接层网络）和注意机制是全局信息处理模块。一方面，将MLP-混合器[46]引入到视觉中会对数据布局进行更改。另一方面，MLP-Mixer通过空间特征信息和通道特征信息的交互，可以更好地建立特征的长依赖/全局关系和空间关系。虽然MLP风格的模型在计算机视觉任务中表现良好，但它们仍然缺乏捕获细粒度的特征表示和在目标检测中获得更高的识别精度。尽管如此，MLP在计算机视觉领域发挥着越来越重要的作用，并且具有比Transformer更简单的网络结构的优点。在我们的工作中，我们还使用MLP来捕获输入图像的全局上下文信息和长期依赖关系。我们的贡献在于使用建议的空间显式视觉中心计划掌握的信息的中心性。</code></p>
+<h2 id="D-Object-Detection"><a href="#D-Object-Detection" class="headerlink" title="D. Object Detection"></a>D. Object Detection</h2><p><code>D.目标检测</code><br>Object detection is a fundamental computer vision task, which aimes to recognize objects or instances of interest for the given image and provide a comprehensive scene description including the object category and location. With the unprecedented development of CNN [38] in the recent years, plenty of object detection models achieve remarkable progress. The existing methods can be divided into two types of two-stage and single-stage. Two-stage object detectors [50], [4], [5], [51], [52] usually first use a RPN to generate a collection of region proposals. Then use a learning module to extract region features of these region proposals and complete the classification and regression process. However, storing and repetitively extracting the features of each region proposal is not only computationally expensive, but also makes it impossible to capture the global feature representations. To this end, the single-stage detectors [7], [6], [53], [54] directly perform prediction and region classification by generating bounding boxes. The existing single-stage methods have a global concept in the design of feature extraction, and use the backbone network to extract feature maps of the entire image to predict each bounding box. In this paper, we also choose the single-stage object detectors (i.e., YOLOv5 [35] and YOLOX [36]) as our baseline models. Our focus is to enhance the representation of the feature pyramid used for these detectors.<br><code>目标检测是计算机视觉的一项基本任务，其目的是识别给定图像中感兴趣的目标或实例，并提供包括目标类别和位置的全面场景描述。近年来，随着CNN的空前发展[38]，许多目标检测模型取得了显著进展。现有的方法可以分为两阶段和单阶段两类。两阶段对象检测器[50]，[4]，[5]，[51]，[52]通常首先使用RPN来生成区域建议的集合。然后利用一个学习模块对这些区域建议进行区域特征提取，完成分类和回归过程。然而，存储和重复提取每个区域建议的特征不仅在计算上是昂贵的，而且使得不可能捕获全局特征表示。为此，单级检测器[7]，[6]，[53]，[54]通过生成边界框直接执行预测和区域分类。现有的单阶段方法在特征提取的设计上具有全局概念，利用骨干网络提取整幅图像的特征图来预测每个包围盒。在本文中，我们还选择了单级目标检测器（即，YOLOv5 [35]和YOLOX [36]）作为我们的基线模型。我们的重点是提高用于这些检测器的特征金字塔的表示。</code></p>
+<h1 id="III-OUR-APPROACH"><a href="#III-OUR-APPROACH" class="headerlink" title="III. OUR APPROACH"></a>III. OUR APPROACH</h1><p>In this section, we introduce the implementation details of the proposed centralized feature pyramid (CFP). We first make an overview architecture description for CFP in Section III-A. Then, we show the implementation details of the explicit visual center in Section III-B. Finally, we show how to implement the explicit visual center on an image feature pyramid and propose our global centralized regulation in Section III-C.<br><code>在本节中，我们将介绍所提出的集中式特征金字塔（CFP）的实现细节。我们首先在第III-A节中对CFP的体系结构进行概述。然后，我们在第三节B中展示了显式视觉中心的实现细节。最后，我们展示了如何在图像特征金字塔上实现显式视觉中心，并在第III-C节中提出了我们的全局集中式规则。</code></p>
+<h2 id="A-Centralized-Feature-Pyramid-CFP"><a href="#A-Centralized-Feature-Pyramid-CFP" class="headerlink" title="A. Centralized Feature Pyramid (CFP)"></a>A. Centralized Feature Pyramid (CFP)</h2><p><code>A.集中式特征金字塔（CFP）</code><br>Although the existing methods have been largely concentrated on the inter-layer feature interactions, they ignore the intra-layer feature regulations, which have been empirically proved beneficial to the vision recognition tasks. In our work, inspired by the previous works on dense prediction tasks [55], [48], [46], we propose a CFP for object detection, which is based on the globally explicit centralized intra-layer feature regulation. Compared to the existing feature pyramids, our proposed CFP not only can capture the global long-range dependencies, but also enable comprehensive and differentiated feature representations. As illustrated in Figure 2, CFP mainly consists of the following parts: the input image, a CNN backbone is used to extract the vision feature pyramid, the proposed Explicit Visual Center (EVC), the proposed Global Centralized Regulation (GCR), and a decoupled head network (which consists of a classification loss, a regression loss and a segmentation loss) for object detection. In Figure 2, EVC and GCR are implemented on the extracted feature pyramid.<br><code>虽然现有的方法已经在很大程度上集中在层间特征的相互作用，他们忽略了层内的特征规则，这已被经验证明是有益的视觉识别任务。在我们的工作中，受到以前关于密集预测任务的工作的启发[55]，[48]，[46]，我们提出了一种用于对象检测的CFP，该CFP基于全局显式集中式层内特征调节。与现有的特征金字塔相比，我们提出的CFP不仅可以捕获全局的长程依赖关系，而且还可以实现全面和差异化的特征表示。如图2所示，CFP主要由以下部分组成：输入图像，CNN主干用于提取视觉特征金字塔，提出的显式视觉中心（EVC），提出的全局集中调节（GCR）和用于对象检测的解耦头网络（由分类损失，回归损失和分割损失组成）。在图2中，EVC和GCR在提取的特征金字塔上实现。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/8-2.png"></p>
+<blockquote>
+<p>Fig. 2. An illustration of the overall architecture, which mainly consists of four components: input image, a backbone network for feature extraction, the centralized feature pyramid which is based on a commonly-used vision feature pyramid following [36], and the object detection head network which includes a classification (i.e., Cls.) loss and a regression (i.e., Reg.) loss. C denotes the class size of the used dataset. Our contribution lines in that we propose an intra-layer feature regulation method in a feature pyramid, and a top-to-down global centralized regulation.<br><code>图二.总体架构的说明，主要由四个组件组成：输入图像，用于特征提取的骨干网络，基于常用视觉特征金字塔的集中式特征金字塔[36]，以及包括分类（即，Cls.）损失和回归（即，Reg.）损失C表示所用数据集的类大小。我们的贡献在于，我们提出了一个层内的特征调节方法在一个特征金字塔，和一个自顶向下的全球集中式监管。</code></p>
+</blockquote>
+<p>Concretely, we first feed the input image into the backbone network (i.e., the Modified CSP v5 [56]) to extract a five-level one feature pyramid X, where the spatial size of each layer of features Xi (i = 0, 1, 2, 3, 4) is 1/2, 1/4, 1/8, 1/16, 1/32 of the input image, respectively. Based on this feature pyramid, our CFP is implemented. A lightweight MLP architecture is proposed to capture the global long-range dependencies of X4, where the multi-head self-attention module of a standard transformer encoder is replaced by a MLP layer. Compared to the transformer encoder based on the multi-head attention mechanism, our lightweight MLP architecture is not only simple in structure but also has a lighter volume and higher computational efficiency (cf. Section III-B). Besides, a learnable visual center mechanism, along with the lightweight MLP, is used to aggregate the local corner regions of the input image. We name the above parallel structure network as the spatial EVC, which is implemented on the top layer (i.e., X4) of the feature pyramid. Based on the proposed ECV, to enable the shallow layer features of the feature pyramid to benefit from the visual centralized information of the deepest feature at the same time in an efficient pattern, we then propose a GCR in a top-down fashion, where the explicit visual center information obtained from the deepest intra-layer feature is used to regulate all the frontal shallow features (i.e., X3 to X2) simultaneously. Finally, we aggregate these features into a decoupled head network for classification and regression.<br><code>具体地，我们首先将输入图像馈送到骨干网络（即，修改的CSP v5 [56]）以提取五级一特征金字塔X，其中特征Xi（i = 0，1，2，3，4）的每一层的空间大小分别是输入图像的1/2，1/4，1/8，1/16，1/32。基于此特征金字塔，我们的CFP实现。提出了一种轻量级的MLP架构来捕获X4的全局长程依赖，其中标准Transformer编码器的多头自注意模块被MLP层取代。与基于多头注意机制的Transformer编码器相比，我们的轻量级MLP架构不仅结构简单，而且具有更轻的体积和更高的计算效率（参见图1）。第III-B节）。此外，一个可学习的视觉中心机制，沿着的轻量级MLP，被用来聚合的输入图像的局部角区域。我们将上述并行结构网络命名为空间EVC，其在顶层（即，X4）的特征金字塔。基于所提出的ECV，为了使特征金字塔的浅层特征能够以有效的模式同时受益于最深特征的视觉集中信息，我们然后以自顶向下的方式提出了GCR，其中从最深层内特征获得的显式视觉中心信息用于调节所有前部浅层特征（即，X3到X2）同时进行。最后，我们将这些特征聚合到一个解耦的头部网络中进行分类和回归。</code></p>
+<h2 id="B-Explicit-Visual-Center-EVC"><a href="#B-Explicit-Visual-Center-EVC" class="headerlink" title="B. Explicit Visual Center (EVC)"></a>B. Explicit Visual Center (EVC)</h2><p><code>B。外显视觉中心（EVC）</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/8-3.png"></p>
+<blockquote>
+<p>Fig. 3. An illustration of the proposed explicit visual center, where a lightweight MLP architecture is used to capture the long-range dependencies and a parallel learnable visual center mechanism is used to aggregate the local corner regions of the input image. The integrated features contain advantages of these two blocks, so that the detection model can learn an all-round yet discriminative feature representation.<br><code>图三.所提出的显式视觉中心的说明，其中一个轻量级的MLP架构被用来捕获的长程依赖关系和一个并行的可学习的视觉中心机制被用来聚合输入图像的局部角区域。集成的特征包含了这两个块的优点，使得检测模型可以学习全面而有区别的特征表示。</code></p>
+</blockquote>
+<p>As illustrated in Figure 3, our proposed EVC mainly consists of two blocks connected in parallel, where a lightweight MLP is used to capture the global long-range dependencies (i.e., the global information) of the top-level features X4. At the same time, to reserve the local corner regions (i.e., the local information), we propose a learnable vision center mechanism is implemented on X4 to aggregate the intra-layer local regional features. The result feature maps of these two blocks are concatenate together along the channel dimension as the output of EVC for the downstream recognition. In our implementation, between X4 and EVC, a Stem block is used for features smoothing instead of implementing directly on the original feature maps as in [35]. The Stem block consists of a 7 × 7 convolution with the output channel size of 256, followed by a batch normalization layer, and an activation function layer. The above processes can be formulated as:<br><code>如图3所示，我们提出的EVC主要由两个并行连接的块组成，其中使用轻量级MLP来捕获全局长范围依赖关系（即，全局信息）。同时，为了保留局部角区域（即，局部信息），我们提出了一种可学习的视觉中心机制，在X4上实现，以聚合层内局部区域特征。这两个块的结果特征图沿着通道维度连接在一起，作为下游识别的EVC的输出。在我们的实现中，在X4和EVC之间，Stem块用于特征平滑，而不是像[35]中那样直接在原始特征图上实现。Stem块由一个输出通道大小为256的7 × 7卷积组成，后面是一个批量归一化层和一个激活函数层。上述过程可表述为：</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/8-4.png"><br>where CMLP(·) is the channel MLP [46]. In our paper, for the presentation convenience, we omit channel scaling and droppath in Eq. 3 and Eq. 4.<br><code>其中CMLP(·)为通道MLP[46]。在我们的论文中，为了演示方便，我们省略了方程3和方程4中的通道缩放和下降路径。</code></p>
+<p><em><strong>LVC.</strong></em><br>LVC is an encoder with an inherent dictionary and has two components: 1) an inherent codebook: B = {b1, b2, . . . , bK}, where N = H × W is the total spatial number of the input features, where H and W denotes the feature map spatial size in height and width, respectively; 2) a set of scaling factors S = {s1, s2, . . . , sK} for the learnable visual centers. Specifically, features from the Stem block $X_{in}$ are first encoded by a combination of a set of convolution layers (which consist of a 1 × 1 convolution, a 3×3 convolution, and a 1×1 convolution). Then, the encoded features are processed by a CBR block, which consists of a 3 × 3 convolution with a BN layer and a ReLU activation function. Through the above steps, the encoded features $\check{\mathbf{X}}<em>{\text {in }}$ are entered into the codebook. To this end, we use a set of scaling factor s to sequentially make $\check{\mathbf{x}}</em>{\text {in }}$ and $b_k$ map the corresponding position information. The information of the whole image with respect to the k-th codeword can be calculated by:<br><code>LVC是具有固有字典的编码器，并且具有两个组件：1）固有码本：B = {b1，b2，...，bK}，其中N = H × W是输入特征的总空间数量，其中H和W分别表示特征图在高度和宽度上的空间大小; 2）缩放因子集合S = {s1，s2，...，sK}的可学习视觉中心。具体来说，来自Stem块</code>$\check{\mathbf{X}}<em>{\text {in }}$<code>的特征首先通过一组卷积层的组合（由1 × 1卷积、3×3卷积和1×1卷积组成）进行编码。然后，编码的特征由CBR块处理，该CBR块由BN层和ReLU激活函数的3 × 3卷积组成。通过上述步骤，编码特征Xin被输入到码本中。为此，我们使用一组缩放因子s来顺序地使</code>$\check{\mathbf{x}}</em>{\text {in }}$<code>和</code>$b_k$<code>映射相应的位置信息。关于第k个码字的整个图像的信息可以通过下式计算：</code></p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2017 YJT
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket"></a>
+
+    </div>
+</div>
+
+
+<script src="/js/jquery.pjax.js?v=1.1.0"></script>
+
+<script src="/js/script.js?v=1.1.0"></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 532px;
+        }
+        .nav.fullscreen {
+            margin-left: -532px;
+        }
+        .nav-left {
+            width: 140px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 532px;
+            margin-left: -532px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/lazyload-plugin/lazyload.intersectionObserver.min.js"></script></body></html>

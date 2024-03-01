@@ -4,13 +4,15 @@
   <meta name="keywords" content=" YOLO ">
   <meta name="description" content="【目标检测】You Only Look Once Unified Real Time Object Detection | YJT's Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Oops～，我崩溃了！找不到你想要的页面 :(">
 <meta property="og:type" content="website">
-<meta property="og:title" content="contact">
-<meta property="og:url" content="http://example.com/contact/index.html">
+<meta property="og:title" content="404">
+<meta property="og:url" content="http://example.com/404/index.html">
 <meta property="og:site_name" content="YJT's Blog">
+<meta property="og:description" content="Oops～，我崩溃了！找不到你想要的页面 :(">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-23T12:55:04.000Z">
-<meta property="article:modified_time" content="2023-09-23T12:55:35.462Z">
+<meta property="article:published_time" content="2023-09-23T12:50:43.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:51:04.478Z">
 <meta property="article:author" content="YJT">
 <meta name="twitter:card" content="summary">
 
@@ -75,7 +77,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(45)</small>
+                <small>(46)</small>
             
         </div>
     </li>
@@ -192,7 +194,7 @@
         <div data-rel="论文翻译">
             
             论文翻译
-            <small>(15)</small>
+            <small>(16)</small>
         </div>
         
     </li>
@@ -228,7 +230,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="45">
+<input type="hidden" id="yelog_site_posts_number" value="46">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -338,6 +340,12 @@
         </a>
         
         
+        <a class="全部文章 论文翻译 " href="/2024/02/29/mu-biao-jian-ce-centralized-feature-pyramid-for-object-detection/" data-tag="目标检测" data-author="">
+            <span class="post-title" title="【目标检测】Centralized Feature Pyramid for Object Detection">【目标检测】Centralized Feature Pyramid for Object Detection</span>
+            <span class="post-date" title="2024-02-29 18:37:17">2024/02/29</span>
+        </a>
+        
+        
         <a class="全部文章 论文翻译 " href="/2024/02/27/mu-biao-jian-ce-you-only-look-once-unified-real-time-object-detection/" data-tag="YOLO" data-author="">
             <span class="post-title" title="【目标检测】You Only Look Once Unified Real Time Object Detection">【目标检测】You Only Look Once Unified Real Time Object Detection</span>
             <span class="post-date" title="2024-02-27 19:51:22">2024/02/27</span>
@@ -368,13 +376,13 @@
         </a>
         
         
-        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network-1/" data-tag="目标检测" data-author="">
+        <a class="全部文章 论文翻译 " href="/2024/02/06/mu-biao-jian-ce-underwater-target-detection-based-on-faster-r-cnn-and-adversarial-occlusion-network/" data-tag="目标检测" data-author="">
             <span class="post-title" title="【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network">【目标检测】Underwater target detection based on Faster R-CNN and adversarial occlusion network</span>
             <span class="post-date" title="2024-02-06 15:05:16">2024/02/06</span>
         </a>
         
         
-        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="目标检测" data-author="">
+        <a class="全部文章 论文翻译 " href="/2024/02/03/mu-biao-jian-ce-underwater-object-detection-algorithm-based-on-feature-enhancement-and-progressive-dynamic-aggregation-strategy/" data-tag="YOLO" data-author="">
             <span class="post-title" title="【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy">【目标检测】Underwater object detection algorithm based on feature enhancement and progressive dynamic aggregation strategy</span>
             <span class="post-date" title="2024-02-03 14:38:42">2024/02/03</span>
         </a>
@@ -646,7 +654,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title="最后更新: 2024-02-28 11:17:45">2024-02-27 19:51</time>
+            发布时间 : <time class="date" title="最后更新: 2024-02-29 08:59:19">2024-02-27 19:51</time>
         
     </div>
     <div class="article-meta">
@@ -690,7 +698,7 @@
 <blockquote>
 <p>Figure 1: The YOLO Detection System. Processing images with YOLO is simple and straightforward. Our system (1) resizes the input image to 448 × 448, (2) runs a single convolutional network on the image, and (3) thresholds the resulting detections by the model’s confidence.<br><code>图1：YOLO检测系统。使用YOLO处理图像简单明了。我们的系统（1）将输入图像的大小调整为448 × 448，（2）在图像上运行单个卷积网络，（3）通过模型的置信度对结果检测进行阈值化。</code></p>
 </blockquote>
-<p>First, YOLO is extremely fast. Since we frame detection as a regression problem we don’t need a complex pipeline. We simply run our neural network on a new image at test time to predict detections. Our base network runs at 45 frames per second with no batch processing on a Titan X GPU and a fast version runs at more than 150 fps. This means we can process streaming video in real-time with less than 25 milliseconds of latency. Furthermore, YOLO achieves more than twice the mean average precision of other real-time systems.<br><code>首先，YOLO的速度非常快。由于我们将检测视为回归问题，因此不需要复杂的管道。我们只是在测试时对新图像运行神经网络来预测检测结果。我们的基础网络以每秒45帧的速度运行，在Titan X GPU上没有批处理，快速版本的运行速度超过150 fps。这意味着我们可以实时处理流视频，延迟时间不到25毫秒。此外，YOLO的平均精度是其他实时系统的两倍多。</code><br>For a demo of our system running in real-time on a webcam please see our project webpage: <a target="_blank" rel="noopener" href="http://pjreddie.com/yolo/">http://pjreddie.com/yolo/</a>.<br><code>有关我们的系统在网络摄像头上实时运行的演示，请参阅我们的项目网页:http://pjreddie.com/yolo/。</code><br>Second, YOLO reasons globally about the image when making predictions. Unlike sliding window and region proposal-based techniques, YOLO sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance. Fast R-CNN, a top detection method [14], mistakes background patches in an image for objects because it can’t see the larger context. YOLO makes less than half the number of background errors compared to Fast R-CNN.<br><code>第二，YOLO在做出预测时，会对形象进行全局性的推理。与基于滑动窗口和区域提议的技术不同，YOLO在训练和测试期间看到整个图像，因此它隐式地编码了关于类及其外观的上下文信息。快速R-CNN是一种顶部检测方法[14]，它会将图像中的背景块误认为是对象，因为它无法看到更大的上下文。与Fast R-CNN相比，YOLO的背景错误数量不到其一半。</code><br>Third, YOLO learns generalizable representations of objects. When trained on natural images and tested on artwork, YOLO outperforms top detection methods like DPM and R-CNN by a wide margin. Since YOLO is highly generalizable it is less likely to break down when applied to new domains or unexpected inputs.<br><code>第三，YOLO学习对象的可概括表示。当在自然图像上进行训练并在艺术品上进行测试时，YOLO的性能远远优于DPM和R-CNN等顶级检测方法。由于YOLO具有高度的可推广性，因此在应用于新领域或意外输入时，它不太可能崩溃。</code><br>YOLO still lags behind state-of-the-art detection systems in accuracy. While it can quickly identify objects in images it struggles to precisely localize some objects, especially small ones. We examine these tradeoffs further in our experiments.<br><code>YOLO在准确性上仍然落后于最先进的检测系统。虽然它可以快速识别图像中的物体，但它很难精确定位一些物体，尤其是小物体。我们将在实验中进一步考察这些权衡。</code><br>All of our training and testing code is open source. A variety of pretrained models are also available to download.<br><code>我们所有的培训和测试代码都是开源的。还可以下载各种预先训练的模型。</code></p>
+<p>First, YOLO is extremely fast. Since we frame detection as a regression problem we don’t need a complex pipeline. We simply run our neural network on a new image at test time to predict detections. Our base network runs at 45 frames per second with no batch processing on a Titan X GPU and a fast version runs at more than 150 fps. This means we can process streaming video in real-time with less than 25 milliseconds of latency. Furthermore, YOLO achieves more than twice the mean average precision of other real-time systems.<br><code>首先，YOLO的速度非常快。由于我们将检测视为回归问题，因此不需要复杂的管道。我们只是在测试时对新图像运行神经网络来预测检测结果。我们的基础网络以每秒45帧的速度运行，在Titan X GPU上没有批处理，快速版本的运行速度超过150 fps。这意味着我们可以实时处理流视频，延迟时间不到25毫秒。此外，YOLO的平均精度是其他实时系统的两倍多。</code><br>For a demo of our system running in real-time on a webcam please see our project webpage: <a target="_blank" rel="noopener" href="http://pjreddie.com/yolo/">http://pjreddie.com/yolo/</a>.<br><code>有关我们的系统在网络摄像头上实时运行的演示，请参阅我们的项目网页:http://pjreddie.com/yolo/。</code><br>Second, YOLO reasons globally about the image when making predictions. Unlike sliding window and region proposal-based techniques, YOLO sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance. Fast R-CNN, a top detection method [14], mistakes background patches in an image for objects because it can’t see the larger context. YOLO makes less than half the number of background errors compared to Fast R-CNN.<br><code>第二，YOLO在做出预测时，会对形象进行全局性的推理。与基于滑动窗口和区域提议的技术不同，YOLO在训练和测试期间看到整个图像，因此它隐式地编码了关于类及其外观的上下文信息。Fast R-CNN是一种顶部检测方法[14]，它会将图像中的背景块误认为是对象，因为它无法看到更大的上下文。与Fast R-CNN相比，YOLO的背景错误数量不到其一半。</code><br>Third, YOLO learns generalizable representations of objects. When trained on natural images and tested on artwork, YOLO outperforms top detection methods like DPM and R-CNN by a wide margin. Since YOLO is highly generalizable it is less likely to break down when applied to new domains or unexpected inputs.<br><code>第三，YOLO学习对象的可概括表示。当在自然图像上进行训练并在艺术品上进行测试时，YOLO的性能远远优于DPM和R-CNN等顶级检测方法。由于YOLO具有高度的可推广性，因此在应用于新领域或意外输入时，它不太可能崩溃。</code><br>YOLO still lags behind state-of-the-art detection systems in accuracy. While it can quickly identify objects in images it struggles to precisely localize some objects, especially small ones. We examine these tradeoffs further in our experiments.<br><code>YOLO在准确性上仍然落后于最先进的检测系统。虽然它可以快速识别图像中的物体，但它很难精确定位一些物体，尤其是小物体。我们将在实验中进一步考察这些权衡。</code><br>All of our training and testing code is open source. A variety of pretrained models are also available to download.<br><code>我们所有的培训和测试代码都是开源的。还可以下载各种预先训练的模型。</code></p>
 <h1 id="2-Unified-Detection"><a href="#2-Unified-Detection" class="headerlink" title="2. Unified Detection"></a>2. Unified Detection</h1><p><code>2.统一检测</code><br>We unify the separate components of object detection into a single neural network. Our network uses features from the entire image to predict each bounding box. It also predicts all bounding boxes across all classes for an image simultaneously. This means our network reasons globally about the full image and all the objects in the image. The YOLO design enables end-to-end training and realtime speeds while maintaining high average precision.<br><code>我们将目标检测的各个组件统一到一个神经网络中。我们的网络使用整个图像的特征来预测每个边界框。它还可以同时预测图像的所有类中的所有边界框。这意味着我们的网络会对整个图像和图像中的所有对象进行全局推理。YOLO设计可实现端到端的训练和实时速度，同时保持较高的平均精度。</code><br>Our system divides the input image into an S × S grid. If the center of an object falls into a grid cell, that grid cell is responsible for detecting that object.<br><code>该系统将输入图像划分为S × S网格。如果一个物体的中心落在一个网格单元中，该网格单元负责检测该物体。</code><br>Each grid cell predicts B bounding boxes and confidence scores for those boxes. These confidence scores reflect how confident the model is that the box contains an object and also how accurate it thinks the box is that it predicts. Formally we define confidence as $\operatorname{Pr}($ Object $) * \mathrm{IOU}<em>{\text {pred }}^{\text {truth }}$. If no object exists in that cell, the confidence scores should be zero. Otherwise we want the confidence score to equal the intersection over union (IOU) between the predicted box and the ground truth.<br><code>每个网格单元预测B个边界框和这些框的置信度得分。这些置信度分数反映了模型对该框包含对象的置信度，以及模型认为该框的预测准确度。形式上，我们将置信定义为</code>$\operatorname{Pr}($ Object $) * \mathrm{IOU}</em>{\text {pred }}^{\text {truth }}$<code>。如果该单元格中不存在对象，则置信度分数应为零。否则，我们希望置信度得分等于预测框和地面真实值之间的并集交集（IOU）。</code><br>Each bounding box consists of 5 predictions: x, y, w, h, and confidence. The (x, y) coordinates represent the center of the box relative to the bounds of the grid cell. The width and height are predicted relative to the whole image. Finally the confidence prediction represents the IOU between the predicted box and any ground truth box.<br><code>每个边界框由5个预测组成：x、y、w、h和置信度。（x，y）坐标表示相对于网格单元格边界的框的中心。宽度和高度是相对于整个图像预测的。最后，置信度预测表示预测框和任何地面实况框之间的IOU。</code><br>Each grid cell also predicts C conditional class probabilities, $\operatorname{Pr}\left(\right.$ Class $_i \mid$ Object $)$. These probabilities are conditioned on the grid cell containing an object. We only predict one set of class probabilities per grid cell, regardless of the number of boxes B.<br><code>每个网格单元还预测C个条件类概率</code>$\operatorname{Pr}\left(\right.$ Class $_i \mid$ Object $)$<code>。这些概率取决于包含对象的网格单元。我们只预测每个网格单元格的一组类概率，而不考虑框B的数量。</code><br>At test time we multiply the conditional class probabilities and the individual box confidence predictions,<br><code>在测试时，我们将条件类概率与单个框置信度预测相乘，</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/7-2.png"><br>which gives us class-specific confidence scores for each box. These scores encode both the probability of that class appearing in the box and how well the predicted box fits the object.<br><code>这给了我们每个盒子的类特定的置信度分数。这些分数编码该类出现在框中的概率以及预测的框与对象的匹配程度。</code><br><img src="https://cdn.jsdelivr.net/gh/YangQingHui66/CDN/blog-img/UASN/7-3.png"></p>
 <blockquote>
 <p>Figure 2: The Model. Our system models detection as a regression problem. It divides the image into an S×S grid and for each grid cell predicts B bounding boxes, confidence for those boxes, and C class probabilities. These predictions are encoded as an S × S × (B ∗ 5 +C) tensor.<br><code>图2：模型。我们的系统将检测建模为回归问题。它将图像划分为S×S网格，并为每个网格单元预测B边界框，这些框的置信度和C类概率。这些预测被编码为S × S ×（B * 5 +C）张量。</code></p>
