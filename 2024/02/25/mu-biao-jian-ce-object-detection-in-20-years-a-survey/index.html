@@ -4,15 +4,13 @@
   <meta name="keywords" content=" 目标检测 ">
   <meta name="description" content="【目标检测】Object Detection in 20 Years A Survey | YJT's Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Oops～，我崩溃了！找不到你想要的页面 :(">
 <meta property="og:type" content="website">
-<meta property="og:title" content="404">
-<meta property="og:url" content="http://example.com/404/index.html">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://example.com/categories/index.html">
 <meta property="og:site_name" content="YJT's Blog">
-<meta property="og:description" content="Oops～，我崩溃了！找不到你想要的页面 :(">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-23T12:50:43.000Z">
-<meta property="article:modified_time" content="2023-09-23T12:51:04.478Z">
+<meta property="article:published_time" content="2023-09-23T12:47:07.000Z">
+<meta property="article:modified_time" content="2023-09-23T12:47:58.927Z">
 <meta property="article:author" content="YJT">
 <meta name="twitter:card" content="summary">
 
@@ -77,7 +75,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(46)</small>
+                <small>(47)</small>
             
         </div>
     </li>
@@ -194,7 +192,7 @@
         <div data-rel="论文翻译">
             
             论文翻译
-            <small>(16)</small>
+            <small>(17)</small>
         </div>
         
     </li>
@@ -230,7 +228,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="46">
+<input type="hidden" id="yelog_site_posts_number" value="47">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -337,6 +335,12 @@
         <a id="top" class="全部文章 " href="/2023/11/11/xue-xi-lu-xian-tu-shen-du-xue-xi-cong-ru-men-dao-ru-tu/" data-tag="深度学习" data-author="">
             <span class="post-title" title="【学习路线图】深度学习从入门到入土">【学习路线图】深度学习从入门到入土</span>
             <span class="post-date" title="2023-11-11 12:25:49">2023/11/11</span>
+        </a>
+        
+        
+        <a class="全部文章 论文翻译 " href="/2024/03/12/spd-conv-no-more-strided-convolutions-or-pooling-a-new-cnn-building-block-for-low-resolution-images-and-small-objects/" data-tag="YOLO" data-author="">
+            <span class="post-title" title="【SPD-conv】No More Strided Convolutions or Pooling: A New CNN Building Block for Low-Resolution Images and Small Objects">【SPD-conv】No More Strided Convolutions or Pooling: A New CNN Building Block for Low-Resolution Images and Small Objects</span>
+            <span class="post-date" title="2024-03-12 12:58:01">2024/03/12</span>
         </a>
         
         
@@ -654,7 +658,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title="最后更新: 2024-02-27 00:38:59">2024-02-25 20:00</time>
+            发布时间 : <time class="date" title="最后更新: 2024-03-14 14:36:04">2024-02-25 20:00</time>
         
     </div>
     <div class="article-meta">
@@ -676,7 +680,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GPT%E8%A7%A3%E8%AF%BB"><span class="toc-text">GPT解读</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ABSTRACT"><span class="toc-text">ABSTRACT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-INTRODUCTION"><span class="toc-text">I. INTRODUCTION</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPT%E8%A7%A3%E8%AF%BB"><span class="toc-text">GPT解读</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -693,6 +697,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><em><strong>Object Detection in 20 Years A Survey</strong></em><br><em><strong>目标检测20年综述</strong></em></p>
+<h1 id="ABSTRACT"><a href="#ABSTRACT" class="headerlink" title="ABSTRACT"></a>ABSTRACT</h1><p>Object detection, as of one the most fundamental and challenging problems in computer vision, has received great attention in recent years. Over the past two decades, we have seen a rapid technological evolution of object detection and its profound impact on the entire computer vision field. If we consider today’s object detection technique as a revolution driven by deep learning, then, back in the 1990s, we would see the ingenious thinking and long-term perspective design of early computer vision. This article extensively reviews this fastmoving research field in the light of technical evolution, spanning over a quarter-century’s time (from the 1990s to 2022). A number of topics have been covered in this article, including the milestone detectors in history, detection datasets, metrics, fundamental building blocks of the detection system, speedup techniques, and recent state-of-the-art detection methods.<br><code>目标检测作为计算机视觉中最基本、最具挑战性的问题之一，近年来受到了广泛的关注。在过去的二十年里，我们看到了物体检测技术的快速发展及其对整个计算机视觉领域的深远影响。如果我们将今天的目标检测技术视为由深度学习驱动的革命，那么，回到20世纪90年代，我们将看到早期计算机视觉的巧妙思考和长期视角设计。本文广泛回顾了这一快速发展的研究领域的技术发展，跨越了四分之一个世纪的时间（从20世纪90年代到2022年）。本文涵盖了许多主题，包括历史上的里程碑式检测器、检测数据集、指标、检测系统的基本构建块、加速技术以及最新的最先进的检测方法。</code><br>KEYWORDS<br>Computer vision; convolutional neural networks (CNNs); deep learning; object detection; technical evolution.<br><code>计算机视觉;卷积神经网络（CNN）;深度学习;物体检测;技术发展。</code></p>
+<h1 id="I-INTRODUCTION"><a href="#I-INTRODUCTION" class="headerlink" title="I. INTRODUCTION"></a>I. INTRODUCTION</h1><p>Object detection is an important computer vision task that deals with detecting instances of visual objects of a certain class (such as humans, animals, or cars) in digital images. The goal of object detection is to develop computational models and techniques that provide one of the most basic pieces of knowledge needed by computer vision applications: What objects are where? The two most significant metrics for object detection are accuracy (including classification accuracy and localization accuracy) and speed.<br><code>对象检测是一项重要的计算机视觉任务，它涉及检测数字图像中某类视觉对象（如人类、动物或汽车）的实例。目标检测的目标是开发计算模型和技术，提供计算机视觉应用所需的最基本知识之一：什么物体在哪里？目标检测的两个最重要的指标是准确性（包括分类准确性和定位准确性）和速度。</code><br>Object detection serves as a basis for many other computer vision tasks, such as instance segmentation [1], [2], [3], [4], image captioning [5], [6], [7], and object tracking [8]. In recent years, the rapid development of deep learning techniques [9] has greatly promoted the progress of object detection, leading to remarkable breakthroughs and propelling it to a research hot-spot with unprecedented attention. Object detection has now been widely used in many real-world applications, such as autonomous driving, robot vision, and video surveillance. Fig. 1 shows the growing number of publications that are associated with “object detection” over the past two decades.<br><code>对象检测是许多其他计算机视觉任务的基础，例如实例分割[1]，[2]，[3]，[4]，图像字幕[5]，[6]，[7]和对象跟踪[8]。近年来，深度学习技术的快速发展[9]极大地推动了目标检测的进步，取得了显著的突破，并将其推向了前所未有的研究热点。目标检测已经广泛应用于自动驾驶、机器人视觉、视频监控等领域。图1显示了在过去二十年中与“目标检测”相关的出版物数量的增长。</code><br>As different detection tasks have totally different objectives and constraints, their difficulties may vary from each other. In addition to some common challenges in other computer vision tasks, such as objects under different viewpoints, illuminations, and intraclass variations, the challenges in object detection include, but are not limited to, the following aspects: object rotation and scale changes (e.g., small objects), accurate object localization, dense and occluded object detection, speedup of detection, and so on. In Section IV, we will give a more detailed analysis of these topics.<br><code>由于不同的检测任务有着完全不同的目标和约束条件，其难度也会有所不同。除了其他计算机视觉任务中的一些常见挑战，例如不同视点下的对象，照明和类内变化，对象检测中的挑战包括但不限于以下方面：对象旋转和尺度变化（例如，小目标）、精确目标定位、密集和遮挡目标检测、检测加速等。在第四节中，我们将给予更详细的分析。</code><br>This survey seeks to provide novices with a complete grasp of object detection technology from many viewpoints, with an emphasis on its evolution. The key features are threefolds: a comprehensive review in the light of technical evolutions, an in-depth exploration of the key technologies and the recent state of the arts, and a comprehensive analysis of detection speedup techniques. The main clue focuses on the past, present, and future, complemented with some other necessary components in object detection, such as datasets, metrics, and acceleration techniques. Standing on the technical highway, this survey aims to present the evolution of related technologies, allowing readers to grasp the essential concepts and find potential future directions, while neglecting their technical specifics.<br><code>本调查旨在从多个角度为新手提供对象检测技术的完整掌握，重点是其演变。主要特点有三个方面：根据技术发展进行全面回顾，深入探讨关键技术和最新技术状况，并全面分析检测加速技术。主要线索集中在过去，现在和未来，辅以对象检测中的其他必要组件，如数据集，度量和加速技术。本调查站在技术高速公路上，旨在呈现相关技术的演变，让读者掌握基本概念并找到潜在的未来方向，同时忽略其技术细节。</code></p>
 <h1 id="GPT解读"><a href="#GPT解读" class="headerlink" title="GPT解读"></a>GPT解读</h1><p> 这篇论文《Object Detection in 20 Years: A Survey》全面回顾了过去二十年对象检测技术的发展历程，强调了其在计算机视觉领域的重要性和挑战性。以下是论文的核心内容概述：</p>
 <ol>
 <li><p><strong>对象检测的重要性</strong>：对象检测是计算机视觉中的基础任务，涉及在数字图像中检测特定类别的视觉对象实例。它为计算机视觉应用提供了基本的知识：对象在哪里。</p>
